@@ -1,0 +1,364 @@
+"use client";
+
+import Image from "next/image";
+import { useEffect, useState } from "react";
+
+/**
+ * News & Updates Section — Cinematic Image Edition
+ * - Hero featured news card with full-bleed image + Ken Burns zoom
+ * - Grid of smaller news cards, each with image background
+ * - Scroll-reveal, hover cinematic overlays, category badges
+ *
+ * MEDIA: Images from /public/news/ folder.
+ * Replace the placeholder data with Puskar Bhatt's real news & updates.
+ */
+
+const NEWS_IMAGES = [
+  "/news/Reel Life Villain.jpg",
+  "/news/1d88f800-dfa6-4021-9a0a-687454246e66.jpg",
+  "/news/2e69b944-1c21-4a67-b16b-c149b924358a.jpg",
+  "/news/3c2648cb-8809-46c7-a448-0641d2d84de4.jpg",
+  "/news/3ea067cb-08eb-44bd-a741-4c059cfba5ca.jpg",
+  "/news/7a2b9fdf-c54f-4acc-a7f9-c01d9c8baa65.jpg",
+  "/news/8defdf50-3f18-472f-a8a1-d4cac190c08b.jpg",
+  "/news/8f52ab90-d1ce-41ed-8371-29a62fb8514c.jpg",
+  "/news/11c0b54f-2353-4e8e-adb6-6af41c74e8d2.jpg",
+  "/news/21ec4c05-0435-4bff-b59c-6204b465e33b.jpg",
+  "/news/41a377b4-df1c-4f7c-b59c-6c538e891b41.jpg",
+  "/news/46cffa9e-ca41-47e1-9bec-d2b4e1f32528.jpg",
+  "/news/64fa808f-def7-4c54-9791-bbe168dc88a0.jpg",
+  "/news/1545b5ba-b2f1-4499-a666-752fc422bf14.jpg",
+  "/news/9447923c-151f-476c-b4cd-8806284f29f6.jpg",
+  "/news/47085716-5f0f-4710-b994-b2c5ef66ddbf.jpg",
+];
+
+const NEWS_ITEMS = [
+  {
+    date: "2025-03-15",
+    title: "New Antagonist Role Announced",
+    category: "Casting",
+    description:
+      "Puskar Bhatt signs on for a high-stakes psychological thriller set to begin production this summer.",
+  },
+  {
+    date: "2025-02-28",
+    title: "Critics' Circle Honours",
+    category: "Award",
+    description:
+      "Recognized among top antagonist performances of the decade by the National Film Critics Circle.",
+  },
+  {
+    date: "2025-01-12",
+    title: "International Festival Selection",
+    category: "Festival",
+    description:
+      "Gangajal selected for the competitive section at an international film festival in Southeast Asia.",
+  },
+  {
+    date: "2024-11-05",
+    title: "Behind-the-Scenes Documentary",
+    category: "Media",
+    description:
+      "A documentary crew follows Puskar Bhatt through rehearsals and character preparation.",
+  },
+  {
+    date: "2024-09-20",
+    title: "Character Masterclass Workshop",
+    category: "Event",
+    description:
+      "Exclusive masterclass on building antagonist presence, hosted at the National Academy of Performing Arts.",
+  },
+  {
+    date: "2024-07-08",
+    title: "Multi-Film Deal Signed",
+    category: "Industry",
+    description:
+      "Multi-film deal with a leading production house to develop original antagonist-driven narratives.",
+  },
+  {
+    date: "2024-05-14",
+    title: "Film Festival Jury Duty",
+    category: "Honor",
+    description:
+      "Invited as a jury member for the Best Actor category at a prestigious national film awards.",
+  },
+];
+
+function getImageForIndex(idx: number): string {
+  return NEWS_IMAGES[idx % NEWS_IMAGES.length];
+}
+
+export default function News() {
+  const [visible, setVisible] = useState<Record<number, boolean>>({});
+  const [featuredVisible, setFeaturedVisible] = useState(false);
+
+  useEffect(() => {
+    const nodes = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-news-card]")
+    );
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          const idx = Number((e.target as HTMLElement).dataset.index || "-1");
+          if (idx >= 0 && e.isIntersecting) {
+            setVisible((prev) =>
+              prev[idx] ? prev : { ...prev, [idx]: true }
+            );
+          }
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    const featuredNode = document.querySelector<HTMLElement>(
+      "[data-news-featured]"
+    );
+    if (featuredNode) {
+      io.observe(featuredNode);
+    }
+
+    nodes.forEach((n) => io.observe(n));
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    // If the featured card is observed via intersection, we need a separate handler
+    const featuredNode = document.querySelector<HTMLElement>(
+      "[data-news-featured]"
+    );
+    if (!featuredNode) return;
+    const ioFeatured = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setFeaturedVisible(true);
+        }
+      },
+      { threshold: 0.2 }
+    );
+    ioFeatured.observe(featuredNode);
+    return () => ioFeatured.disconnect();
+  }, []);
+
+  const formatDate = (dateStr: string) => {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
+
+  // Featured item is the first news item
+  const featured = NEWS_ITEMS[0];
+  const gridItems = NEWS_ITEMS.slice(1, 7);
+
+  return (
+    <section id="news" className="relative py-20 px-4 sm:px-6 overflow-hidden">
+      {/* Global vignette for the section */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none [background:radial-gradient(1200px_circle_at_30%_0%,rgba(220,38,38,0.10),transparent_55%),radial-gradient(900px_circle_at_80%_90%,rgba(220,38,38,0.07),transparent_60%),linear-gradient(to_bottom,rgba(0,0,0,0),rgba(0,0,0,0.55))]"
+      />
+
+      <div className="relative mx-auto max-w-6xl">
+        {/* Section Header */}
+        <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h3 className="uppercase tracking-[0.18em] font-black text-[#d4d4d8] text-[22px]">
+              News & Updates
+            </h3>
+            <p className="mt-3 text-[#d4d4d8]/70 max-w-2xl">
+              Latest announcements, press coverage, and career milestones from
+              the world of Puskar Bhatt.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="h-[2px] w-10 bg-[#dc2626] shadow-[0_0_24px_rgba(220,38,38,0.35)]" />
+            <span className="text-[12px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/80">
+              Press Room
+            </span>
+          </div>
+        </header>
+
+        {/* Marquee headlines strip */}
+        <div className="mt-10 relative overflow-hidden rounded-[18px] border border-[rgba(220,38,38,0.18)] bg-black/30 backdrop-blur-sm">
+          <div className="absolute inset-0 [background:radial-gradient(600px_circle_at_20%_40%,rgba(220,38,38,0.18),transparent_55%),radial-gradient(600px_circle_at_80%_60%,rgba(220,38,38,0.10),transparent_60%)]" />
+          <div className="relative px-5 py-4">
+            <div className="flex gap-6 items-center">
+              <span className="inline-flex items-center rounded-full border border-[rgba(220,38,38,0.25)] px-3 py-1 text-[11px] uppercase tracking-widest font-black text-[#d4d4d8] shadow-[0_0_30px_rgba(220,38,38,0.12)]">
+                LATEST HEADLINES
+              </span>
+              <div className="min-w-0 flex-1">
+                <div className="whitespace-nowrap text-[#dc2626] uppercase tracking-[0.22em] font-black text-[12px] animate-[marquee_18s_linear_infinite]">
+                  BREAKING • CASTING • FESTIVAL • RELEASE • MASTERCLASS • BREAKING • CASTING • FESTIVAL • RELEASE • MASTERCLASS •
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ===== FEATURED NEWS — Hero Card with Full-Bleed Image ===== */}
+        <div
+          data-news-featured
+          className={
+            "mt-10 relative overflow-hidden rounded-[22px] border border-[rgba(220,38,38,0.20)] transition-all duration-700 " +
+            (featuredVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-5")
+          }
+        >
+          <div className="relative aspect-[21/9] sm:aspect-[3/1] overflow-hidden">
+            {/* Background Image */}
+            <Image
+              src={getImageForIndex(0)}
+              alt={featured.title}
+              fill
+              sizes="(max-width: 640px) 100vw, 1200px"
+              className="object-cover object-center select-none animate-[kenburns_20s_ease-in-out_infinite]"
+              priority
+            />
+
+            {/* Cinematic gradient shroud */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-black/40 to-black/20" />
+            <div className="absolute inset-0 [background:radial-gradient(900px_circle_at_20%_30%,rgba(220,38,38,0.25),transparent_55%)]" />
+            <div className="absolute inset-0 [background:radial-gradient(800px_circle_at_80%_70%,rgba(220,38,38,0.12),transparent_55%)]" />
+
+            {/* Scan line effect */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 opacity-20 [background:repeating-linear-gradient(0deg,rgba(255,255,255,0.04)_0,rgba(255,255,255,0.04)_1px,transparent_1px,transparent_4px)]"
+            />
+
+            {/* Featured content overlay */}
+            <div className="absolute inset-0 flex items-end">
+              <div className="w-full p-6 sm:p-8 md:p-10">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(220,38,38,0.25)] bg-black/30 backdrop-blur-sm px-3 py-1 shadow-[0_0_30px_rgba(220,38,38,0.18)]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#dc2626] shadow-[0_0_10px_rgba(220,38,38,0.65)] animate-pulse" />
+                  <span className="text-[10px] uppercase tracking-[0.18em] font-black text-[#d4d4d8]">
+                    Featured Story
+                  </span>
+                  <span className="text-[10px] uppercase tracking-widest font-black text-[#d4d4d8]/60">
+                    — {formatDate(featured.date)}
+                  </span>
+                </div>
+
+                <h4 className="mt-4 text-[26px] sm:text-[32px] md:text-[38px] leading-[1.05] font-black uppercase tracking-[0.06em] text-[#d4d4d8] max-w-3xl">
+                  {featured.title}
+                </h4>
+
+                <p className="mt-3 text-[#d4d4d8]/80 text-[14px] sm:text-[15px] leading-relaxed max-w-2xl">
+                  {featured.description}
+                </p>
+
+                <div className="mt-5 flex items-center gap-4">
+                  <span className="inline-flex items-center rounded-full border border-[rgba(220,38,38,0.22)] bg-black/20 px-3 py-1 text-[11px] uppercase tracking-widest font-black text-[#d4d4d8] shadow-[0_0_20px_rgba(220,38,38,0.10)]">
+                    {featured.category}
+                  </span>
+                  <span className="text-[11px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/50">
+                    Read More →
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Corner accent */}
+            <div className="absolute top-0 right-0 h-24 w-24 [background:radial-gradient(circle_at_30%_30%,rgba(220,38,38,0.35),transparent_60%)] blur-sm opacity-60" />
+          </div>
+        </div>
+
+        {/* ===== NEWS GRID — Image-backed Cinematic Cards ===== */}
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {gridItems.map((item, idx) => {
+            const isVis = !!visible[idx + 1];
+            const imgSrc = getImageForIndex(idx + 1);
+            return (
+              <article
+                key={item.title + item.date}
+                data-news-card
+                data-index={idx + 1}
+                className={
+                  "group relative overflow-hidden rounded-[18px] border border-[rgba(220,38,38,0.16)] bg-black/20 shadow-[0_0_30px_rgba(220,38,38,0.08)] " +
+                  (isVis
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-5")
+                }
+                style={{
+                  transition: "opacity 600ms ease, transform 600ms ease",
+                  transitionDelay: `${(idx + 1) * 100}ms`,
+                }}
+              >
+                {/* Image layer */}
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <Image
+                    src={imgSrc}
+                    alt={item.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover object-center transition-all duration-700 group-hover:scale-[1.08] grayscale group-hover:grayscale-0"
+                  />
+
+                  {/* Gradient shroud for text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-black/50 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-black/30 via-transparent to-black/20" />
+
+                  {/* Hover crimson glow */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 [background:radial-gradient(500px_circle_at_30%_20%,rgba(220,38,38,0.28),transparent_60%),radial-gradient(400px_circle_at_80%_80%,rgba(220,38,38,0.12),transparent_55%)]"
+                  />
+
+                  {/* Category badge */}
+                  <div className="absolute top-4 left-4">
+                    <span className="inline-flex items-center rounded-full border border-[rgba(220,38,38,0.25)] bg-black/30 backdrop-blur-sm px-3 py-1 shadow-[0_0_20px_rgba(220,38,38,0.12)]">
+                      <span className="text-[9px] uppercase tracking-[0.16em] font-black text-[#d4d4d8]">
+                        {item.category}
+                      </span>
+                    </span>
+                  </div>
+
+                  {/* Content at bottom */}
+                  <div className="absolute inset-x-0 bottom-0 p-5">
+                    <p className="text-[10px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/60">
+                      {formatDate(item.date)}
+                    </p>
+                    <h4 className="mt-1.5 text-[16px] leading-[1.15] uppercase tracking-[0.06em] font-black text-[#dc2626] transition-all duration-300 group-hover:text-[#d4d4d8]">
+                      {item.title}
+                    </h4>
+                    <p className="mt-2 text-[#d4d4d8]/70 text-[12px] leading-relaxed line-clamp-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  {/* Hover indicator */}
+                  <div className="absolute bottom-5 right-5 h-8 w-8 rounded-full border border-[rgba(220,38,38,0.25)] bg-black/30 backdrop-blur-sm flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-[0_0_20px_rgba(220,38,38,0.18)]">
+                    <span className="text-[11px] font-black text-[#dc2626]">→</span>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+
+        {/* Footer note */}
+        <div className="mt-10 text-center text-[#d4d4d8]/60 text-[13px]">
+          Replace with Puskar Bhatt&apos;s actual news, press releases, and announcements.
+        </div>
+      </div>
+
+      {/* Keyframes */}
+      <style jsx>{`
+        @keyframes marquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+        @keyframes kenburns {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.08); }
+          100% { transform: scale(1); }
+        }
+      `}</style>
+    </section>
+  );
+}
+
