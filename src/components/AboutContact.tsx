@@ -67,8 +67,8 @@ export default function AboutContact() {
 
               <div className="mt-5 space-y-4 text-[#d4d4d8]/80">
                 <p className="leading-relaxed text-[14px]">
-                  Precision isn’t an accessory—it’s a weapon. Training his
-                  presence, timing, and silence until the screen can’t ignore him.
+                  Precision isn't an accessory—it's a weapon. Training his
+                  presence, timing, and silence until the screen can't ignore him.
                 </p>
                 <p className="leading-relaxed text-[14px]">
                   The villain on-screen thrives on contrast: calm outside,
@@ -192,10 +192,66 @@ export default function AboutContact() {
                 </button>
 
                 <p className="text-[#d4d4d8]/60 text-[12px] leading-relaxed">
-                  This demo form doesn’t send emails yet. Connect it to your API
+                  This demo form doesn&apos;t send emails yet. Connect it to your API
                   route later.
                 </p>
               </form>
+
+              {/* Direct Contact Info */}
+              <div className="mt-8 border-t border-[rgba(220,38,38,0.15)] pt-8">
+                <p className="text-[#dc2626] uppercase tracking-[0.22em] font-black text-[12px]">
+                  DIRECT CONTACT
+                </p>
+                <div className="mt-5 space-y-3">
+                  <a
+                    href="mailto:bhattapuskar@gmail.com"
+                    className="flex items-center gap-3 rounded-[14px] border border-[rgba(220,38,38,0.16)] bg-black/20 px-4 py-3 hover:bg-black/30 hover:border-[rgba(220,38,38,0.32)] transition-all duration-300 group"
+                  >
+                    <span className="text-[18px]">✉️</span>
+                    <div>
+                      <p className="text-[10px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/60">Email</p>
+                      <p className="text-[13px] font-bold text-[#d4d4d8] group-hover:text-[#dc2626] transition-colors">bhattapuskar@gmail.com</p>
+                    </div>
+                  </a>
+
+                  <a
+                    href="https://wa.me/16477602298"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 rounded-[14px] border border-[rgba(220,38,38,0.16)] bg-black/20 px-4 py-3 hover:bg-black/30 hover:border-[rgba(220,38,38,0.32)] transition-all duration-300 group"
+                  >
+                    <span className="text-[18px]">💬</span>
+                    <div>
+                      <p className="text-[10px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/60">WhatsApp</p>
+                      <p className="text-[13px] font-bold text-[#d4d4d8] group-hover:text-[#dc2626] transition-colors">+1 (647) 760-2298</p>
+                    </div>
+                  </a>
+
+                  <a
+                    href="tel:+9779704072077"
+                    className="flex items-center gap-3 rounded-[14px] border border-[rgba(220,38,38,0.16)] bg-black/20 px-4 py-3 hover:bg-black/30 hover:border-[rgba(220,38,38,0.32)] transition-all duration-300 group"
+                  >
+                    <span className="text-[18px]">📞</span>
+                    <div>
+                      <p className="text-[10px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/60">Mobile</p>
+                      <p className="text-[13px] font-bold text-[#d4d4d8] group-hover:text-[#dc2626] transition-colors">9704072077</p>
+                    </div>
+                  </a>
+
+                  <a
+                    href="https://www.facebook.com/puskar.bhatta.148469"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 rounded-[14px] border border-[rgba(220,38,38,0.16)] bg-black/20 px-4 py-3 hover:bg-black/30 hover:border-[rgba(220,38,38,0.32)] transition-all duration-300 group"
+                  >
+                    <span className="text-[18px]">📘</span>
+                    <div>
+                      <p className="text-[10px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/60">Facebook</p>
+                      <p className="text-[13px] font-bold text-[#d4d4d8] group-hover:text-[#dc2626] transition-colors truncate">Puskar Bhatta</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
             </div>
           </aside>
         </div>
@@ -213,4 +269,3 @@ export default function AboutContact() {
     </section>
   );
 }
-
