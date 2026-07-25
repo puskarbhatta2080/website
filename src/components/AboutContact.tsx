@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 /**
@@ -197,6 +198,16 @@ export default function AboutContact() {
               </form>
             </div>
           </aside>
+        </div>
+
+        {/* View More */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/gallery/filmography"
+            className="inline-flex items-center justify-center rounded-full border border-[rgba(220,38,38,0.25)] px-6 py-3 text-[12px] uppercase tracking-widest font-black text-[#d4d4d8] bg-black/10 hover:bg-black/20 shadow-[0_0_30px_rgba(220,38,38,0.10)] transition-all duration-300"
+          >
+            View More — Explore the Filmography →
+          </Link>
         </div>
       </div>
     </section>

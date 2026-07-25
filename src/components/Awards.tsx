@@ -1,7 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useEffect, useState, useCallback, useRef } from "react";
+import CinematicLightbox from "@/components/CinematicLightbox";
+import type { LightboxImage } from "@/components/CinematicLightbox";
 
 /**
  * Awards & Recognition Section — Cinematic Image Edition
@@ -82,9 +85,48 @@ function getImageForIndex(idx: number): string {
   return AWARD_IMAGES[idx % AWARD_IMAGES.length];
 }
 
+interface CardTilt {
+  rx: number;
+  ry: number;
+  glowX: number;
+  glowY: number;
+}
+
 export default function Awards() {
   const [visible, setVisible] = useState<Record<number, boolean>>({});
   const [featuredVisible, setFeaturedVisible] = useState(false);
+  const cardRefs = useRef<(HTMLElement | null)[]>([]);
+  const [cardTilts, setCardTilts] = useState<Record<number, CardTilt>>({});
+
+  const handleCardMouse = useCallback(
+    (idx: number, clientX: number, clientY: number, entering: boolean) => {
+      const el = cardRefs.current[idx];
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      if (entering) {
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = (clientX - cx) / (rect.width / 2);
+        const dy = (clientY - cy) / (rect.height / 2);
+        setCardTilts((prev) => ({
+          ...prev,
+          [idx]: {
+            rx: -dy * 6,
+            ry: dx * 6,
+            glowX: ((clientX - rect.left) / rect.width) * 100,
+            glowY: ((clientY - rect.top) / rect.height) * 100,
+          },
+        }));
+      } else {
+        setCardTilts((prev) => {
+          const next = { ...prev };
+          delete next[idx];
+          return next;
+        });
+      }
+    },
+    []
+  );
 
   useEffect(() => {
     const nodes = Array.from(
@@ -129,6 +171,34 @@ export default function Awards() {
   const featured = AWARDS[0];
   const gridItems = AWARDS.slice(1);
 
+  // Lightbox state
+  const awardLightboxImages: LightboxImage[] = AWARD_IMAGES.map((src, idx) => ({
+    src,
+    alt: AWARDS[idx % AWARDS.length]?.title ?? `Award image ${idx + 1}`,
+  }));
+
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const openLightbox = useCallback((idx: number) => {
+    setLightboxIndex(idx);
+    setLightboxOpen(true);
+  }, []);
+
+  const closeLightbox = useCallback(() => setLightboxOpen(false), []);
+
+  const prevLightbox = useCallback(() => {
+    setLightboxIndex((prev) =>
+      prev === 0 ? awardLightboxImages.length - 1 : prev - 1
+    );
+  }, []);
+
+  const nextLightbox = useCallback(() => {
+    setLightboxIndex((prev) =>
+      prev === awardLightboxImages.length - 1 ? 0 : prev + 1
+    );
+  }, []);
+
   return (
     <section id="awards" className="relative py-20 px-4 sm:px-6 overflow-hidden">
       {/* Vignette */}
@@ -150,6 +220,12 @@ export default function Awards() {
             </p>
           </div>
           <div className="flex items-center gap-3">
+            <Link
+              href="/gallery/awards"
+              className="inline-flex items-center justify-center rounded-full border border-[rgba(220,38,38,0.25)] px-4 py-2 text-[12px] uppercase tracking-widest font-black text-[#d4d4d8] bg-black/10 hover:bg-black/20 shadow-[0_0_30px_rgba(220,38,38,0.10)] transition"
+            >
+              View More →
+            </Link>
             <div className="h-[2px] w-10 bg-[#dc2626] shadow-[0_0_24px_rgba(220,38,38,0.35)]" />
             <span className="text-[12px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/80">
               Trophy Cabinet
@@ -177,8 +253,9 @@ export default function Awards() {
         {/* ===== FEATURED AWARD — Hero Card with Full-Bleed Image ===== */}
         <div
           data-award-featured
+          onClick={() => openLightbox(0)}
           className={
-            "mt-10 relative overflow-hidden rounded-[22px] border border-[rgba(220,38,38,0.20)] transition-all duration-700 group " +
+            "mt-10 relative overflow-hidden rounded-[22px] border border-[rgba(220,38,38,0.20)] transition-all duration-700 group cursor-pointer " +
             (featuredVisible
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-5")
@@ -251,21 +328,43 @@ export default function Awards() {
             const isVis = !!visible[idx + 1];
             const imgSrc = getImageForIndex(idx + 1);
             return (
-              <article
+<article
                 key={award.title + award.year}
+                ref={(el) => { cardRefs.current[idx + 1] = el; }}
                 data-award-card
                 data-index={idx + 1}
+                onClick={() => openLightbox(idx + 1)}
+                onMouseMove={(e) => handleCardMouse(idx + 1, e.clientX, e.clientY, true)}
+                onMouseEnter={(e) => handleCardMouse(idx + 1, e.clientX, e.clientY, true)}
+                onMouseLeave={() => handleCardMouse(idx + 1, 0, 0, false)}
                 className={
-                  "group relative overflow-hidden rounded-[18px] border border-[rgba(220,38,38,0.16)] bg-black/20 shadow-[0_0_30px_rgba(220,38,38,0.08)] " +
+                  "group relative overflow-hidden rounded-[18px] border border-[rgba(220,38,38,0.16)] bg-black/20 shadow-[0_0_30px_rgba(220,38,38,0.08)] cursor-pointer " +
                   (isVis
                     ? "opacity-100 translate-y-0"
                     : "opacity-0 translate-y-5")
                 }
                 style={{
-                  transition: "opacity 600ms ease, transform 600ms ease",
-                  transitionDelay: `${(idx + 1) * 100}ms`,
+                  perspective: "800px",
+                  transform: cardTilts[idx + 1]
+                    ? `rotateX(${cardTilts[idx + 1].rx}deg) rotateY(${cardTilts[idx + 1].ry}deg)`
+                    : "rotateX(0deg) rotateY(0deg)",
+                  transitionProperty: "opacity, transform",
+                  transitionDuration: isVis ? "600ms, 600ms" : "600ms, 600ms",
+                  transitionTimingFunction: "ease, ease",
+                  transitionDelay: isVis ? `${(idx + 1) * 100}ms, ${(idx + 1) * 100}ms` : `${(idx + 1) * 100}ms, ${(idx + 1) * 100}ms`,
                 }}
               >
+                {/* Cursor-follow spotlight glow */}
+                {cardTilts[idx + 1] && (
+                  <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-[-1px] z-10"
+                    style={{
+                      background: `radial-gradient(350px circle at ${cardTilts[idx + 1].glowX}% ${cardTilts[idx + 1].glowY}%, rgba(220,38,38,0.35), transparent 60%)`,
+                    }}
+                  />
+                )}
+
                 {/* Image layer */}
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image
@@ -331,6 +430,17 @@ export default function Awards() {
           Replace with Puskar Bhatt&apos;s actual awards, years, and project names.
         </div>
       </div>
+
+      {/* Cinematic lightbox */}
+      {lightboxOpen && (
+        <CinematicLightbox
+          images={awardLightboxImages}
+          currentIndex={lightboxIndex}
+          onClose={closeLightbox}
+          onPrev={prevLightbox}
+          onNext={nextLightbox}
+        />
+      )}
 
       {/* Keyframes */}
       <style jsx>{`

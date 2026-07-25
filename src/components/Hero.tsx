@@ -1,20 +1,54 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useRef, useCallback, useEffect, useState } from "react";
 
 /**
- * Hero Section
+ * Hero Section - Enhanced Cinematic Portrait Edition
  *
  * - Aggressive overlapping headlines on the left
- * - Masked portrait placeholder on the right with Ken Burns style zoom
- * - Crimson pulsing CTA
- *
- * MEDIA INSTRUCTIONS:
- * - Replace the placeholder <div> with a real portrait asset.
- *   Option A: Put an image in /public and use next/image.
- *     Example: src="/puskar-portrait.jpg"
- *   Option B: Use an <Image /> with an imported static asset.
+ * - Premium portrait with 3D cursor-follow tilt, dynamic spotlight sweep,
+ *   cinematic film frame border with sprocket holes, film grain texture,
+ *   animated crimson edge glow, and integrated bottom info bar
+ * - Uses iconic portrait image as the primary focal point
  */
 export default function Hero() {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState({ rx: 0, ry: 0, s: 1 });
+  const [spotlightPos, setSpotlightPos] = useState({ x: 50, y: 50 });
+  const [isHovered, setIsHovered] = useState(false);
+  const rafRef = useRef<number>(0);
+  const targetTilt = useRef({ rx: 0, ry: 0 });
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = cardRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = (e.clientX - cx) / (rect.width / 2);
+    const dy = (e.clientY - cy) / (rect.height / 2);
+    targetTilt.current = { rx: -dy * 14, ry: dx * 14 };
+    setSpotlightPos({
+      x: ((e.clientX - rect.left) / rect.width) * 100,
+      y: ((e.clientY - rect.top) / rect.height) * 100,
+    });
+  }, []);
+
+  const animateTilt = useCallback(() => {
+    setTilt((prev) => ({
+      rx: prev.rx + (targetTilt.current.rx - prev.rx) * 0.08,
+      ry: prev.ry + (targetTilt.current.ry - prev.ry) * 0.08,
+      s: 1 + Math.abs(targetTilt.current.rx + targetTilt.current.ry) * 0.0002,
+    }));
+    rafRef.current = requestAnimationFrame(animateTilt);
+  }, []);
+
+  useEffect(() => {
+    rafRef.current = requestAnimationFrame(animateTilt);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [animateTilt]);
+
   return (
     <section
       aria-label="Hero"
@@ -26,7 +60,7 @@ export default function Hero() {
       <div className="relative mx-auto w-full max-w-6xl px-4 sm:px-6 pb-12 sm:pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           {/* Left: typography */}
-          <div className="relative">
+          <div className="relative z-10">
             <div className="inline-flex items-center gap-3 rounded-full border border-[rgba(220,38,38,0.22)] bg-black/20 px-4 py-2 shadow-[0_0_28px_rgba(220,38,38,0.15)]">
               <span className="h-2 w-2 rounded-full bg-[#dc2626] shadow-[0_0_14px_rgba(220,38,38,0.65)]" />
               <p className="text-[12px] uppercase tracking-widest font-extrabold text-[#d4d4d8]">
@@ -34,14 +68,10 @@ export default function Hero() {
               </p>
             </div>
 
-            <h2 className="mt-6 leading-[0.9]">
-              <span className="block text-[#d4d4d8] text-[42px] sm:text-[56px] md:text-[64px] font-black uppercase tracking-[0.18em]">
-                THE ULTIMATE
-                <span className="block text-[#dc2626]">ANTAGONIST</span>
-              </span>
-
-              <span className="block mt-2 text-black/0 text-[44px] sm:text-[64px] md:text-[78px] font-black uppercase tracking-[0.10em] [-webkit-text-stroke:1px_rgba(220,38,38,0.35)] text-transparent opacity-80">
-                PUSKAR BHATT
+<h2 className="mt-6 leading-[0.85]">
+              <span className="block text-[#d4d4d8] text-[36px] xs:text-[42px] sm:text-[68px] md:text-[84px] font-black uppercase tracking-[0.06em] drop-shadow-[0_0_30px_rgba(220,38,38,0.25)]">
+                PUSKAR
+                <span className="block text-[#dc2626] drop-shadow-[0_0_40px_rgba(220,38,38,0.40)]">BHATT</span>
               </span>
             </h2>
 
@@ -62,6 +92,13 @@ export default function Hero() {
               </Link>
 
               <Link
+                href="/gallery/iconic"
+                className="inline-flex items-center justify-center rounded-full border border-[rgba(220,38,38,0.25)] px-6 py-3 text-[13px] uppercase tracking-widest font-black text-[#d4d4d8] bg-black/10 hover:bg-black/20 shadow-[0_0_30px_rgba(220,38,38,0.10)] transition-all duration-300"
+              >
+                View More →
+              </Link>
+
+              <Link
                 href="#quotes"
                 className="inline-flex items-center justify-center rounded-full border border-[rgba(220,38,38,0.25)] px-6 py-3 text-[13px] uppercase tracking-widest font-black text-[#d4d4d8] bg-black/10 hover:bg-black/20 shadow-[0_0_30px_rgba(220,38,38,0.10)] transition-all duration-300"
               >
@@ -73,99 +110,129 @@ export default function Hero() {
             <div className="pointer-events-none absolute -top-6 -left-6 h-28 w-28 bg-[radial-gradient(circle_at_30%_30%,rgba(220,38,38,0.35),transparent_60%)] opacity-60 blur-[2px]" />
           </div>
 
-          {/* Right: portrait mask */}
-          <div className="relative">
+          {/* Right: Cinematic Portrait with 3D tilt + Film Frame */}
+<div className="relative flex justify-center">
+            {/* Background glow orbs */}
             <div className="absolute -top-10 -right-10 h-48 w-48 rounded-full bg-[radial-gradient(circle_at_30%_30%,rgba(220,38,38,0.35),transparent_60%)] blur-2xl opacity-70" />
+            <div className="absolute -bottom-8 -left-8 h-40 w-40 rounded-full bg-[radial-gradient(circle_at_70%_70%,rgba(220,38,38,0.20),transparent_60%)] blur-2xl opacity-50" />
 
-            <div className="relative mx-auto w-full max-w-[420px] aspect-[4/5] rounded-[22px] overflow-hidden border border-[rgba(220,38,38,0.18)] bg-black/20 shadow-[0_0_60px_rgba(220,38,38,0.18)]">
-              {/* Masked image placeholder */}
+            <div
+              ref={cardRef}
+              onMouseMove={handleMouseMove}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => {
+                setIsHovered(false);
+                targetTilt.current = { rx: 0, ry: 0 };
+              }}
+              className="relative mx-auto w-full max-w-[280px] sm:max-w-[360px] md:max-w-[420px] aspect-[3/4] rounded-[18px] overflow-hidden bg-black/30"
+              style={{
+                perspective: "1000px",
+                transform: `rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) scale(${tilt.s})`,
+                boxShadow: isHovered
+                  ? `0 0 80px rgba(220,38,38,0.30), ${tilt.ry * 0.5}px ${-tilt.rx * 0.5}px 100px rgba(220,38,38,0.15)`
+                  : "0 0 60px rgba(220,38,38,0.18)",
+                transition: "box-shadow 0.3s ease, border-color 0.3s ease",
+                border: "1px solid rgba(220,38,38,0.25)",
+              }}
+            >
+              {/* === ANIMATED FILM FRAME BORDER (sprocket holes) === */}
+              {/* Top sprocket strip */}
+              <div
+                className="absolute top-0 left-0 right-0 z-20 h-[14px] pointer-events-none"
+                aria-hidden="true"
+              >
+                <div className="w-full h-full flex items-center justify-around px-2"
+                  style={{
+                    background: "repeating-conic-gradient(rgba(220,38,38,0.35) 0% 25%, transparent 0% 50%) 0 0 / 16px 14px",
+                    opacity: 0.7,
+                  }}
+                />
+              </div>
+              {/* Bottom sprocket strip */}
+              <div
+                className="absolute bottom-0 left-0 right-0 z-20 h-[14px] pointer-events-none"
+                aria-hidden="true"
+              >
+                <div className="w-full h-full flex items-center justify-around px-2"
+                  style={{
+                    background: "repeating-conic-gradient(rgba(220,38,38,0.35) 0% 25%, transparent 0% 50%) 0 0 / 16px 14px",
+                    opacity: 0.7,
+                  }}
+                />
+              </div>
+
+              {/* === MAIN PORTRAIT IMAGE === */}
               <div className="absolute inset-0">
                 <Image
-                  src="/pimage/placeholder1.JPG"
+                  src="/pimage/biography.JPG"
                   alt="Puskar Bhatt portrait"
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 420px"
-                  style={{ objectFit: "cover" }}
-                  className="animate-[kenburns_18s_ease-in-out_infinite]"
+                  style={{ objectFit: "cover", objectPosition: "50% 20%" }}
+                  className="animate-[kenburns_22s_ease-in-out_infinite]"
                 />
 
-                {/* Localized readability gradient ONLY on the far-left side of the image */}
-                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.80)_0%,rgba(0,0,0,0.35)_28%,rgba(0,0,0,0.0)_52%)]" />
+                {/* Cursor-follow dynamic spotlight sweep */}
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-60 transition-opacity duration-300"
+                  style={{
+                    background: `radial-gradient(550px circle at ${spotlightPos.x}% ${spotlightPos.y}%, rgba(220,38,38,0.30), transparent 50%)`,
+                  }}
+                />
+
+                {/* Cinematic vignette — dramatic movie-poster lighting */}
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_30%,transparent_30%,rgba(0,0,0,0.75)_85%)]" />
+                {/* Side rim lighting */}
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.40)_0%,transparent_25%,transparent_75%,rgba(0,0,0,0.40)_100%)]" />
+                {/* Subtle top rim highlight */}
+                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(220,38,38,0.12)_0%,transparent_30%)]" />
               </div>
 
-              {/* Theatrical mask / vignette */}
-              <div className="absolute inset-0 [mask-image:radial-gradient(circle_at_50%_20%,black_0%,black_55%,transparent_78%)] bg-black/10" />
-              <div className="absolute inset-0 bg-[radial-gradient(closest-side_at_50%_60%,transparent_35%,rgba(0,0,0,0.88)_80%)]" />
-
-              {/* Crimson edge accents */}
-              <div className="absolute inset-0 pointer-events-none [background:linear-gradient(90deg,rgba(220,38,38,0.0),rgba(220,38,38,0.25),rgba(220,38,38,0.0))] opacity-[0.35]" />
-
-              {/* Full-width cinematic landing banner (covers left→right, sits above filmography) */}
+              {/* === FILM GRAIN TEXTURE OVERLAY === */}
               <div
-                className="absolute top-[-100px] left-0 right-0 z-[2] h-[84px] sm:h-[96px]"
-                role="presentation"
-              >
-                {/* Banner background */}
-                <div className="absolute inset-0">
-                  <Image
-                    src="/iconic4.jpg"
-                    alt="Cinematic banner"
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 1280px"
-                    className="object-cover object-center"
-                    draggable={false}
-                    priority
-                  />
-                </div>
+                className="absolute inset-0 z-10 pointer-events-none opacity-[0.04]"
+                aria-hidden="true"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+                  backgroundRepeat: "repeat",
+                  backgroundSize: "256px 256px",
+                }}
+              />
 
-                {/* Overlays */}
-                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.88)_0%,rgba(0,0,0,0.55)_20%,rgba(220,38,38,0.22)_55%,rgba(0,0,0,0.82)_100%)]" />
-                <div className="absolute inset-0 [background:radial-gradient(circle_at_20%_40%,rgba(220,38,38,0.55),transparent_55%)] opacity-60" />
-                <div className="absolute inset-0 opacity-80 [background:linear-gradient(115deg,transparent_0%,rgba(220,38,38,0.30)_35%,transparent_70%)] animate-[scan_sweep_3.6s_ease-in-out_infinite]" />
+              {/* === CINEMATIC EDGE GLOW (animated) === */}
+              <div
+                className="absolute inset-0 z-10 pointer-events-none rounded-[18px] animate-pulse [animation-duration:4s]"
+                style={{
+                  boxShadow: "inset 0 0 30px rgba(220,38,38,0.15), inset 0 0 60px rgba(220,38,38,0.05)",
+                }}
+              />
 
-                {/* Content */}
-                <div className="relative h-full mx-auto max-w-6xl px-4 sm:px-6 flex items-center justify-between gap-6">
-                  <div className="min-w-0">
-                    <p className="text-[11px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/80">
-                      Special Broadcast
-                    </p>
-                    <p className="text-[14px] uppercase tracking-[0.10em] font-black text-[#dc2626]">
-                      Tonight: Antagonist Mode
-                    </p>
-                  </div>
+{/* === MINIMAL BOTTOM GRADIENT === */}
+              <div className="absolute bottom-0 left-0 right-0 z-20 h-12 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
 
-                  <div className="hidden md:flex items-center gap-3">
-                    <div className="h-[2px] w-16 bg-[#dc2626] shadow-[0_0_24px_rgba(220,38,38,0.55)]" />
-                    <div className="h-[8px] w-[8px] rounded-full bg-[#dc2626] shadow-[0_0_18px_rgba(220,38,38,0.65)] animate-pulse" />
-                    <div className="text-[11px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/70">
-                      FEAR • CINEMA • POWER
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between gap-3">
-                <div>
-                  <p className="text-[11px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/70">
-                    On-screen Persona
-                  </p>
-                  <p className="text-[16px] uppercase tracking-[0.12em] font-black text-[#dc2626]">
-                    Fear Made Cinematic
-                  </p>
-                </div>
-                <div className="h-10 w-10 rounded-full border border-[rgba(220,38,38,0.25)] bg-black/20 shadow-[0_0_30px_rgba(220,38,38,0.25)]" />
-              </div>
+              {/* Corner accents */}
+              <div className="absolute top-3 left-3 z-15 h-6 w-6 border-l-[2px] border-t-[2px] border-[rgba(220,38,38,0.35)] rounded-tl-[6px] pointer-events-none" aria-hidden="true" />
+              <div className="absolute top-3 right-3 z-15 h-6 w-6 border-r-[2px] border-t-[2px] border-[rgba(220,38,38,0.35)] rounded-tr-[6px] pointer-events-none" aria-hidden="true" />
+              <div className="absolute bottom-3 left-3 z-15 h-6 w-6 border-l-[2px] border-b-[2px] border-[rgba(220,38,38,0.35)] rounded-bl-[6px] pointer-events-none" aria-hidden="true" />
+              <div className="absolute bottom-3 right-3 z-15 h-6 w-6 border-r-[2px] border-b-[2px] border-[rgba(220,38,38,0.35)] rounded-br-[6px] pointer-events-none" aria-hidden="true" />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Ken Burns keyframes (Server Component-safe):
-          Avoid styled-jsx. Animation is handled via Tailwind arbitrary animation.
-          If you need to tweak timing, adjust the class: animate-[kenburns_18s_ease-in-out_infinite]
-          and ensure keyframes are defined globally in src/app/globals.css.
-      */}
+      {/* Keyframes for animations */}
+      <style jsx>{`
+        @keyframes kenburns {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.06); }
+          100% { transform: scale(1); }
+        }
+        @keyframes marquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+      `}</style>
     </section>
   );
 }

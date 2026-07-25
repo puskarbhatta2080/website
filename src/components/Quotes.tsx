@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 
@@ -117,6 +118,16 @@ export default function Quotes() {
               </figure>
             );
           })}
+        </div>
+
+        {/* View More */}
+        <div className="mt-10 text-center">
+          <Link
+            href="#bts"
+            className="inline-flex items-center justify-center rounded-full border border-[rgba(220,38,38,0.25)] px-6 py-3 text-[12px] uppercase tracking-widest font-black text-[#d4d4d8] bg-black/10 hover:bg-black/20 shadow-[0_0_30px_rgba(220,38,38,0.10)] transition-all duration-300"
+          >
+            View More — Explore the Archive ↓
+          </Link>
         </div>
       </div>
 

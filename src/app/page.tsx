@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import FilmStrip from "@/components/FilmStrip";
 import Filmography from "@/components/Filmography";
 import Quotes from "@/components/Quotes";
 import Awards from "@/components/Awards";
@@ -6,6 +7,8 @@ import News from "@/components/News";
 import AboutContact from "@/components/AboutContact";
 import BtsMemoris from "@/components/BtsMemoris";
 import CreativeImageDisplay from "@/components/CreativeImageDisplay";
+import SocialMediaFeed from "@/components/SocialMediaFeed";
+import Link from "next/link";
 
 
 
@@ -20,6 +23,9 @@ export default function Home() {
 
       <main>
         <Hero />
+
+        {/* 35mm Evidence Reel — Film Strip */}
+        <FilmStrip />
 
         {/* Cinematic film-spindle block */}
         <div id="spindle" className="mx-auto max-w-6xl px-4 sm:px-6 py-10">
@@ -37,6 +43,16 @@ export default function Home() {
             ]}
             label="PROJECTOR REEL // PSYCHOLOGICAL VILLAIN"
           />
+
+          {/* View More for CreativeImageDisplay */}
+          <div className="mt-8 text-center">
+            <Link
+              href="/gallery/iconic"
+              className="inline-flex items-center justify-center rounded-full border border-[rgba(220,38,38,0.25)] px-6 py-3 text-[12px] uppercase tracking-widest font-black text-[#d4d4d8] bg-black/10 hover:bg-black/20 shadow-[0_0_30px_rgba(220,38,38,0.10)] transition-all duration-300"
+            >
+              View More — All Iconic Stills →
+            </Link>
+          </div>
         </div>
 
 
@@ -44,6 +60,7 @@ export default function Home() {
         <Quotes />
         <Awards />
         <News />
+        <SocialMediaFeed />
         <BtsMemoris />
         <AboutContact />
 
