@@ -2,141 +2,155 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useState, useRef } from "react";
+import { useCallback, useState, useRef, useEffect, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import CinematicLightbox from "@/components/CinematicLightbox";
 import type { LightboxImage } from "@/components/CinematicLightbox";
 
-interface CardTilt {
-  rx: number;
-  ry: number;
-  glowX: number;
-  glowY: number;
+/**
+ * BTS / MEMORIS — Evidence & Case File Board
+ *
+ * A high-tech villain "surveillance & intelligence" UI dashboard.
+ * Images are arranged as interconnected nodes with glowing red/amber
+ * vector lines, frosted-glass panels, HUD metadata overlays, and
+ * telemetry indicators.
+ */
+
+const BTS_FILES = [
+  "1eb3c7ec-b5f7-48d5-abb6-6c122244f06e.webp",
+  "3fc2ad96-4ab6-41fd-994e-ac3ed1bebc50.webp",
+  "4a893cd6-11c0-4681-bf97-0e56032a38fc.webp",
+  "5a1ed671-4b52-42cb-8995-f17bb58a4c23.webp",
+  "8c6d0d32-1871-4da7-9186-f27627be6cf4.webp",
+  "9d8ba5e8-b19a-458d-bf7c-99e1018736c2.webp",
+  "23d6b1f7-446c-49a4-8035-209bf030d285.webp",
+  "43bb180b-1335-4753-89ee-38fa11871471.webp",
+  "53fb3a5a-8908-41d2-a754-60a00076bb38.webp",
+  "154e2cd6-ad68-4eb5-8c96-343d2c6b23eb.webp",
+  "391b465a-6f39-402f-a5ec-16cfa8c19bc5.webp",
+  "478cd438-93eb-4911-989c-9954a5943780.webp",
+  "484bd65c-32b1-45c5-8943-7c8f5af18f15.webp",
+  "910a13eb-9bbb-4d50-bbf0-c26d5895e0c6.webp",
+  "5958c07e-ffec-4815-abd5-58a2de2440b1.webp",
+  "8835e4d3-b129-4d70-acba-fd1962bca7fd.webp",
+  "9473dec5-9ffe-4c9c-bc34-3b329de37bb6.webp",
+  "522196b1-6abc-4966-8519-e214c7e1bcc1.webp",
+  "a5b5f20f-7bf2-47fe-805f-4c6c02e02608.webp",
+  "a8c3e3e8-9123-44ac-9b92-4b22aa580dc0.webp",
+  "ab388c23-0fbe-49c6-81ff-f20aed433480.webp",
+  "abe3f8a4-20f1-4b4d-ae25-228c55833380.webp",
+  "b0d452a8-d63e-4f0b-8cb6-ccbbeb321255.webp",
+  "ce379785-cd83-4f01-9bc1-21e1a2cd0ecf.webp",
+  "f91369a6-f6fe-41ec-bf4b-54fab4a413ed.webp",
+];
+
+// Generate telemetry data for each node
+const TELEMETRY = [
+  { iso: "800", aperture: "f/2.8", shutter: "1/125", geo: "27.71°N, 85.32°E", time: "23:47:12", frame: "EVI-001" },
+  { iso: "1600", aperture: "f/1.8", shutter: "1/60", geo: "27.71°N, 85.32°E", time: "00:12:38", frame: "EVI-002" },
+  { iso: "400", aperture: "f/4.0", shutter: "1/250", geo: "27.70°N, 85.33°E", time: "18:05:44", frame: "EVI-003" },
+  { iso: "3200", aperture: "f/2.0", shutter: "1/30", geo: "27.72°N, 85.31°E", time: "02:33:09", frame: "EVI-004" },
+  { iso: "200", aperture: "f/5.6", shutter: "1/500", geo: "27.71°N, 85.32°E", time: "15:20:55", frame: "EVI-005" },
+  { iso: "6400", aperture: "f/1.4", shutter: "1/15", geo: "27.70°N, 85.33°E", time: "03:47:21", frame: "EVI-006" },
+];
+
+interface NodeData {
+  id: number;
+  src: string;
+  title: string;
+  subtitle: string;
+  x: number;
+  y: number;
+  telemetry: typeof TELEMETRY[0];
 }
 
-/**
- * BTS / MEMORIS (Backstage) section
- * - Aggressive cinematic layout
- * - Replaces placeholder media with images from /public if available.
- *
- * MEDIA INSTRUCTIONS:
- * - Add your real BTS photos into:
- *   - public/bts/
- *   - public/memoris/
- * - Update the src fields below to match your filenames.
- */
-const BTS_FILES = [
-  "1eb3c7ec-b5f7-48d5-abb6-6c122244f06e.jpg",
-  "3fc2ad96-4ab6-41fd-994e-ac3ed1bebc50.jpg",
-  "4a893cd6-11c0-4681-bf97-0e56032a38fc.jpg",
-  "5a1ed671-4b52-42cb-8995-f17bb58a4c23.jpg",
-  "8c6d0d32-1871-4da7-9186-f27627be6cf4.jpg",
-  "9d8ba5e8-b19a-458d-bf7c-99e1018736c2.jpg",
-  "23d6b1f7-446c-49a4-8035-209bf030d285.jpg",
-  "43bb180b-1335-4753-89ee-38fa11871471.jpg",
-  "53fb3a5a-8908-41d2-a754-60a00076bb38.jpg",
-  "154e2cd6-ad68-4eb5-8c96-343d2c6b23eb.jpg",
-  "391b465a-6f39-402f-a5ec-16cfa8c19bc5.jpg",
-  "478cd438-93eb-4911-989c-9954a5943780.jpg",
-  "484bd65c-32b1-45c5-8943-7c8f5af18f15.jpg",
-  "910a13eb-9bbb-4d50-bbf0-c26d5895e0c6.jpg",
-  "5958c07e-ffec-4815-abd5-58a2de2440b1.jpg",
-  "8835e4d3-b129-4d70-acba-fd1962bca7fd.jpg",
-  "9473dec5-9ffe-4c9c-bc34-3b329de37bb6.jpg",
-  "522196b1-6abc-4966-8519-e214c7e1bcc1.jpg",
-  "a5b5f20f-7bf2-47fe-805f-4c6c02e02608.jpg",
-  "a8c3e3e8-9123-44ac-9b92-4b22aa580dc0.jpg",
-  "ab388c23-0fbe-49c6-81ff-f20aed433480.jpg",
-  "abe3f8a4-20f1-4b4d-ae25-228c55833380.jpg",
-  "b0d452a8-d63e-4f0b-8cb6-ccbbeb321255.jpg",
-  "ce379785-cd83-4f01-9bc1-21e1a2cd0ecf.jpg",
-  "f91369a6-f6fe-41ec-bf4b-54fab4a413ed.jpg",
-];
+/** Generate pseudo-random node positions in a clustered layout */
+function generateNodes(): NodeData[] {
+  const titles = [
+    "The Wardrobe Returns", "Mask Tests", "Light & Smoke", "Director's Cut",
+    "On Set", "Rehearsal", "Character Prep", "Night Shoot",
+    "Prop Testing", "Makeup Trials", "Scene Blocking", "Camera Setup",
+    "Dialogue Prep", "Costume Fitting", "Lighting Rig", "Action Rehearse",
+    "Green Room", "Script Notes", "BTS POV", "Crew Moment",
+    "Sound Check", "Standby", "Final Call", "Cut!", "Wrap Party",
+  ];
+  const subtitles = [
+    "Night rehearsal", "Fear is engineered", "Atmosphere set",
+    "Precision in pause", "Live on set", "Silence speaks",
+    "Method acting", "After dark", "Prop master", "Face paint",
+    "Walk through", "Lens test", "Line run", "Wardrobe check",
+    "Rig lights", "Stunt prep", "Off camera", "Page turn",
+    "Behind lens", "Team huddle", "Mic check", "Standby mode",
+    "Last looks", "Scene done", "That's a wrap",
+  ];
 
-const BTS_ITEMS = [
-  {
-    title: "The Wardrobe Returns",
-    subtitle: "Night rehearsal. Crimson intent.",
-    src: `/BTS/${BTS_FILES[0]}`,
-  },
-  {
-    title: "Mask Tests",
-    subtitle: "Fear is engineered. Not acted.",
-    src: `/BTS/${BTS_FILES[1]}`,
-  },
-  {
-    title: "Light & Smoke",
-    subtitle: "Atmosphere, then menace.",
-    src: `/BTS/${BTS_FILES[2]}`,
-  },
-  {
-    title: "Director's Cut",
-    subtitle: "Precision in every pause.",
-    src: `/BTS/${BTS_FILES[3]}`,
-  },
-];
+  // Pre-defined positions in a network layout
+  const positions = [
+    { x: 5, y: 10 }, { x: 28, y: 5 }, { x: 52, y: 8 }, { x: 75, y: 12 },
+    { x: 15, y: 35 }, { x: 38, y: 30 }, { x: 62, y: 33 }, { x: 85, y: 28 },
+    { x: 8, y: 58 }, { x: 30, y: 55 }, { x: 55, y: 52 }, { x: 78, y: 58 },
+    { x: 20, y: 78 }, { x: 45, y: 75 }, { x: 68, y: 80 }, { x: 90, y: 72 },
+    { x: 5, y: 90 }, { x: 35, y: 92 }, { x: 60, y: 88 }, { x: 82, y: 90 },
+    { x: 12, y: 70 }, { x: 48, y: 42 }, { x: 72, y: 45 }, { x: 25, y: 50 }, { x: 50, y: 65 },
+  ];
 
-const MEMORIS_ITEMS = [
-  {
-    title: "Memoris #01",
-    subtitle: "A scar of cinema.",
-    src: "/pimage/placeholder1.JPG",
-  },
-  {
-    title: "Memoris #02",
-    subtitle: "The vow before the scene.",
-    src: "/pimage/placeholder2.JPG",
-  },
-  {
-    title: "Memoris #03",
-    subtitle: "A silence that speaks.",
-    src: "/pimage/placeholder3.JPG",
-  },
-];
+  return titles.slice(0, BTS_FILES.length).map((title, i) => ({
+    id: i,
+    src: `/BTS/${BTS_FILES[i]}`,
+    title,
+    subtitle: subtitles[i] || "Evidence capture",
+    x: positions[i].x,
+    y: positions[i].y,
+    telemetry: TELEMETRY[i % TELEMETRY.length],
+  }));
+}
 
-// All BTS images + MEMORIS for the lightbox
-const ALL_BTS_LIGHTBOX: LightboxImage[] = [
-  ...BTS_FILES.map((f, i) => ({
-    src: `/BTS/${f}`,
-    alt: `BTS still ${i + 1}`,
-  })),
-  ...MEMORIS_ITEMS.map((item) => ({ src: item.src, alt: item.title })),
-];
+const ALL_BTS_LIGHTBOX: LightboxImage[] = BTS_FILES.map((f, i) => ({
+  src: `/BTS/${f}`,
+  alt: `BTS still ${i + 1}`,
+}));
+
+/** Generate connections between nearby nodes */
+function generateConnections(nodes: NodeData[]) {
+  const connections: [number, number][] = [];
+  for (let i = 0; i < nodes.length; i++) {
+    for (let j = i + 1; j < nodes.length; j++) {
+      const dx = nodes[i].x - nodes[j].x;
+      const dy = nodes[i].y - nodes[j].y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      // Connect nodes within a certain distance (deterministic based on node indices)
+      if (dist < 30 && ((i * 7 + j * 13) % 10) > 3) {
+        connections.push([i, j]);
+      }
+    }
+  }
+  return connections;
+}
 
 export default function BtsMemoris() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
-  const cardRefs = useRef<(HTMLElement | null)[]>([]);
-  const [cardTilts, setCardTilts] = useState<Record<number, CardTilt>>({});
+  const [hoveredNode, setHoveredNode] = useState<number | null>(null);
+  const [activeNodes, setActiveNodes] = useState<Set<number>>(new Set());
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [dimensions, setDimensions] = useState({ w: 1200, h: 1600 });
 
-  const handleCardMouse = useCallback(
-    (idx: number, clientX: number, clientY: number, entering: boolean) => {
-      const el = cardRefs.current[idx];
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      if (entering) {
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const dx = (clientX - cx) / (rect.width / 2);
-        const dy = (clientY - cy) / (rect.height / 2);
-        setCardTilts((prev) => ({
-          ...prev,
-          [idx]: {
-            rx: -dy * 6,
-            ry: dx * 6,
-            glowX: ((clientX - rect.left) / rect.width) * 100,
-            glowY: ((clientY - rect.top) / rect.height) * 100,
-          },
-        }));
-      } else {
-        setCardTilts((prev) => {
-          const next = { ...prev };
-          delete next[idx];
-          return next;
+  const nodes = useMemo(() => generateNodes(), []);
+  const connections = useMemo(() => generateConnections(nodes), [nodes]);
+
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (containerRef.current) {
+        setDimensions({
+          w: containerRef.current.offsetWidth,
+          h: containerRef.current.offsetHeight,
         });
       }
-    },
-    []
-  );
+    };
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, []);
 
   const openLightbox = useCallback((idx: number) => {
     setLightboxIndex(idx);
@@ -157,159 +171,338 @@ export default function BtsMemoris() {
     );
   }, []);
 
+  const handleNodeHover = useCallback((id: number | null) => {
+    setHoveredNode(id);
+    if (id !== null) {
+      const connected = new Set<number>();
+      connections.forEach(([a, b]) => {
+        if (a === id) connected.add(b);
+        if (b === id) connected.add(a);
+      });
+      connected.add(id);
+      setActiveNodes(connected);
+    } else {
+      setActiveNodes(new Set());
+    }
+  }, [connections]);
+
   return (
     <section
       id="bts"
       className="relative py-20 px-4 sm:px-6 overflow-hidden"
+      style={{ background: "#0d0f12" }}
     >
-      {/* Corner vignette */}
+      {/* Grid overlay — surveillance grid */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 pointer-events-none [background:radial-gradient(1200px_circle_at_50%_10%,rgba(220,38,38,0.10),transparent_55%),radial-gradient(900px_circle_at_0%_80%,rgba(220,38,38,0.08),transparent_60%),radial-gradient(900px_circle_at_100%_85%,rgba(220,38,38,0.07),transparent_62%),linear-gradient(to_bottom,rgba(0,0,0,0),rgba(0,0,0,0.65))]"
+        className="absolute inset-0 pointer-events-none opacity-[0.04]"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: "60px 60px",
+        }}
       />
 
-      <div className="relative mx-auto max-w-6xl">
-        <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      {/* Corner vignette with red glow */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none [background:radial-gradient(1200px_circle_at_50%_10%,rgba(220,38,38,0.08),transparent_55%),radial-gradient(900px_circle_at_0%_80%,rgba(220,38,38,0.06),transparent_60%),radial-gradient(900px_circle_at_100%_85%,rgba(220,38,38,0.05),transparent_62%),linear-gradient(to_bottom,rgba(0,0,0,0),rgba(0,0,0,0.75))]"
+      />
+
+      <div className="relative mx-auto max-w-7xl">
+        {/* Header — Surveillance Console */}
+        <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-6">
           <div>
+            <div className="inline-flex items-center gap-3 mb-3">
+              <span className="h-2 w-2 rounded-full bg-[#dc2626] shadow-[0_0_12px_rgba(220,38,38,0.85)] animate-pulse" />
+              <span className="text-[10px] uppercase tracking-[0.22em] font-black text-[#dc2626]/80">
+                SURVEILLANCE FEED // CLASSIFIED
+              </span>
+            </div>
             <h3 className="uppercase tracking-[0.18em] font-black text-[#d4d4d8] text-[22px]">
               BTS / MEMORIS
             </h3>
             <p className="mt-3 text-[#d4d4d8]/70 max-w-2xl">
-              Backstage fragments, rehearsals, and memory cuts—where the
-              antagonist becomes a ritual.
+              Intercepted behind-the-scenes intelligence. Connected evidence
+              nodes from the antagonist&apos;s workshop.
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <Link
               href="/gallery/bts"
-              className="inline-flex items-center justify-center rounded-full border border-[rgba(220,38,38,0.25)] px-4 py-2 text-[12px] uppercase tracking-widest font-black text-[#d4d4d8] bg-black/10 hover:bg-black/20 shadow-[0_0_30px_rgba(220,38,38,0.10)] transition"
+              className="inline-flex items-center justify-center rounded-full border border-[rgba(220,38,38,0.25)] px-5 py-2.5 text-[12px] uppercase tracking-widest font-black text-[#d4d4d8] bg-black/10 hover:bg-black/20 shadow-[0_0_30px_rgba(220,38,38,0.10)] transition"
             >
-              View More →
+              View Full Archive →
             </Link>
-            <div className="h-[2px] w-10 bg-[#dc2626] shadow-[0_0_24px_rgba(220,38,38,0.35)]" />
-            <span className="text-[12px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/80">
-              Archive Mode
-            </span>
+            <div className="flex items-center gap-2">
+              <div className="h-[2px] w-8 bg-[#dc2626] shadow-[0_0_24px_rgba(220,38,38,0.35)]" />
+              <span className="text-[10px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/60">
+                {BTS_FILES.length} NODES
+              </span>
+            </div>
           </div>
         </header>
 
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* BTS */}
-          <div className="lg:col-span-2">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {BTS_ITEMS.map((item, idx) => (
-                <article
-                  key={item.title}
-                  ref={(el) => { cardRefs.current[idx] = el; }}
-                  onClick={() => openLightbox(idx)}
-                  onMouseMove={(e) => handleCardMouse(idx, e.clientX, e.clientY, true)}
-                  onMouseEnter={(e) => handleCardMouse(idx, e.clientX, e.clientY, true)}
-                  onMouseLeave={() => handleCardMouse(idx, 0, 0, false)}
-                  className="group relative overflow-hidden rounded-[18px] border border-[rgba(220,38,38,0.16)] bg-black/15 cursor-pointer"
+        {/* Status Bar */}
+        <div className="mb-6 relative overflow-hidden rounded-[12px] border border-[rgba(220,38,38,0.18)] bg-black/40 backdrop-blur-sm">
+          <div className="absolute inset-0 [background:radial-gradient(600px_circle_at_30%_20%,rgba(220,38,38,0.18),transparent_55%),radial-gradient(600px_circle_at_70%_80%,rgba(220,38,38,0.10),transparent_60%)]" />
+          <div className="relative px-4 py-2.5 flex items-center gap-6 text-[10px] uppercase tracking-widest font-black text-[#d4d4d8]/60">
+            <span className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#dc2626] shadow-[0_0_8px_rgba(220,38,38,0.65)] animate-pulse" />
+              FEED LIVE
+            </span>
+            <span className="text-[#d4d4d8]/30">|</span>
+            <span>ENCRYPTION: AES-256</span>
+            <span className="text-[#d4d4d8]/30">|</span>
+            <span>SIGNAL: STRONG</span>
+            <span className="text-[#d4d4d8]/30">|</span>
+            <span className="text-[#dc2626]">NODES: {BTS_FILES.length} ACTIVE</span>
+          </div>
+        </div>
+
+        {/* Evidence Board — Node Network */}
+        <div
+          ref={containerRef}
+          className="relative w-full overflow-hidden rounded-[22px] border border-[rgba(220,38,38,0.15)] bg-black/30"
+          style={{ minHeight: "900px" }}
+        >
+          {/* SVG Connection Lines */}
+          <svg
+            className="absolute inset-0 w-full h-full pointer-events-none z-0"
+            style={{ width: "100%", height: "100%" }}
+          >
+            <defs>
+              <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="rgba(220,38,38,0)" />
+                <stop offset="50%" stopColor="rgba(220,38,38,0.35)" />
+                <stop offset="100%" stopColor="rgba(220,38,38,0)" />
+              </linearGradient>
+              <linearGradient id="lineGradActive" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="rgba(220,38,38,0)" />
+                <stop offset="50%" stopColor="rgba(220,38,38,0.7)" />
+                <stop offset="100%" stopColor="rgba(220,38,38,0)" />
+              </linearGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+
+            {connections.map(([a, b], i) => {
+              const nodeA = nodes[a];
+              const nodeB = nodes[b];
+              const isActive =
+                activeNodes.has(a) && activeNodes.has(b);
+              const isDimmed =
+                activeNodes.size > 0 && !isActive;
+
+              return (
+                <line
+                  key={`conn-${i}`}
+                  x1={`${nodeA.x}%`}
+                  y1={`${nodeA.y}%`}
+                  x2={`${nodeB.x}%`}
+                  y2={`${nodeB.y}%`}
+                  stroke={isActive ? "rgba(220,38,38,0.7)" : "rgba(220,38,38,0.15)"}
+                  strokeWidth={isActive ? 2 : 1}
+                  filter={isActive ? "url(#glow)" : undefined}
+                  className="transition-all duration-500"
                   style={{
-                    perspective: "800px",
-                    transform: cardTilts[idx]
-                      ? `rotateX(${cardTilts[idx].rx}deg) rotateY(${cardTilts[idx].ry}deg)`
-                      : "rotateX(0deg) rotateY(0deg)",
-                    transition: "transform 0.15s ease-out",
+                    opacity: isDimmed ? 0.1 : isActive ? 1 : 0.4,
+                  }}
+                />
+              );
+            })}
+          </svg>
+
+          {/* Node Cards */}
+          {nodes.map((node) => {
+            const isHovered = hoveredNode === node.id;
+            const isConnected = activeNodes.has(node.id);
+            const isDimmed = activeNodes.size > 0 && !isConnected;
+
+            return (
+              <motion.button
+                key={node.id}
+                onClick={() => openLightbox(node.id)}
+                onMouseEnter={() => handleNodeHover(node.id)}
+                onMouseLeave={() => handleNodeHover(null)}
+                className="absolute z-10 text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#dc2626]/50"
+                style={{
+                  left: `${node.x}%`,
+                  top: `${node.y}%`,
+                  width: "180px",
+                  transform: "translate(-50%, -50%)",
+                }}
+                animate={{
+                  scale: isHovered ? 1.15 : isDimmed ? 0.85 : 1,
+                  opacity: isDimmed ? 0.3 : 1,
+                  zIndex: isHovered ? 50 : 10,
+                }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+              >
+                <div
+                  className="relative overflow-hidden rounded-[14px] backdrop-blur-md transition-all duration-300"
+                  style={{
+                    background: isHovered
+                      ? "rgba(220,38,38,0.15)"
+                      : "rgba(255,255,255,0.04)",
+                    border: isHovered
+                      ? "1.5px solid rgba(220,38,38,0.5)"
+                      : "1px solid rgba(220,38,38,0.12)",
+                    boxShadow: isHovered
+                      ? "0 0 40px rgba(220,38,38,0.2), inset 0 0 20px rgba(220,38,38,0.05)"
+                      : "0 0 20px rgba(0,0,0,0.3)",
                   }}
                 >
-                  {/* Cursor-follow spotlight glow */}
-                  {cardTilts[idx] && (
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none absolute inset-[-1px] z-10"
-                      style={{
-                        background: `radial-gradient(350px circle at ${cardTilts[idx].glowX}% ${cardTilts[idx].glowY}%, rgba(220,38,38,0.35), transparent 60%)`,
-                      }}
-                    />
-                  )}
-
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 [background:radial-gradient(600px_circle_at_30%_0%,rgba(220,38,38,0.30),transparent_55%),linear-gradient(to_top,rgba(0,0,0,0.75),rgba(0,0,0,0.15))]" />
-
-                  <div className="relative aspect-[4/3]">
-                    {/* Replace with real BTS images when available in /public/bts */}
+                  {/* Image */}
+                  <div className="relative aspect-[4/3] overflow-hidden">
                     <Image
-                      src={item.src}
-                      alt={item.title}
+                      src={node.src}
+                      alt={node.title}
                       fill
-                      sizes="(max-width: 1024px) 50vw, 33vw"
-                      className="object-cover grayscale contrast-[1.1] transition duration-500 group-hover:grayscale-0"
-                      priority={false}
+                      sizes="180px"
+                      className="object-cover transition-all duration-500"
+                      loading="lazy"
                     />
+
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0d0f12] via-black/30 to-transparent" />
+
+                    {/* Hover scanline effect */}
+                    <AnimatePresence>
+                      {isHovered && (
+                        <motion.div
+                          initial={{ top: "-100%" }}
+                          animate={{ top: "100%" }}
+                          exit={{ top: "100%" }}
+                          transition={{ duration: 1.5, ease: "linear" }}
+                          className="absolute inset-x-0 h-1 bg-[rgba(220,38,38,0.3)] pointer-events-none"
+                        />
+                      )}
+                    </AnimatePresence>
+
+                    {/* Red dot indicator */}
+                    <div className="absolute top-2 left-2">
+                      <span className="flex items-center gap-1.5 rounded-full border border-[rgba(220,38,38,0.25)] bg-black/50 backdrop-blur-sm px-2 py-0.5">
+                        <span className={`h-1.5 w-1.5 rounded-full ${isHovered ? "bg-[#dc2626] shadow-[0_0_8px_rgba(220,38,38,0.85)]" : "bg-[rgba(220,38,38,0.5)]"} transition-all duration-300`} />
+                        <span className="text-[8px] uppercase tracking-widest font-black text-[#d4d4d8]">
+                          {node.telemetry.frame}
+                        </span>
+                      </span>
+                    </div>
+
+                    {/* Node ID */}
+                    <div className="absolute top-2 right-2">
+                      <span className="text-[9px] font-mono tracking-wider text-[rgba(220,38,38,0.5)]">
+                        #{String(node.id + 1).padStart(3, "0")}
+                      </span>
+                    </div>
                   </div>
 
-                  <div className="relative p-5">
-                    <p className="text-[11px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/70">
-                      BTS Fragment
+                  {/* HUD Metadata — visible on hover */}
+                  <AnimatePresence>
+                    {isHovered && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="p-3 space-y-1.5 border-t border-[rgba(220,38,38,0.15)]">
+                          <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[9px] font-mono">
+                            <span className="text-[rgba(220,38,38,0.5)]">ISO:</span>
+                            <span className="text-[#d4d4d8] text-right">{node.telemetry.iso}</span>
+                            <span className="text-[rgba(220,38,38,0.5)]">APERTURE:</span>
+                            <span className="text-[#d4d4d8] text-right">{node.telemetry.aperture}</span>
+                            <span className="text-[rgba(220,38,38,0.5)]">SHUTTER:</span>
+                            <span className="text-[#d4d4d8] text-right">{node.telemetry.shutter}</span>
+                            <span className="text-[rgba(220,38,38,0.5)]">GEO:</span>
+                            <span className="text-[#d4d4d8] text-right truncate">{node.telemetry.geo}</span>
+                            <span className="text-[rgba(220,38,38,0.5)]">TIME:</span>
+                            <span className="text-[#dc2626] text-right">{node.telemetry.time}</span>
+                          </div>
+
+                          {/* Waveform mini visualization */}
+                          <div className="flex items-end gap-[2px] h-4 mt-2">
+                            {Array.from({ length: 20 }).map((_, i) => (
+                              <div
+                                key={i}
+                                className="w-full rounded-full"
+                                style={{
+                                  height: `${20 + Math.sin(i * 1.2 + node.id) * 15 + 10}%`,
+                                  background: `rgba(220,38,38,${0.2 + Math.sin(i * 1.2 + node.id) * 0.15 + 0.15})`,
+                                }}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  {/* Title — always visible */}
+                  <div className="p-2.5">
+                    <p className="text-[9px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/50">
+                      EVIDENCE NODE
                     </p>
-                    <h4 className="mt-1 text-[18px] uppercase tracking-[0.08em] font-black text-[#dc2626]">
-                      {item.title}
-                    </h4>
-                    <p className="mt-2 text-[#d4d4d8]/75 text-[13px] leading-relaxed">
-                      {item.subtitle}
+                    <p className="mt-0.5 text-[11px] uppercase tracking-[0.06em] font-black text-[#d4d4d8] truncate">
+                      {node.title}
                     </p>
                   </div>
+                </div>
 
-                  <div
-                    aria-hidden="true"
-                    className="absolute -bottom-10 left-6 h-24 w-24 rounded-full bg-[#dc2626]/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                {/* Connection pulse ring on hover */}
+                {isHovered && (
+                  <motion.div
+                    initial={{ scale: 0.8, opacity: 0.6 }}
+                    animate={{ scale: 1.4, opacity: 0 }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                    className="absolute inset-0 rounded-[14px] border-2 border-[rgba(220,38,38,0.3)] pointer-events-none"
                   />
-                </article>
-              ))}
+                )}
+              </motion.button>
+            );
+          })}
+
+          {/* Center hub — red warning indicator */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0">
+            <div className="relative">
+              <div className="h-16 w-16 rounded-full border border-[rgba(220,38,38,0.1)] animate-ping [animation-duration:3s]" />
+              <div className="absolute inset-2 h-12 w-12 rounded-full border border-[rgba(220,38,38,0.15)] animate-ping [animation-duration:4s]" />
+              <div className="absolute inset-4 h-8 w-8 rounded-full bg-[rgba(220,38,38,0.05)]" />
+              <div className="absolute inset-[30%] rounded-full bg-[rgba(220,38,38,0.1)] shadow-[0_0_60px_rgba(220,38,38,0.15)]" />
             </div>
           </div>
+        </div>
 
-          {/* MEMORIS */}
-          <aside className="lg:col-span-1">
-            <div className="rounded-[18px] border border-[rgba(220,38,38,0.18)] bg-black/15 overflow-hidden">
-              <div className="p-6">
-                <p className="text-[12px] uppercase tracking-[0.22em] font-black text-[#d4d4d8]/80">
-                  MEMORIS CUTS
-                </p>
-                <h4 className="mt-3 text-[20px] uppercase tracking-[0.10em] font-black text-[#d4d4d8]">
-                  Rehearsal Notes
-                </h4>
-                <p className="mt-3 text-[#d4d4d8]/70 text-[13px] leading-relaxed">
-                  Short fragments from the making—typed like threats.
-                </p>
-              </div>
+        {/* Bottom actions */}
+        <div className="mt-8 flex items-center justify-between">
+          <div className="flex items-center gap-4 text-[10px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/40">
+            <span className="flex items-center gap-2">
+              <span className="h-1 w-1 rounded-full bg-[#dc2626]" />
+              HOVER TO INSPECT
+            </span>
+            <span className="flex items-center gap-2">
+              <span className="h-1 w-1 rounded-full bg-[#dc2626]" />
+              CLICK TO ENLARGE
+            </span>
+          </div>
 
-              <div className="grid grid-cols-1 gap-4 px-6 pb-6">
-                {MEMORIS_ITEMS.map((item, idx) => (
-                  <div
-                    key={item.title}
-                    onClick={() => openLightbox(BTS_ITEMS.length + idx)}
-                    className="relative overflow-hidden rounded-[14px] border border-[rgba(220,38,38,0.14)] bg-black/10 cursor-pointer"
-                  >
-                    <div className="relative h-28">
-                      <Image
-                        src={item.src}
-                        alt={item.title}
-                        fill
-                        sizes="(max-width: 640px) 100vw, 33vw"
-                        className="object-cover object-[50%_30%] grayscale contrast-[1.2] [image-rendering:auto]"
-                        priority={false}
-                      />
-                    </div>
-                    <div className="p-4">
-                      <p className="text-[11px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/70">
-                        {item.title}
-                      </p>
-                      <p className="mt-1 text-[#d4d4d8]/70 text-[13px] leading-relaxed">
-                        {item.subtitle}
-                      </p>
-                    </div>
-                    <div
-                      aria-hidden="true"
-                      className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300 [background:linear-gradient(to_top,rgba(0,0,0,0.78),rgba(220,38,38,0.10))]"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </aside>
+          <Link
+            href="/gallery/bts"
+            className="inline-flex items-center gap-2 rounded-full border border-[rgba(220,38,38,0.25)] px-5 py-2.5 text-[12px] uppercase tracking-widest font-black text-[#d4d4d8] bg-black/10 hover:bg-black/20 shadow-[0_0_30px_rgba(220,38,38,0.10)] transition-all duration-300"
+          >
+            ACCESS FULL ARCHIVE —
+            <span className="text-[#dc2626]">{BTS_FILES.length} NODES</span>
+          </Link>
         </div>
       </div>
 
@@ -326,4 +519,3 @@ export default function BtsMemoris() {
     </section>
   );
 }
-

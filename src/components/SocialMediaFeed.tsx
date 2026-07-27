@@ -148,7 +148,7 @@ export default function SocialMediaFeed() {
     });
   };
 
-  const fallbackSrc = "/news/Reel Life Villain.jpg";
+  const fallbackSrc = "/news/Reel Life Villain.webp";
 
   return (
     <section id="social" className="relative py-20 px-4 sm:px-6 overflow-hidden">

@@ -10,7 +10,7 @@ import Link from "next/link";
  * - Mobile-first responsive height (cinema-ish ratio)
  *
  * Media instructions:
- * - Default banner asset is `/public/iconic4.jpg`.
+ * - Default banner asset is `/public/iconic4.webp`.
  * - To swap images, either pass `imageSrc`/`imageAlt` props or replace the default.
  */
 export type BannerProps = {
@@ -31,7 +31,7 @@ export type BannerProps = {
 };
 
 export default function Banner({
-  imageSrc = "/iconic4.jpg",
+  imageSrc = "/iconic4.webp",
   imageAlt = "Puskar Bhatt cinematic banner",
   badge = "FEATURED RELEASE",
   heading = "PUSKAR BHATT",

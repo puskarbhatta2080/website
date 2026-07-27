@@ -1,7 +1,6 @@
 import Hero from "@/components/Hero";
 import FilmStrip from "@/components/FilmStrip";
 import Filmography from "@/components/Filmography";
-import Quotes from "@/components/Quotes";
 import Awards from "@/components/Awards";
 import News from "@/components/News";
 import AboutContact from "@/components/AboutContact";
@@ -35,11 +34,11 @@ export default function Home() {
           */}
           <CreativeImageDisplay
             images={[
-              { src: "/iconic1.jpg", alt: "Fragment 1" },
-              { src: "/iconic2.JPG", alt: "Fragment 2" },
-              { src: "/iconic3.jpg", alt: "Fragment 3" },
-              { src: "/iconic4.jpg", alt: "Fragment 4" },
-              { src: "/iconic5.jpg", alt: "Fragment 5" },
+              { src: "/iconic1.webp", alt: "Fragment 1" },
+              { src: "/iconic2.webp", alt: "Fragment 2" },
+              { src: "/iconic3.webp", alt: "Fragment 3" },
+              { src: "/iconic4.webp", alt: "Fragment 4" },
+              { src: "/iconic5.webp", alt: "Fragment 5" },
             ]}
             label="PROJECTOR REEL // PSYCHOLOGICAL VILLAIN"
           />
@@ -57,11 +56,10 @@ export default function Home() {
 
 
         <Filmography />
-        <Quotes />
+        <BtsMemoris />
         <Awards />
         <News />
         <SocialMediaFeed />
-        <BtsMemoris />
         <AboutContact />
 
 

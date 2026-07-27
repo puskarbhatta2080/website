@@ -127,7 +127,7 @@ export default function SocialGalleryClient() {
     return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
   };
 
-  const fallbackSrc = "/news/Reel Life Villain.jpg";
+  const fallbackSrc = "/news/Reel Life Villain.webp";
 
   return (
     <section className="relative min-h-screen py-20 px-4 sm:px-6 overflow-hidden">

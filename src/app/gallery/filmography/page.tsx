@@ -8,11 +8,11 @@ export const metadata: Metadata = {
 };
 
 const MOVIES: LightboxImage[] = [
-  { src: "/filmography/gangajal.jpg", alt: "Gangajal — Blood-Soaked Judge" },
-  { src: "/filmography/Himmatwali.jpg", alt: "Himmatwali — Predator in Silk" },
-  { src: "/filmography/Jaljalaa.jpg", alt: "Jaljalaa — The Burning Strategist" },
-  { src: "/filmography/Ma Birsu Kasari.jpg", alt: "Ma Birsu Kasari — Cold-Hearted Conjurer" },
-  { src: "/filmography/Salam Cha Mayalai.jpg", alt: "Salam Cha Mayalai — Nightmare Negotiator" },
+  { src: "/filmography/gangajal.webp", alt: "Gangajal — Blood-Soaked Judge" },
+  { src: "/filmography/Himmatwali.webp", alt: "Himmatwali — Predator in Silk" },
+  { src: "/filmography/Jaljalaa.webp", alt: "Jaljalaa — The Burning Strategist" },
+  { src: "/filmography/Ma Birsu Kasari.webp", alt: "Ma Birsu Kasari — Cold-Hearted Conjurer" },
+  { src: "/filmography/Salam Cha Mayalai.webp", alt: "Salam Cha Mayalai — Nightmare Negotiator" },
 ];
 
 export default function FilmographyGalleryPage() {

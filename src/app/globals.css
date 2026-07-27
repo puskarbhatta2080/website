@@ -67,4 +67,41 @@ body {
   color: #ffffff;
 }
 
+/* ===== MOBILE / TABLET OPTIMIZATIONS ===== */
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (pointer: coarse) {
+  button, a, input, textarea, select, [role="button"], [tabindex]:not([tabindex="-1"]) {
+    cursor: default;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 1024px) {
+  *::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: rgba(220, 38, 38, 0.4);
+    border-radius: 999px;
+  }
+}
+
+html {
+  overscroll-behavior: none;
+}
+
+@media (max-width: 640px) {
+  body {
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+  }
+  img, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+  }
+}

@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/iconic2.JPG",
+        url: "/iconic2.webp",
         width: 1200,
         height: 630,
         alt: "Puskar Bhatt — Cinematic Villain",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     title: "Puskar Bhatt — Nepali Cinema's Ultimate Antagonist",
     description:
       "Premium cinematic portfolio showcasing Puskar Bhatt's antagonist roles across Nepali cinema.",
-    images: ["/iconic2.JPG"],
+    images: ["/iconic2.webp"],
   },
   robots: {
     index: true,
@@ -94,12 +94,16 @@ export default function RootLayout({
               description:
                 "Nepali cinema antagonist known for iconic villain roles in Gangajal, Himmatwali, Jaljalaa, Ma Birsu Kasari, and Salam Cha Mayalai.",
               url: "https://puskarbhatta.com.np",
-              image: "/iconic2.JPG",
+              image: "/iconic2.webp",
               sameAs: [],
               knowsAbout: "Acting, Nepali Cinema, Villain Performance",
             }),
           }}
         />
+        <meta name="theme-color" content="#07080b" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       <body className="min-h-full flex flex-col">
         {/* Persistent background + interactive cursor + floating nav */}
@@ -107,10 +111,9 @@ export default function RootLayout({
         <CrimsonCursor />
         <FloatingNav />
 
-{/* Offset for fixed nav height */}
+        {/* Offset for fixed nav height */}
         <div className="pt-[64px] sm:pt-[72px]">{children}</div>
       </body>
     </html>
   );
 }
-

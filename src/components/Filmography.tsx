@@ -15,37 +15,37 @@ import type { LightboxImage } from "@/components/CinematicLightbox";
  * MEDIA:
  * Place posters inside: public/filmography/
  * Example filenames (existing in your folder):
- *  - filmography/gangajal.jpg
- *  - filmography/Himmatwali.jpg
- *  - filmography/Jaljalaa.jpg
- *  - filmography/Ma Birsu Kasari.jpg
- *  - filmography/Salam Cha Mayalai.jpg
+ *  - filmography/gangajal.webp
+ *  - filmography/Himmatwali.webp
+ *  - filmography/Jaljalaa.webp
+ *  - filmography/Ma Birsu Kasari.webp
+ *  - filmography/Salam Cha Mayalai.webp
  */
 const MOVIES = [
   {
     title: "Gangajal",
     role: "Blood-Soaked Judge",
-    src: "/filmography/gangajal.jpg",
+    src: "/filmography/gangajal.webp",
   },
   {
     title: "Himmatwali",
     role: "Predator in Silk",
-    src: "/filmography/Himmatwali.jpg",
+    src: "/filmography/Himmatwali.webp",
   },
   {
     title: "Jaljalaa",
     role: "The Burning Strategist",
-    src: "/filmography/Jaljalaa.jpg",
+    src: "/filmography/Jaljalaa.webp",
   },
   {
     title: "Ma Birsu Kasari",
     role: "Cold-Hearted Conjurer",
-    src: "/filmography/Ma Birsu Kasari.jpg",
+    src: "/filmography/Ma Birsu Kasari.webp",
   },
   {
     title: "Salam Cha Mayalai",
     role: "Nightmare Negotiator",
-    src: "/filmography/Salam Cha Mayalai.jpg",
+    src: "/filmography/Salam Cha Mayalai.webp",
   },
 ];
 

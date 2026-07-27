@@ -12,16 +12,16 @@ type CreativeImageDisplayProps = {
 };
 
 const BTS_FILES = [
-  "1eb3c7ec-b5f7-48d5-abb6-6c122244f06e.jpg",
-  "3fc2ad96-4ab6-41fd-994e-ac3ed1bebc50.jpg",
-  "4a893cd6-11c0-4681-bf97-0e56032a38fc.jpg",
-  "5a1ed671-4b52-42cb-8995-f17bb58a4c23.jpg",
-  "8c6d0d32-1871-4da7-9186-f27627be6cf4.jpg",
-  "9d8ba5e8-b19a-458d-bf7c-99e1018736c2.jpg",
-  "23d6b1f7-446c-49a4-8035-209bf030d285.jpg",
-  "43bb180b-1335-4753-89ee-38fa11871471.jpg",
-  "53fb3a5a-8908-41d2-a754-60a00076bb38.jpg",
-  "154e2cd6-ad68-4eb5-8c96-343d2c6b23eb.jpg",
+  "1eb3c7ec-b5f7-48d5-abb6-6c122244f06e.webp",
+  "3fc2ad96-4ab6-41fd-994e-ac3ed1bebc50.webp",
+  "4a893cd6-11c0-4681-bf97-0e56032a38fc.webp",
+  "5a1ed671-4b52-42cb-8995-f17bb58a4c23.webp",
+  "8c6d0d32-1871-4da7-9186-f27627be6cf4.webp",
+  "9d8ba5e8-b19a-458d-bf7c-99e1018736c2.webp",
+  "23d6b1f7-446c-49a4-8035-209bf030d285.webp",
+  "43bb180b-1335-4753-89ee-38fa11871471.webp",
+  "53fb3a5a-8908-41d2-a754-60a00076bb38.webp",
+  "154e2cd6-ad68-4eb5-8c96-343d2c6b23eb.webp",
 ];
 
 const DEFAULT_BTS_IMAGES: CreativeImage[] = BTS_FILES.map((f, i) => ({

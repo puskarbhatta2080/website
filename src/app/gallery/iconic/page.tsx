@@ -8,11 +8,11 @@ export const metadata: Metadata = {
 };
 
 const ICONIC_IMAGES: LightboxImage[] = [
-  { src: "/iconic1.jpg", alt: "Fragment 1" },
-  { src: "/iconic2.JPG", alt: "Fragment 2" },
-  { src: "/iconic3.jpg", alt: "Fragment 3" },
-  { src: "/iconic4.jpg", alt: "Fragment 4" },
-  { src: "/iconic5.jpg", alt: "Fragment 5" },
+  { src: "/iconic1.webp", alt: "Fragment 1" },
+  { src: "/iconic2.webp", alt: "Fragment 2" },
+  { src: "/iconic3.webp", alt: "Fragment 3" },
+  { src: "/iconic4.webp", alt: "Fragment 4" },
+  { src: "/iconic5.webp", alt: "Fragment 5" },
 ];
 
 export default function IconicGalleryPage() {
