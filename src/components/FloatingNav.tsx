@@ -3,22 +3,14 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const NAV_HEIGHT = 72;
 const NAV_ITEMS = [
   { href: "#filmography", label: "Filmography" },
-  { href: "#quotes", label: "Quotes" },
   { href: "#awards", label: "Awards" },
   { href: "#news", label: "News" },
   { href: "#about", label: "About" },
   { href: "#contact", label: "Contact" },
 ];
 
-/**
- * Floating glass navigation bar.
- * - Blur + subtle crimson borders
- * - Shrinks on scroll for premium feel
- * - Mobile hamburger menu with slide-in overlay
- */
 export default function FloatingNav() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -37,7 +29,9 @@ export default function FloatingNav() {
     } else {
       document.body.style.overflow = "";
     }
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [menuOpen]);
 
   return (
@@ -56,7 +50,9 @@ export default function FloatingNav() {
             className="group relative inline-flex items-center gap-2 font-extrabold tracking-widest uppercase text-[#d4d4d8]"
             onClick={() => setMenuOpen(false)}
           >
-            <span className="text-[11px] sm:text-[12px] leading-none">Puskar Bhatt</span>
+            <span className="text-[11px] sm:text-[12px] leading-none">
+              Puskar Bhatt
+            </span>
             <span className="absolute -bottom-2 left-0 h-[2px] w-full origin-left scale-x-0 bg-[#dc2626] transition-transform duration-300 group-hover:scale-x-100" />
           </Link>
 
@@ -94,9 +90,21 @@ export default function FloatingNav() {
               aria-expanded={menuOpen}
             >
               <div className="flex flex-col gap-[3px] items-center justify-center">
-                <span className={`block h-[1.5px] w-4 bg-[#d4d4d8] transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-[4.5px]" : ""}`} />
-                <span className={`block h-[1.5px] w-4 bg-[#d4d4d8] transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-                <span className={`block h-[1.5px] w-4 bg-[#d4d4d8] transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-[4.5px]" : ""}`} />
+                <span
+                  className={`block h-[1.5px] w-4 bg-[#d4d4d8] transition-all duration-300 ${
+                    menuOpen ? "rotate-45 translate-y-[4.5px]" : ""
+                  }`}
+                />
+                <span
+                  className={`block h-[1.5px] w-4 bg-[#d4d4d8] transition-all duration-300 ${
+                    menuOpen ? "opacity-0" : ""
+                  }`}
+                />
+                <span
+                  className={`block h-[1.5px] w-4 bg-[#d4d4d8] transition-all duration-300 ${
+                    menuOpen ? "-rotate-45 -translate-y-[4.5px]" : ""
+                  }`}
+                />
               </div>
             </button>
           </div>
@@ -106,7 +114,9 @@ export default function FloatingNav() {
       {/* Mobile slide-in overlay menu */}
       <div
         className={`fixed inset-0 z-[-1] bg-black/80 backdrop-blur-lg transition-opacity duration-300 md:hidden ${
-          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          menuOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setMenuOpen(false)}
       >
@@ -145,4 +155,3 @@ export default function FloatingNav() {
     </header>
   );
 }
-

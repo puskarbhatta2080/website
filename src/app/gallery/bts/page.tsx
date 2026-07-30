@@ -3,8 +3,24 @@ import GalleryPage from "@/components/GalleryPage";
 import type { LightboxImage } from "@/components/CinematicLightbox";
 
 export const metadata: Metadata = {
-  title: "BTS & Memoris Gallery — Puskar Bhatt",
-  description: "Behind-the-scenes fragments, rehearsals, and memory cuts from Puskar Bhatt's cinematic journey.",
+  title: "BTS & Memoris",
+  description:
+    "Behind-the-scenes fragments, rehearsals, and memory cuts from Puskar Bhatt's cinematic journey. Explore 25+ exclusive BTS photographs, character preparation shots, and on-set moments from Nepali film productions.",
+  keywords: [
+    "Puskar Bhatt BTS",
+    "behind the scenes Nepali film",
+    "Nepali cinema behind the scenes",
+    "Puskar Bhatt rehearsal",
+    "film set photos Nepal",
+    "Nepali actor behind the scenes",
+    "movie making Nepal",
+    "antagonist preparation",
+  ],
+  openGraph: {
+    title: "Puskar Bhatt — BTS & Memoris Gallery",
+    description:
+      "Exclusive behind-the-scenes photographs, rehearsals, and on-set moments from Puskar Bhatt's film career.",
+  },
 };
 
 const BTS_FILES = [
@@ -57,4 +73,3 @@ export default function BtsGalleryPage() {
     />
   );
 }
-

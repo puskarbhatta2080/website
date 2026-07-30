@@ -112,11 +112,97 @@ export default function CreativeImageDisplay({
   return (
     <section aria-label={label ?? "Image display"} className="relative">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+        {/* Enhanced label with projector reel styling */}
         {label ? (
-          <div className="mb-4 text-center">
-            <p className="text-[12px] uppercase tracking-[0.22em] font-black text-[#d4d4d8]/80">
-              {label}
-            </p>
+          <div className="mb-6 text-center relative">
+            {/* Sprocket hole decoration */}
+            <div className="flex justify-center gap-2 mb-3" aria-hidden="true">
+              {Array.from({ length: 12 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="w-2 h-3 rounded-sm opacity-40"
+                  style={{
+                    background: "rgba(220,38,38,0.3)",
+                    border: "1px solid rgba(220,38,38,0.15)",
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Animated label */}
+            <motion.div
+              className="inline-flex items-center gap-3 relative"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+              {/* Left decorative line */}
+              <motion.div
+                className="h-[1px] w-8 sm:w-12"
+                style={{
+                  background: "linear-gradient(90deg, transparent, rgba(220,38,38,0.4))",
+                }}
+                animate={{ opacity: [0.3, 0.7, 0.3] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+
+              {/* Label text with flicker animation */}
+              <motion.span
+                className="text-[14px] sm:text-[16px] font-black tracking-[0.28em] uppercase relative"
+                style={{ color: "#d4d4d8" }}
+                animate={{
+                  textShadow: [
+                    "0 0 4px rgba(220,38,38,0.3)",
+                    "0 0 8px rgba(220,38,38,0.5)",
+                    "0 0 4px rgba(220,38,38,0.3)",
+                    "0 0 2px rgba(220,38,38,0.2)",
+                    "0 0 6px rgba(220,38,38,0.4)",
+                    "0 0 4px rgba(220,38,38,0.3)",
+                  ],
+                }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              >
+                {label}
+              </motion.span>
+
+              {/* Right decorative line */}
+              <motion.div
+                className="h-[1px] w-8 sm:w-12"
+                style={{
+                  background: "linear-gradient(270deg, transparent, rgba(220,38,38,0.4))",
+                }}
+                animate={{ opacity: [0.3, 0.7, 0.3] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            </motion.div>
+
+            {/* Red accent underline */}
+            <motion.div
+              className="mx-auto mt-2 h-[2px] rounded-full"
+              style={{
+                width: "60%",
+                maxWidth: "300px",
+                background: "linear-gradient(90deg, transparent, rgba(220,38,38,0.3), transparent)",
+              }}
+              animate={{ opacity: [0.2, 0.5, 0.2] }}
+              transition={{ duration: 2.5, repeat: Infinity }}
+            />
+
+            {/* Frame counter */}
+            <motion.p
+              className="mt-3 text-[11px] uppercase tracking-[0.3em] font-black"
+              style={{ color: "rgba(220,38,38,0.5)" }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              <span className="text-[rgba(220,38,38,0.7)]">{String(activeIdx + 1).padStart(2, "0")}</span>
+              <span className="mx-1.5">/</span>
+              <span>{String(images.length).padStart(2, "0")}</span>
+              <span className="ml-2 text-[9px] tracking-[0.15em]" style={{ color: "rgba(148,163,184,0.4)" }}>
+                FRAMES
+              </span>
+            </motion.p>
           </div>
         ) : null}
 
@@ -128,7 +214,68 @@ export default function CreativeImageDisplay({
             className="absolute inset-0 pointer-events-none opacity-90"
           >
             <div className="absolute inset-0 [background:radial-gradient(1200px_circle_at_50%_10%,rgba(220,38,38,0.18),transparent_55%),radial-gradient(900px_circle_at_20%_70%,rgba(220,38,38,0.12),transparent_55%),linear-gradient(to_bottom,rgba(0,0,0,0.0),rgba(0,0,0,0.95))]" />
-            <div className="absolute inset-0 opacity-25 [background:repeating-linear-gradient(0deg,rgba(255,255,255,0.06)_0,rgba(255,255,255,0.06)_1px,transparent_1px,transparent_3px)]" />
+            {/* Film grain overlay */}
+            <div
+              className="absolute inset-0 opacity-20 mix-blend-overlay"
+              style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+                backgroundRepeat: "repeat",
+                backgroundSize: "200px 200px",
+              }}
+            />
+            {/* Horizontal scan lines */}
+            <div
+              className="absolute inset-0 opacity-15"
+              style={{
+                background: "repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 3px)",
+              }}
+            />
+          </div>
+
+          {/* Projector beam animation */}
+          <motion.div
+            aria-hidden="true"
+            className="absolute inset-0 pointer-events-none z-[1]"
+            animate={{
+              background: [
+                "linear-gradient(115deg, transparent 0%, rgba(220,38,38,0.08) 20%, transparent 40%)",
+                "linear-gradient(115deg, transparent 15%, rgba(220,38,38,0.05) 35%, transparent 55%)",
+                "linear-gradient(115deg, transparent 30%, rgba(220,38,38,0.08) 50%, transparent 70%)",
+                "linear-gradient(115deg, transparent 10%, rgba(220,38,38,0.06) 30%, transparent 50%)",
+                "linear-gradient(115deg, transparent 0%, rgba(220,38,38,0.08) 20%, transparent 40%)",
+              ],
+              opacity: [0.6, 0.4, 0.5, 0.3, 0.6],
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            style={{ mixBlendMode: "screen" }}
+          />
+
+          {/* Sprocket holes - left side */}
+          <div className="absolute left-3 top-0 bottom-0 flex flex-col justify-around z-[2] pointer-events-none" aria-hidden="true">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div
+                key={i}
+                className="w-2.5 h-3.5 rounded-sm opacity-30"
+                style={{
+                  background: "rgba(0,0,0,0.6)",
+                  border: "1px solid rgba(220,38,38,0.15)",
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Sprocket holes - right side */}
+          <div className="absolute right-3 top-0 bottom-0 flex flex-col justify-around z-[2] pointer-events-none" aria-hidden="true">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div
+                key={i}
+                className="w-2.5 h-3.5 rounded-sm opacity-30"
+                style={{
+                  background: "rgba(0,0,0,0.6)",
+                  border: "1px solid rgba(220,38,38,0.15)",
+                }}
+              />
+            ))}
           </div>
 
           {/* Hero frame with 3D tilt */}
@@ -156,6 +303,15 @@ export default function CreativeImageDisplay({
                   }}
                 />
 
+                {/* Film flicker overlay */}
+                <motion.div
+                  aria-hidden="true"
+                  className="absolute inset-0 pointer-events-none"
+                  animate={{ opacity: [0, 0.03, 0, 0.02, 0.01, 0, 0.04, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  style={{ background: "rgba(220,38,38,0.5)", mixBlendMode: "overlay" }}
+                />
+
                 <Image
                   src={active?.src}
                   alt={active?.alt ?? "Active image"}
@@ -177,20 +333,32 @@ export default function CreativeImageDisplay({
                   }}
                 />
 
-                <div className="absolute inset-x-6 bottom-5 flex items-end justify-between gap-4">
+                <div className="absolute inset-x-6 bottom-5 flex items-end justify-between gap-4 z-10">
                   <div className="min-w-0">
-                    <p className="text-[11px] uppercase tracking-[0.20em] font-black text-[#d4d4d8]/80">
-                      Projected Frame
-                    </p>
-                    <p className="mt-1 text-[16px] uppercase tracking-[0.12em] font-black text-[#dc2626] truncate">
+                    <motion.p
+                      className="text-[11px] uppercase tracking-[0.20em] font-black"
+                      style={{ color: "rgba(220,38,38,0.7)" }}
+                      animate={{ opacity: [0.6, 1, 0.6] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                    >
+                      PROJECTED FRAME
+                    </motion.p>
+                    <motion.p
+                      className="mt-1 text-[16px] uppercase tracking-[0.12em] font-black truncate"
+                      style={{ color: "#dc2626" }}
+                      key={activeIdx}
+                      initial={{ opacity: 0, y: 5 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
                       {active?.alt ?? ""}
-                    </p>
+                    </motion.p>
                   </div>
 
                   <button
                     type="button"
                     onClick={() => goTo((activeIdx + 1) % images.length)}
-                    className="rounded-full border border-[rgba(220,38,38,0.25)] bg-black/30 px-5 py-2 text-[12px] uppercase tracking-[0.18em] font-black text-[#d4d4d8] shadow-[0_0_34px_rgba(220,38,38,0.18)] hover:bg-black/45 transition-colors"
+                    className="rounded-full border border-[rgba(220,38,38,0.25)] bg-black/30 backdrop-blur-sm px-5 py-2 text-[12px] uppercase tracking-[0.18em] font-black text-[#d4d4d8] shadow-[0_0_34px_rgba(220,38,38,0.18)] hover:bg-black/45 transition-all duration-300 hover:scale-105 active:scale-95"
                   >
                     Next Frame →
                   </button>
@@ -223,7 +391,7 @@ export default function CreativeImageDisplay({
                           : "border-white/10 hover:border-white/20")
                       }
                       aria-pressed={isActive}
-                      aria-label={`Select image ${idx + 1}`}
+                      aria-label={`Select frame ${idx + 1}`}
                     >
                       <div className="relative h-[86px] w-[120px] lg:w-auto">
                         <Image
@@ -248,17 +416,33 @@ export default function CreativeImageDisplay({
                       <div
                         className={
                           "absolute left-3 top-3 h-2 w-2 rounded-full " +
-                          (isActive ? "bg-[#dc2626]" : "bg-[rgba(220,38,38,0.5)]")
+                          (isActive ? "bg-[#dc2626] shadow-[0_0_8px_rgba(220,38,38,0.6)]" : "bg-[rgba(220,38,38,0.5)]")
                         }
                       />
+
+                      {/* Frame number on thumbnail */}
+                      <div
+                        className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-widest"
+                        style={{
+                          background: "rgba(0,0,0,0.6)",
+                          color: isActive ? "rgba(220,38,38,0.8)" : "rgba(148,163,184,0.5)",
+                        }}
+                      >
+                        #{String(idx + 1).padStart(2, "0")}
+                      </div>
                     </button>
                   );
                 })}
               </div>
 
-              <p className="mt-4 text-[12px] leading-relaxed text-[#d4d4d8]/70">
-                Drag to scroll · Auto-advances every 5s.
-              </p>
+              <motion.p
+                className="mt-4 text-[12px] leading-relaxed"
+                style={{ color: "rgba(148,163,184,0.5)" }}
+                animate={{ opacity: [0.4, 0.7, 0.4] }}
+                transition={{ duration: 4, repeat: Infinity }}
+              >
+                <span className="text-[rgba(220,38,38,0.4)]">⟳</span> Drag to scroll · Auto-advances every 5s
+              </motion.p>
             </div>
           </div>
         </div>

@@ -8,23 +8,21 @@ import CinematicLightbox from "@/components/CinematicLightbox";
 import type { LightboxImage } from "@/components/CinematicLightbox";
 
 const IMG: LightboxImage[] = [
-  { src: "/award/2f175c12-7da3-4e5e-82b7-96bc7152bd20.jpg", alt: "Award 1" },
-  { src: "/award/3de07ccb-8243-4ad5-aa98-456deb4423b0.jpg", alt: "Award 2" },
-  { src: "/award/4d162db9-1609-4f6e-9746-351b2088c4b7.jpg", alt: "Award 3" },
-  { src: "/award/5ee33416-c4cb-4b30-baa5-c9255912f25f.jpg", alt: "Award 4" },
-  { src: "/award/6b22a6ae-8bbc-42d8-8622-f595264fded7.jpg", alt: "Award 5" },
-  { src: "/award/8ac7e3ba-e22f-45a1-8924-1c5ee73aae62.jpg", alt: "Award 6" },
-  { src: "/award/8baac643-4914-4fcc-8861-2d59361d3281.jpg", alt: "Award 7" },
-  { src: "/award/075d73cf-84fe-49ed-9ea4-2b24226a1de0.jpg", alt: "Award 8" },
-  { src: "/award/84e2214c-e020-4fb3-b164-0bf4147010a5.jpg", alt: "Award 9" },
-  { src: "/award/88e9d7d2-22d6-4680-abbd-765e5ba4e160.jpg", alt: "Award 10" },
-  { src: "/award/93b3de55-a394-40bf-b8c6-d5c4fe151bd1.jpg", alt: "Award 11" },
-  { src: "/award/430ded95-5d14-4e47-ae03-e9b034b47652.jpg", alt: "Award 12" },
-  { src: "/award/1499a539-27d8-4200-9dc6-a6737526e90a.jpg", alt: "Award 13" },
-  { src: "/award/b3ce9787-77bf-4b27-a3ae-c6df4d688da4.jpg", alt: "Award 14" },
-  { src: "/award/bedcd64e-a90f-4454-9d15-b373987bcb53.jpg", alt: "Award 15" },
-  { src: "/award/c06d64e2-e7bc-4d2e-8d31-9ff0ba8331a5.jpg", alt: "Award 16" },
-  { src: "/award/e23d4c4e-489c-4eb7-a8f8-1bf4e7ed19f9.jpg", alt: "Award 17" },
+  { src: "/award/Dance Academy.webp", alt: "Dance Academy" },
+  { src: "/award/कोल्हवी परिवार बारा जिल्ला सम्मान..webp", alt: "कोल्हवी परिवार बारा जिल्ला सम्मान" },
+  { src: "/award/Brand ambassador of खजाना गुट्खा.webp", alt: "Brand ambassador of खजाना गुट्खा" },
+  { src: "/award/Global Nepali Film Award.webp", alt: "Global Nepali Film Award" },
+  { src: "/award/School Function Chief Guest honor.webp", alt: "School Function Chief Guest honor" },
+  { src: "/award/कदर पत्र NFAA.webp", alt: "कदर पत्र NFAA" },
+  { src: "/award/कोल्हवी परिवार बारा जिल्ला सम्मान.webp", alt: "कोल्हवी परिवार बारा जिल्ला सम्मान" },
+  { src: "/award/गुरुङ समाज द्वारा Canada मा सम्मानित.webp", alt: "गुरुङ समाज द्वारा Canada मा सम्मानित" },
+  { src: "/award/चलचित्र बिकाश बोर्डको सहकार्यमा अध्ध्यक्ष्य  कप.webp", alt: "चलचित्र बिकाश बोर्डको सहकार्यमा अध्ध्यक्ष्य  कप" },
+  { src: "/award/ताम्र पत्र सम्मान कार्यक्रम महेन्द्रनगर.webp", alt: "ताम्र पत्र सम्मान कार्यक्रम महेन्द्रनगर" },
+  { src: "/award/ल्होसार पर्व  Function Chief Guest.webp", alt: "ल्होसार पर्व  Function Chief Guest" },
+  { src: "/award/ल्होसार पर्व Canada.webp", alt: "ल्होसार पर्व Canada" },
+  { src: "/award/सम्मान कार्यक्रम जमुना बिध्ध्यालय.webp", alt: "सम्मान कार्यक्रम जमुना बिध्ध्यालय" },
+  { src: "/award/सम्मान कार्यक्रम प्रमुख अथिति दोधारा चादनी.webp", alt: "सम्मान कार्यक्रम प्रमुख अथिति दोधारा चादनी" },
+  { src: "/award/सम्मान कार्यक्रम.webp", alt: "सम्मान कार्यक्रम" },
 ];
 
 const DATA = [
@@ -154,7 +152,7 @@ export default function Awards() {
               className="text-[13px] sm:text-[15px] font-black uppercase tracking-[0.06em] leading-tight"
               style={{ color: isCenter ? "#f1f5f9" : "#cbd5e1" }}
             >
-              {item.a.t}
+              {item.alt}
             </h4>
             <p
               className="text-[10px] font-semibold uppercase tracking-widest mt-1"
@@ -205,17 +203,17 @@ export default function Awards() {
                 }} />
               ))}
             </div>
-            <button onClick={gn} className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-full transition-all duration-300 hover:scale-105" style={{ border: "1px solid rgba(6,182,212,0.3)", background: "rgba(0,0,0,0.4)", backdropFilter: "blur(12px)", color: "#06b6d4" }} aria-label="Next award">
+            <button onClick={gn} className="flex items-center justify-center h-10 w-10 sm:h-12 sm:w-12 rounded-full transition-all duration-500 hover:scale-105" style={{ border: "1px solid rgba(6,182,212,0.3)", background: "rgba(0,0,0,0.4)", backdropFilter: "blur(12px)", color: "#06b6d4" }} aria-label="Next award">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="9 18 15 12 9 6" /></svg>
             </button>
           </div>
 
           <div className="mt-10 text-center">
             <Link href="/gallery/awards" className="inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.25em] font-bold group" style={{ color: "rgba(6,182,212,0.7)" }}>
-              <span className="h-[1px] w-6 bg-gradient-to-r from-transparent to-cyan-500/30 group-hover:w-10 transition-all duration-300" />
+              <span className="h-[1px] w-6 bg-gradient-to-r from-transparent to-cyan-500/30 group-hover:w-10 transition-all duration-500" />
               <span className="group-hover:tracking-[0.3em] transition-all duration-300">All Awards &amp; Honors</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="group-hover:translate-x-1 transition-transform duration-300"><polyline points="9 18 15 12 9 6" /></svg>
-              <span className="h-[1px] w-6 bg-gradient-to-l from-transparent to-cyan-500/30 group-hover:w-10 transition-all duration-300" />
+              <span className="h-[1px] w-6 bg-gradient-to-l from-transparent to-cyan-500/30 group-hover:w-10 transition-all duration-500" />
             </Link>
           </div>
         </div>

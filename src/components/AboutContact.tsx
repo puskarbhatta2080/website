@@ -35,7 +35,7 @@ export default function AboutContact() {
       <div className="mx-auto max-w-6xl">
         <header className="flex items-end justify-between gap-6 flex-wrap">
           <div>
-            <h3 className="uppercase tracking-[0.18em] font-black text-[#d4d4d8] text-[22px]">
+<h3 className="uppercase tracking-[0.18em] font-black text-[#d4d4d8] text-[22px]">
               About & Discipline
             </h3>
             <p className="mt-3 text-[#d4d4d8]/70 max-w-2xl">
@@ -61,7 +61,7 @@ export default function AboutContact() {
               <p className="text-[#dc2626] uppercase tracking-[0.22em] font-black text-[12px]">
                 THE REAL ARC
               </p>
-              <h4 className="mt-4 text-[26px] leading-[1.05] font-black uppercase tracking-wider text-[#d4d4d8]">
+<h4 className="mt-4 text-[26px] leading-[1.05] font-black uppercase tracking-wider text-[#d4d4d8]">
                 From discipline to dominance.
               </h4>
 

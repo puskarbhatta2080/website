@@ -18,69 +18,68 @@ import type { LightboxImage } from "@/components/CinematicLightbox";
 
 const NEWS_IMAGES = [
   "/news/Reel Life Villain.webp",
-  "/news/1d88f800-dfa6-4021-9a0a-687454246e66.webp",
-  "/news/2e69b944-1c21-4a67-b16b-c149b924358a.webp",
-  "/news/3c2648cb-8809-46c7-a448-0641d2d84de4.webp",
-  "/news/3ea067cb-08eb-44bd-a741-4c059cfba5ca.webp",
-  "/news/7a2b9fdf-c54f-4acc-a7f9-c01d9c8baa65.webp",
-  "/news/8defdf50-3f18-472f-a8a1-d4cac190c08b.webp",
-  "/news/8f52ab90-d1ce-41ed-8371-29a62fb8514c.webp",
-  "/news/11c0b54f-2353-4e8e-adb6-6af41c74e8d2.webp",
-  "/news/21ec4c05-0435-4bff-b59c-6204b465e33b.webp",
-  "/news/41a377b4-df1c-4f7c-b59c-6c538e891b41.webp",
-  "/news/46cffa9e-ca41-47e1-9bec-d2b4e1f32528.webp",
-  "/news/64fa808f-def7-4c54-9791-bbe168dc88a0.webp",
-  "/news/1545b5ba-b2f1-4499-a666-752fc422bf14.webp",
-  "/news/9447923c-151f-476c-b4cd-8806284f29f6.webp",
-  "/news/47085716-5f0f-4710-b994-b2c5ef66ddbf.webp",
+  "/news/REEL-LIFE VILLAIN.webp",
+  "/news/South Indian News.webp",
+  "/news/Certificate of appreciation.webp",
+  "/news/Puskar bhatta returns after 10 years with  12 Gau 2.webp",
+  "/news/कोह्ल्वी युवा परिवार.webp",
+  "/news/खतरनाक खलनायक.webp",
+  "/news/खलनायक पुस्कर , CANADA मा सम्मानित.webp",
+  "/news/ग्रोबरको बाटोमा (2).webp",
+  "/news/ग्रोबरको बाटोमा.webp",
+  "/news/पुस्कर भट्ट , खलनायक.webp",
+  "/news/पुस्करलाइ सुटिंगमा भ्याई नभ्याई.webp",
+  "/news/राजेन्द्र र पुस्कर सम्मानित.webp",
+  "/news/सुदुरपस्चिमको सुन्दरतालाइ बिस्वभर चिनाउछु.webp",
+  "/news/हुस्सुले सुटिंग रोकियो.webp",
 ];
 
 const NEWS_ITEMS = [
   {
     date: "2025-03-15",
-    title: "New Antagonist Role Announced",
+    title: "Reel Life Villain",
     category: "Casting",
     description:
       "Puskar Bhatt signs on for a high-stakes psychological thriller set to begin production this summer.",
   },
   {
     date: "2025-02-28",
-    title: "Critics' Circle Honours",
+    title: "REEL-LIFE VILLAIN",
     category: "Award",
     description:
       "Recognized among top antagonist performances of the decade by the National Film Critics Circle.",
   },
   {
     date: "2025-01-12",
-    title: "International Festival Selection",
+    title: "South Indian News",
     category: "Festival",
     description:
       "Gangajal selected for the competitive section at an international film festival in Southeast Asia.",
   },
   {
     date: "2024-11-05",
-    title: "Behind-the-Scenes Documentary",
+    title: "Certificate of appreciation",
     category: "Media",
     description:
       "A documentary crew follows Puskar Bhatt through rehearsals and character preparation.",
   },
   {
     date: "2024-09-20",
-    title: "Character Masterclass Workshop",
+    title: "Puskar bhatta returns after 10 years with 12 Gau 2",
     category: "Event",
     description:
       "Exclusive masterclass on building antagonist presence, hosted at the National Academy of Performing Arts.",
   },
   {
     date: "2024-07-08",
-    title: "Multi-Film Deal Signed",
+    title: "कोह्ल्वी युवा परिवार",
     category: "Industry",
     description:
       "Multi-film deal with a leading production house to develop original antagonist-driven narratives.",
   },
   {
     date: "2024-05-14",
-    title: "Film Festival Jury Duty",
+    title: "खतरनाक खलनायक",
     category: "Honor",
     description:
       "Invited as a jury member for the Best Actor category at a prestigious national film awards.",
@@ -194,10 +193,28 @@ export default function News() {
   const featured = NEWS_ITEMS[0];
   const gridItems = NEWS_ITEMS.slice(1, 7);
 
+const NEWS_LIGHTBOX_ALT = [
+    "Reel Life Villain",
+    "REEL-LIFE VILLAIN",
+    "South Indian News",
+    "Certificate of appreciation",
+    "Puskar bhatta returns after 10 years with 12 Gau 2",
+    "कोह्ल्वी युवा परिवार",
+    "खतरनाक खलनायक",
+    "खलनायक पुस्कर , CANADA मा सम्मानित",
+    "ग्रोबरको बाटोमा (2)",
+    "ग्रोबरको बाटोमा",
+    "पुस्कर भट्ट , खलनायक",
+    "पुस्करलाइ सुटिंगमा भ्याई नभ्याई",
+    "राजेन्द्र र पुस्कर सम्मानित",
+    "सुदुरपस्चिमको सुन्दरतालाइ बिस्वभर चिनाउछु",
+    "हुस्सुले सुटिंग रोकियो",
+  ];
+
   // Lightbox state
   const newsLightboxImages: LightboxImage[] = NEWS_IMAGES.map((src, idx) => ({
     src,
-    alt: NEWS_ITEMS[idx % NEWS_ITEMS.length]?.title ?? `News image ${idx + 1}`,
+    alt: NEWS_LIGHTBOX_ALT[idx] ?? `News image ${idx + 1}`,
   }));
 
   const [lightboxOpen, setLightboxOpen] = useState(false);

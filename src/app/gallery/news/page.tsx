@@ -3,31 +3,47 @@ import GalleryPage from "@/components/GalleryPage";
 import type { LightboxImage } from "@/components/CinematicLightbox";
 
 export const metadata: Metadata = {
-  title: "News & Updates Gallery — Puskar Bhatt",
-  description: "Browse all press coverage and news images from Puskar Bhatt's career milestones.",
+  title: "News & Press Coverage",
+  description:
+    "Browse all press coverage, news articles, and media features about Puskar Bhatt — Nepali cinema's ultimate antagonist. Includes South Indian news, Canadian coverage, and regional press from Nepal's film industry.",
+  keywords: [
+    "Puskar Bhatt news",
+    "Nepali film news",
+    "Puskar Bhatta updates",
+    "Nepali cinema press",
+    "Puskar Bhatt media coverage",
+    "Nepali actor news 2025",
+    "12 Gaun 2 news",
+    "Nepali film industry news",
+    "South Indian news Nepal",
+    "Nepali actor Canada news",
+    "Puskar Bhatt return to films",
+    "Nepali cinema latest news",
+  ],
+  openGraph: {
+    title: "Puskar Bhatt — News & Press Coverage Gallery",
+    description:
+      "Latest press coverage, news articles, and media features from Puskar Bhatt's career in Nepali cinema.",
+  },
 };
 
 const NEWS_IMAGES: LightboxImage[] = [
-  "/news/Reel Life Villain.webp",
-  "/news/1d88f800-dfa6-4021-9a0a-687454246e66.webp",
-  "/news/2e69b944-1c21-4a67-b16b-c149b924358a.webp",
-  "/news/3c2648cb-8809-46c7-a448-0641d2d84de4.webp",
-  "/news/3ea067cb-08eb-44bd-a741-4c059cfba5ca.webp",
-  "/news/7a2b9fdf-c54f-4acc-a7f9-c01d9c8baa65.webp",
-  "/news/8defdf50-3f18-472f-a8a1-d4cac190c08b.webp",
-  "/news/8f52ab90-d1ce-41ed-8371-29a62fb8514c.webp",
-  "/news/11c0b54f-2353-4e8e-adb6-6af41c74e8d2.webp",
-  "/news/21ec4c05-0435-4bff-b59c-6204b465e33b.webp",
-  "/news/41a377b4-df1c-4f7c-b59c-6c538e891b41.webp",
-  "/news/46cffa9e-ca41-47e1-9bec-d2b4e1f32528.webp",
-  "/news/64fa808f-def7-4c54-9791-bbe168dc88a0.webp",
-  "/news/1545b5ba-b2f1-4499-a666-752fc422bf14.webp",
-  "/news/9447923c-151f-476c-b4cd-8806284f29f6.webp",
-  "/news/47085716-5f0f-4710-b994-b2c5ef66ddbf.webp",
-].map((src, i) => ({
-  src,
-  alt: `News image ${i + 1}`,
-}));
+  { src: "/news/Reel Life Villain.webp", alt: "Reel Life Villain" },
+  { src: "/news/REEL-LIFE VILLAIN.webp", alt: "REEL-LIFE VILLAIN" },
+  { src: "/news/South Indian News.webp", alt: "South Indian News" },
+  { src: "/news/Certificate of appreciation.webp", alt: "Certificate of appreciation" },
+  { src: "/news/Puskar bhatta returns after 10 years with  12 Gau 2.webp", alt: "Puskar bhatta returns after 10 years with 12 Gau 2" },
+  { src: "/news/कोह्ल्वी युवा परिवार.webp", alt: "कोह्ल्वी युवा परिवार" },
+  { src: "/news/खतरनाक खलनायक.webp", alt: "खतरनाक खलनायक" },
+  { src: "/news/खलनायक पुस्कर , CANADA मा सम्मानित.webp", alt: "खलनायक पुस्कर , CANADA मा सम्मानित" },
+  { src: "/news/ग्रोबरको बाटोमा (2).webp", alt: "ग्रोबरको बाटोमा (2)" },
+  { src: "/news/ग्रोबरको बाटोमा.webp", alt: "ग्रोबरको बाटोमा" },
+  { src: "/news/पुस्कर भट्ट , खलनायक.webp", alt: "पुस्कर भट्ट , खलनायक" },
+  { src: "/news/पुस्करलाइ सुटिंगमा भ्याई नभ्याई.webp", alt: "पुस्करलाइ सुटिंगमा भ्याई नभ्याई" },
+  { src: "/news/राजेन्द्र र पुस्कर सम्मानित.webp", alt: "राजेन्द्र र पुस्कर सम्मानित" },
+  { src: "/news/सुदुरपस्चिमको सुन्दरतालाइ बिस्वभर चिनाउछु.webp", alt: "सुदुरपस्चिमको सुन्दरतालाइ बिस्वभर चिनाउछु" },
+  { src: "/news/हुस्सुले सुटिंग रोकियो.webp", alt: "हुस्सुले सुटिंग रोकियो" },
+];
 
 export default function NewsGalleryPage() {
   return (
@@ -39,4 +55,3 @@ export default function NewsGalleryPage() {
     />
   );
 }
-

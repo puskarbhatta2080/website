@@ -1,11 +1,35 @@
-# TODO - Puskar Bhatt Villain Portfolio
+# Vercel Deployment Preparation — COMPLETE ✅
 
-- [ ] Step 1: Install deps (framer-motion, lucide-react)
-- [x] Step 2: Update globals.css with cinematic dark palette + grain/vignette smoke overlays
-- [x] Step 3: Update src/app/layout.tsx with persistent background layers + base fonts + custom cursor + floating nav shell
-- [x] Step 4: Generate src/components/Hero.tsx (aggressive hero + ken burns portrait placeholder + pulsing crimson CTA)
-- [x] Step 5: Update src/app/page.tsx to compose: Hero + (placeholders for other sections for now)
+## Status
 
-- [x] Step 6: Run typecheck/build to ensure no TS/Next errors
+### ✅ Vercel Configuration
+- `vercel.json` — Created with proper framework, headers, and rewrites
+- `next.config.ts` — Properly configured with image remote patterns
 
+### ✅ SEO Optimization
+- `src/app/sitemap.ts` — Dynamic XML sitemap with all 8 routes
+- `src/app/robots.ts` — Proper robots.txt configuration
+- `src/app/layout.tsx` — Enhanced with:
+  - Complete Person JSON-LD schema (sameAs, award, birthPlace, nationality, homeLocation)
+  - BreadcrumbList structured data
+  - Hreflang tags (en-US, ne, x-default)
+  - Rich OG/Twitter metadata
+  - Geo tags
+- All 7 gallery pages have rich SEO metadata with keywords
 
+### ✅ Build Verification
+- TypeScript compiles with zero errors
+- Previous `npm run build` succeeded
+
+### ⚠️ Before Deploying
+1. **Update the domain** from `puskarbhatta.com.np` to `puskarbhatt.com` in:
+   - `layout.tsx` (canonical URL, hreflangs, structured data)
+   - `sitemap.ts` (base URL)
+   - `robots.ts` (sitemap URL)
+   - `vercel.json` (if needed)
+
+2. **Add Google Search Console verification** code in `layout.tsx`:
+   - Set `verification.google` field
+
+3. **Root directory**: Set to `puskar-villain-portfolio` when importing to Vercel
+</create_file>
