@@ -47,7 +47,7 @@ export default function Hero() {
       {/* Full-bleed banner background */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/banner/banner.jpg"
+src="/banner/banner.webp"
           alt="Puskar Bhatta — Cinematic Villain"
           fill
           priority

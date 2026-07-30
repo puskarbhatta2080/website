@@ -42,19 +42,7 @@ const FILENAMES = [
 const MAX_VISIBLE = 8;
 
 const MOVIES = FILENAMES.map((name) => {
-  const isJpg =
-    name === "१२ गाउँ 2 (12 Gaun) - 2026 AD" ||
-    name === "आफ्नो मान्छे आफ्नै हुन्छ 2010 AD" ||
-    name === "कहाँ छौ कहाँ (Kaha Chhau Kaha) - 2010 AD" ||
-    name === "जाबंज जिगरवाले(jabaaz jigarwale) 2015" ||
-    name === "तुलसी (Tulsi) - 2018 AD" ||
-    name === "दुर्गा(Durga) 2014" ||
-    name === "फर्ज (Farz) - 2012 AD" ||
-    name === "फैसला (Faisala) - 2011 AD" ||
-    name === "बिरताको चिनो (Birata Ko Chino) - 2011 AD" ||
-    name === "माया दिउँ झैं भयो (Maya Dium Jhai Bhayo) - 2011 AD" ||
-    name === "राम जाने (Ram Jane) - 2006 AD";
-  const ext = isJpg ? ".jpg" : ".webp";
+  const ext = ".webp";
 
   // Extract year from filename
   const yearMatch = name.match(/(\d{4})\s*(AD)?/);

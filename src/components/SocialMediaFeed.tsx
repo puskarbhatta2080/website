@@ -21,7 +21,7 @@ interface SocialPost {
   date?: string;
 }
 
-const THUMBNAIL_FILES = ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png"];
+const THUMBNAIL_FILES = ["1.webp", "2.webp", "3.webp", "4.webp", "5.webp", "6.webp"];
 
 function getThumbnail(idx: number): string {
   return `/thumbnail/${THUMBNAIL_FILES[idx % THUMBNAIL_FILES.length]}`;
