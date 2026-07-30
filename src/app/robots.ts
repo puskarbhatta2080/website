@@ -5,8 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/_next/"],
+      disallow: ["/api/", "/admin/"], // Keep /api/ disallowed, remove /_next/
     },
-sitemap: "https://puskarbhatt.com/sitemap.xml",
+    sitemap: "https://puskarbhatt.com/sitemap.xml",
   };
 }
