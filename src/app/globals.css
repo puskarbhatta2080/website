@@ -31,13 +31,17 @@ body {
   height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
 body {
   background: radial-gradient(1000px circle at 50% 10%, rgba(220,38,38,0.10), transparent 55%),
     #0a0a0a;
 
   color: #d4d4d8;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial,
-    Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -75,8 +79,12 @@ body {
 
 @media (pointer: coarse) {
   button, a, input, textarea, select, [role="button"], [tabindex]:not([tabindex="-1"]) {
-    cursor: default;
+    cursor: pointer;
     min-height: 44px;
+  }
+
+  input, textarea, select {
+    cursor: text;
   }
 }
 
@@ -93,6 +101,25 @@ body {
 
 html {
   overscroll-behavior: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @media (max-width: 640px) {

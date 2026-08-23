@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 /**
  * About & Contact
@@ -26,9 +26,7 @@ export default function AboutContact() {
     return form.name.trim().length >= 2 && emailOk && form.project.trim().length >= 2;
   }, [form.email, form.name, form.project]);
 
-  useEffect(() => {
-    // No-op; keep for future integrations.
-  }, []);
+  const [errorMsg, setErrorMsg] = useState("");
 
   return (
     <section id="about" className="py-20 px-4 sm:px-6">
@@ -67,8 +65,8 @@ export default function AboutContact() {
 
               <div className="mt-5 space-y-4 text-[#d4d4d8]/80">
                 <p className="leading-relaxed text-[14px]">
-                  Precision isn't an accessory—it's a weapon. Training his
-                  presence, timing, and silence until the screen can't ignore him.
+                  Precision isn&apos;t an accessory&mdash;it&apos;s a weapon. Training his
+                  presence, timing, and silence until the screen can&apos;t ignore him.
                 </p>
                 <p className="leading-relaxed text-[14px]">
                   The villain on-screen thrives on contrast: calm outside,
@@ -118,16 +116,30 @@ export default function AboutContact() {
 
               <form
                 className="mt-6 space-y-4"
-                onSubmit={(e) => {
+                onSubmit={async (e) => {
                   e.preventDefault();
                   if (!isValid || status === "sending") return;
                   setStatus("sending");
-                  // Local-only demo submission
-                  setTimeout(() => {
-                    setStatus("sent");
-                    setForm({ name: "", email: "", project: "", message: "" });
-                    setTimeout(() => setStatus("idle"), 2500);
-                  }, 900);
+                  setErrorMsg("");
+                  try {
+                    const res = await fetch("/api/contact", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify(form),
+                    });
+                    const data = await res.json();
+                    if (res.ok) {
+                      setStatus("sent");
+                      setForm({ name: "", email: "", project: "", message: "" });
+                      setTimeout(() => setStatus("idle"), 3000);
+                    } else {
+                      setErrorMsg(data.error || "Something went wrong.");
+                      setStatus("idle");
+                    }
+                  } catch {
+                    setErrorMsg("Network error. Please try again.");
+                    setStatus("idle");
+                  }
                 }}
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -191,10 +203,16 @@ export default function AboutContact() {
                   {status === "sending" ? "Sending..." : status === "sent" ? "Request Sent" : "Request Booking"}
                 </button>
 
-                <p className="text-[#d4d4d8]/60 text-[12px] leading-relaxed">
-                  This demo form doesn&apos;t send emails yet. Connect it to your API
-                  route later.
-                </p>
+                {errorMsg && (
+                  <p className="text-[#dc2626] text-[12px] leading-relaxed">
+                    {errorMsg}
+                  </p>
+                )}
+                {status === "sent" && (
+                  <p className="text-[#22c55e] text-[12px] leading-relaxed">
+                    ✓ Request sent! We&apos;ll get back to you soon.
+                  </p>
+                )}
               </form>
 
               {/* Direct Contact Info */}

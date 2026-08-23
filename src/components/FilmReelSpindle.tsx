@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import Image from "next/image";
 import FilmReelFrame from "@/components/FilmReelFrame";
@@ -30,9 +30,6 @@ export default function FilmReelSpindle({ items, label }: FilmReelSpindleProps) 
   // Create real MotionValues so FilmReelFrame doesn't crash.
   const progress = useMotionValue(0);
   const skewX = useMotionValue(0);
-
-  const motionReadyRef = useRef(false);
-  motionReadyRef.current = true;
 
   // sprocket patterns (keep FilmReelFrame styling intact)
   const sprocketH =

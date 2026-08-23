@@ -146,7 +146,7 @@ export default function CinematicLightbox({
 
       {/* Image container */}
       <div
-        className="relative z-[5] w-full max-w-5xl mx-4 sm:mx-8 aspect-[16/10] md:aspect-[16/9]"
+        className="relative z-[5] w-full max-w-5xl mx-4 sm:mx-8 aspect-[16/10] md:aspect-[16/9] max-h-[calc(100svh-8rem)]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="relative w-full h-full rounded-[18px] overflow-hidden border border-[rgba(220,38,38,0.2)] shadow-[0_0_60px_rgba(220,38,38,0.12)] animate-[lightboxIn_0.4s_ease-out]">
@@ -157,7 +157,7 @@ export default function CinematicLightbox({
             sizes="(max-width: 768px) 100vw, 80vw"
             className="object-contain animate-[lightboxKenBurns_12s_ease-in-out_infinite]"
             priority
-            quality={95}
+            quality={85}
           />
 
           {/* Cinematic gradient shroud on edges */}

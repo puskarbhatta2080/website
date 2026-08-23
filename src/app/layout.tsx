@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import GlobalBackground from "@/components/GlobalBackground";
@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://puskarbhatt.com"),
   title: {
     default:
       "Puskar Bhatt — Nepali Cinema's Ultimate Antagonist | Villain Portfolio",
@@ -110,6 +111,13 @@ export const metadata: Metadata = {
     "geo.region": "NP",
     "geo.placename": "Nepal",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#07080b",
 };
 
 const structuredData = {
@@ -216,11 +224,6 @@ export default function RootLayout({
           }}
         />
 
-        <meta name="theme-color" content="#07080b" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-        />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta
           name="apple-mobile-web-app-status-bar-style"

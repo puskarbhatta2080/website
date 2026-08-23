@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const fs = require("fs");
 
 // 1. Fix layout.tsx - replace domain and restore authors line
@@ -28,5 +29,3 @@ fs.writeFileSync("puskar-villain-portfolio/src/app/robots.ts", robots, "utf8");
 console.log("✓ Fixed robots.ts");
 
 console.log("\n✅ All domain references updated from puskarbhatta.com.np → puskarbhatt.com");
-</｜｜DSML｜｜parameter>
-</create_file>

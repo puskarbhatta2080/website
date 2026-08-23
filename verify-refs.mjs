@@ -6,8 +6,6 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const SRC = join(__dirname, "src");
-
 const files = [
   "src/components/Hero.tsx",
   "src/app/gallery/filmography/page.tsx",
@@ -59,7 +57,7 @@ for (const file of files) {
 }
 
 console.log("\n=== Public Directory WebP Availability ===");
-const { readdirSync, existsSync } = await import("fs");
+const { readdirSync } = await import("fs");
 const publicDir = join(__dirname, "public");
 
 function checkDir(dirPath, label) {

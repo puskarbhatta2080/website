@@ -57,18 +57,18 @@ export default function CreativeImageDisplay({
     targetTilt.current = { rx: -dy * 6, ry: dx * 6 };
   }, []);
 
-  const animateTilt = useCallback(() => {
-    setTilt((prev) => ({
-      rx: prev.rx + (targetTilt.current.rx - prev.rx) * 0.08,
-      ry: prev.ry + (targetTilt.current.ry - prev.ry) * 0.08,
-    }));
-    rafRef.current = requestAnimationFrame(animateTilt);
-  }, []);
-
   useEffect(() => {
-    rafRef.current = requestAnimationFrame(animateTilt);
+    const animate = () => {
+      setTilt((prev) => ({
+        rx: prev.rx + (targetTilt.current.rx - prev.rx) * 0.08,
+        ry: prev.ry + (targetTilt.current.ry - prev.ry) * 0.08,
+      }));
+      rafRef.current = requestAnimationFrame(animate);
+    };
+
+    rafRef.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(rafRef.current);
-  }, [animateTilt]);
+  }, []);
 
   // --- Auto-advance every 5s ---
   useEffect(() => {

@@ -36,8 +36,6 @@ async function convertFile(filePath) {
 
   try {
     const img = sharp(filePath);
-    const metadata = await img.metadata();
-
     // Quality settings
     const quality = 82;
 

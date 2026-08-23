@@ -231,13 +231,13 @@ const NEWS_LIGHTBOX_ALT = [
     setLightboxIndex((prev) =>
       prev === 0 ? newsLightboxImages.length - 1 : prev - 1
     );
-  }, []);
+  }, [newsLightboxImages.length]);
 
   const nextLightbox = useCallback(() => {
     setLightboxIndex((prev) =>
       prev === newsLightboxImages.length - 1 ? 0 : prev + 1
     );
-  }, []);
+  }, [newsLightboxImages.length]);
 
   return (
     <section id="news" className="relative py-20 px-4 sm:px-6 overflow-hidden">

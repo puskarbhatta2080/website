@@ -3,11 +3,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
 
 export default function Hero() {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [imgError, setImgError] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   // 3D Motion Values for Card Tilt Effect
   const x = useMotionValue(0);
@@ -80,7 +81,7 @@ src="/banner/banner.webp"
             </p>
           </div>
 
-          <h2 className="mt-6 leading-[0.85] relative">
+          <h1 className="mt-6 leading-[0.85] relative">
             <motion.div
               aria-hidden="true"
               className="absolute -left-3 top-0 w-1.5 h-0 rounded-full bg-gradient-to-b from-[#dc2626] to-transparent"
@@ -116,7 +117,7 @@ src="/banner/banner.webp"
                 BHATTA
               </span>
             </div>
-          </h2>
+          </h1>
 
           {/* About Text - Updated Narrative */}
           <div className="mt-6 max-w-xl text-[#d4d4d8]/95 text-[15px] sm:text-[16px] leading-relaxed space-y-4">
@@ -159,11 +160,11 @@ src="/banner/banner.webp"
           <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-[#dc2626]/40 via-red-900/20 to-transparent blur-2xl opacity-70 animate-pulse pointer-events-none" />
 
           <motion.div
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
+            onMouseMove={prefersReducedMotion ? undefined : handleMouseMove}
+            onMouseLeave={prefersReducedMotion ? undefined : handleMouseLeave}
             style={{
-              rotateX,
-              rotateY,
+              rotateX: prefersReducedMotion ? 0 : rotateX,
+              rotateY: prefersReducedMotion ? 0 : rotateY,
               transformStyle: "preserve-3d",
             }}
             className="relative w-full h-full rounded-2xl border border-[rgba(220,38,38,0.4)] bg-black/60 backdrop-blur-md p-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_30px_rgba(220,38,38,0.25)] transition-shadow duration-300 hover:shadow-[0_25px_60px_rgba(220,38,38,0.45)]"

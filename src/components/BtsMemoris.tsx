@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useState, useRef, useEffect, useMemo } from "react";
+import { useCallback, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CinematicLightbox from "@/components/CinematicLightbox";
 import type { LightboxImage } from "@/components/CinematicLightbox";
@@ -132,25 +132,9 @@ export default function BtsMemoris() {
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [hoveredNode, setHoveredNode] = useState<number | null>(null);
   const [activeNodes, setActiveNodes] = useState<Set<number>>(new Set());
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [dimensions, setDimensions] = useState({ w: 1200, h: 1600 });
 
   const nodes = useMemo(() => generateNodes(), []);
   const connections = useMemo(() => generateConnections(nodes), [nodes]);
-
-  useEffect(() => {
-    const updateDimensions = () => {
-      if (containerRef.current) {
-        setDimensions({
-          w: containerRef.current.offsetWidth,
-          h: containerRef.current.offsetHeight,
-        });
-      }
-    };
-    updateDimensions();
-    window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
-  }, []);
 
   const openLightbox = useCallback((idx: number) => {
     setLightboxIndex(idx);
@@ -265,7 +249,6 @@ export default function BtsMemoris() {
 
         {/* Evidence Board — Node Network */}
         <div
-          ref={containerRef}
           className="relative w-full overflow-hidden rounded-[22px] border border-[rgba(220,38,38,0.15)] bg-black/30"
           style={{ minHeight: "900px" }}
         >

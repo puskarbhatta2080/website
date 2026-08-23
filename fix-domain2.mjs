@@ -24,4 +24,3 @@ if (!layout.includes("authors:")) {
 } else {
   console.log("✓ authors already present in layout.tsx");
 }
-</create_file>

@@ -34,6 +34,15 @@ export default function FloatingNav() {
     };
   }, [menuOpen]);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
+
   return (
     <header
       className={
@@ -84,10 +93,12 @@ export default function FloatingNav() {
               Book
             </Link>
             <button
+              type="button"
               onClick={() => setMenuOpen(!menuOpen)}
               className="relative h-9 w-9 flex items-center justify-center rounded-full border border-[rgba(220,38,38,0.25)] bg-black/20"
               aria-label={menuOpen ? "Close menu" : "Open menu"}
               aria-expanded={menuOpen}
+              aria-controls="mobile-navigation"
             >
               <div className="flex flex-col gap-[3px] items-center justify-center">
                 <span
@@ -113,11 +124,16 @@ export default function FloatingNav() {
 
       {/* Mobile slide-in overlay menu */}
       <div
+        id="mobile-navigation"
         className={`fixed inset-0 z-[-1] bg-black/80 backdrop-blur-lg transition-opacity duration-300 md:hidden ${
           menuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
+        aria-hidden={!menuOpen}
         onClick={() => setMenuOpen(false)}
       >
         <nav
