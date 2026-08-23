@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
@@ -9,6 +9,15 @@ export default function Hero() {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [imgError, setImgError] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+  const isCoarsePointer = useSyncExternalStore(
+    (onStoreChange) => {
+      const mediaQuery = window.matchMedia("(pointer: coarse)");
+      mediaQuery.addEventListener("change", onStoreChange);
+      return () => mediaQuery.removeEventListener("change", onStoreChange);
+    },
+    () => window.matchMedia("(pointer: coarse)").matches,
+    () => false
+  );
 
   // 3D Motion Values for Card Tilt Effect
   const x = useMotionValue(0);
@@ -162,9 +171,19 @@ src="/banner/banner.webp"
           <motion.div
             onMouseMove={prefersReducedMotion ? undefined : handleMouseMove}
             onMouseLeave={prefersReducedMotion ? undefined : handleMouseLeave}
+            animate={
+              isCoarsePointer && !prefersReducedMotion
+                ? { rotateX: [0, 2.5, -2, 0], rotateY: [0, -2, 2.5, 0] }
+                : undefined
+            }
+            transition={
+              isCoarsePointer && !prefersReducedMotion
+                ? { duration: 8, repeat: Infinity, ease: "easeInOut" }
+                : undefined
+            }
             style={{
-              rotateX: prefersReducedMotion ? 0 : rotateX,
-              rotateY: prefersReducedMotion ? 0 : rotateY,
+              rotateX: isCoarsePointer || prefersReducedMotion ? 0 : rotateX,
+              rotateY: isCoarsePointer || prefersReducedMotion ? 0 : rotateY,
               transformStyle: "preserve-3d",
             }}
             className="relative w-full h-full rounded-2xl border border-[rgba(220,38,38,0.4)] bg-black/60 backdrop-blur-md p-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_30px_rgba(220,38,38,0.25)] transition-shadow duration-300 hover:shadow-[0_25px_60px_rgba(220,38,38,0.45)]"
@@ -200,6 +219,15 @@ src="/banner/banner.webp"
 
               {/* Cinematic Vignette Overlay inside 3D Card */}
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80 pointer-events-none" />
+
+              {!prefersReducedMotion && (
+                <motion.div
+                  aria-hidden="true"
+                  className="absolute inset-y-0 -left-1/2 w-1/2 pointer-events-none bg-gradient-to-r from-transparent via-red-400/10 to-transparent skew-x-[-18deg]"
+                  animate={{ x: ["0%", "360%"] }}
+                  transition={{ duration: 6, repeat: Infinity, repeatDelay: 2, ease: "easeInOut" }}
+                />
+              )}
 
               {/* Corner Frame Accents */}
               <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-[#dc2626]/70 pointer-events-none" />
