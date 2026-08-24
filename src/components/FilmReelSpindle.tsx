@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
-import { AnimatePresence, motion, useMotionValue } from "framer-motion";
+import React, { useState } from "react";
+import { AnimatePresence, motion, useAnimationFrame, useMotionValue, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import FilmReelFrame from "@/components/FilmReelFrame";
 
@@ -15,21 +15,20 @@ type FilmReelSpindleProps = {
   label?: string;
 };
 
-/**
- * FilmReelSpindle
- *  - Swindle/mechanical loop effect removed.
- *  - Reel is static (no projector beam / spindle rotation loop).
- */
 export default function FilmReelSpindle({ items, label }: FilmReelSpindleProps) {
   const [selectedImage, setSelectedImage] = useState<FilmItem | null>(null);
-  const reducedMotion = useMemo(() => {
-    if (typeof window === "undefined") return false;
-    return window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
-  }, []);
+  const reducedMotion = useReducedMotion();
 
-  // Create real MotionValues so FilmReelFrame doesn't crash.
   const progress = useMotionValue(0);
   const skewX = useMotionValue(0);
+
+  useAnimationFrame((time) => {
+    if (reducedMotion) return;
+
+    // Keep the loop slow enough for mobile GPUs while preserving continuous motion.
+    progress.set((time / 18000) % 1);
+    skewX.set(Math.sin(time / 2200) * 0.8);
+  });
 
   // sprocket patterns (keep FilmReelFrame styling intact)
   const sprocketH =
@@ -39,7 +38,7 @@ export default function FilmReelSpindle({ items, label }: FilmReelSpindleProps) 
 
   return (
     <section className="relative w-full py-12">
-      {/* Creative best-image display: centered rotating hero tile (no mechanical loop) */}
+          {/* Creative best-image display: centered animated hero tile */}
       <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
         <div className="relative rounded-[22px] border border-white/10 bg-black/10 overflow-hidden">
           {/* Subtle, non-mechanical ambience */}
@@ -55,9 +54,9 @@ export default function FilmReelSpindle({ items, label }: FilmReelSpindleProps) 
 
           <div className="relative grid place-items-center py-10 sm:py-12">
             <div className="relative w-[min(360px,92vw)] sm:w-[420px] h-[480px] sm:h-[540px]">
-              {/* Static film frames (FilmReelFrame still has its own slight vibration based on progress, but progress is fixed) */}
+              {/* Responsive animated film frames */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative w-[360px] sm:w-[520px] aspect-video">
+                <div className="relative w-full max-w-[520px] aspect-video">
                   {items.map((item, idx) => (
                     <FilmReelFrame
                       key={item.src + idx}
@@ -121,8 +120,6 @@ export default function FilmReelSpindle({ items, label }: FilmReelSpindleProps) 
             </div>
           )}
         </AnimatePresence>
-
-        {reducedMotion && null}
       </div>
     </section>
   );

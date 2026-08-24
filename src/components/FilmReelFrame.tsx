@@ -80,7 +80,7 @@ export default function FilmReelFrame({
 
   return (
     <motion.div
-      className="absolute inset-0"
+      className="group absolute inset-0"
       role="button"
       tabIndex={0}
       aria-label={`Film frame ${idx + 1}`}
@@ -140,9 +140,6 @@ export default function FilmReelFrame({
           </motion.div>
         </div>
       </div>
-
-      {/* Needed for :group-hover */}
-      <div className="hidden group" />
     </motion.div>
   );
 }
