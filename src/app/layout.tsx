@@ -18,12 +18,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://puskarbhatt.com"),
   title: {
-    default:
-      "Puskar Bhatt — Nepali Cinema's Ultimate Antagonist | Villain Portfolio",
+    default: "Puskar Bhatt | Nepali Actor, Villain and Filmography",
     template: "%s — Puskar Bhatt",
   },
   description:
-    "Premium cinematic portfolio of Puskar Bhatt, Nepal's most intense on-screen antagonist. Explore 80+ Nepali films, awards, BTS memoris, and casting inquiries for Gangajal, Himmatwali, Jaljalaa, Ma Birsu Kasari & Salam Cha Mayalai.",
+    "Official portfolio of Puskar Bhatt, Nepali actor known for villain and antagonist roles. Explore his filmography, awards, behind-the-scenes archive, press coverage, and casting contact.",
   keywords: [
     "Puskar Bhatt",
     "Puskar Bhatta",
@@ -47,7 +46,7 @@ export const metadata: Metadata = {
     "Nepali film industry",
     "Bhojpuri cinema",
     "Nepali action film",
-       "Nepali drama actor",
+    "Nepali drama actor",
   ],
   authors: [{ name: "Puskar Bhatt", url: "https://puskarbhatt.com" }],
   creator: "Puskar Bhatt",
@@ -95,9 +94,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "",
-  },
   alternates: {
     canonical: "https://puskarbhatt.com",
     languages: {
@@ -126,9 +122,14 @@ const structuredData = {
   name: "Puskar Bhatt",
   alternateName: "Puskar Bhatta",
   description:
-    "Nepali cinema antagonist known for iconic villain roles in 80+ Nepali feature films and Bhojpuri movies. Known as the 'Nepali Gulshan Grover' for commanding screen presence and intense dialogue delivery.",
+    "Puskar Bhatt is a Nepali actor known for villain and antagonist roles in Nepali and Bhojpuri cinema, including Gangajal, Himmatwali, Jaljala, Ma Birsu Kasari, and Salam Cha Mayalai.",
   url: "https://puskarbhatt.com",
-  image: "/iconic2.webp",
+  image: "https://puskarbhatt.com/pimage/biography.webp",
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": "https://puskarbhatt.com",
+  },
+  jobTitle: "Actor",
   nationality: {
     "@type": "Country",
     name: "Nepal",
@@ -158,13 +159,6 @@ const structuredData = {
     "https://www.facebook.com/puskar.bhatta.148469",
     "https://wa.me/16477602298",
     "https://www.youtube.com/@puskarbhatt",
-  ],
-  award: [
-    "Best Villain Performance",
-    "Outstanding Negative Role",
-    "Screen Presence Award",
-    "Viewer's Choice Antagonist",
-    "Lifetime Menace Achievement",
   ],
 };
 
@@ -229,11 +223,6 @@ export default function RootLayout({
           name="apple-mobile-web-app-status-bar-style"
           content="black-translucent"
         />
-        <meta name="rating" content="general" />
-        <meta name="revisit-after" content="7 days" />
-        <link rel="alternate" hrefLang="en-us" href="https://puskarbhatt.com" />
-        <link rel="alternate" hrefLang="ne" href="https://puskarbhatt.com" />
-        <link rel="alternate" hrefLang="x-default" href="https://puskarbhatt.com" />
       </head>
       <body className="min-h-full flex flex-col">
         {/* Persistent background + interactive cursor + floating nav */}

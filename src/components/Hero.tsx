@@ -58,7 +58,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <Image
 src="/banner/banner.webp"
-          alt="Puskar Bhatta — Cinematic Villain"
+          alt="Puskar Bhatt — Cinematic Villain"
           fill
           priority
           sizes="100vw"
@@ -109,7 +109,7 @@ src="/banner/banner.webp"
               PUSKAR
             </span>
 
-            {/* BHATTA Header - Solid Crimson Red */}
+            {/* BHATT Header - Solid Crimson Red */}
             <div className="relative inline-block mt-1">
               <div
                 aria-hidden="true"
@@ -123,7 +123,7 @@ src="/banner/banner.webp"
                     "0 4px 10px rgba(0, 0, 0, 1), 0 0 20px rgba(220, 38, 38, 0.9), 0 0 40px rgba(220, 38, 38, 0.4)",
                 }}
               >
-                BHATTA
+                BHATT
               </span>
             </div>
           </h1>
@@ -131,7 +131,7 @@ src="/banner/banner.webp"
           {/* About Text - Updated Narrative */}
           <div className="mt-6 max-w-xl text-[#d4d4d8]/95 text-[15px] sm:text-[16px] leading-relaxed space-y-4">
             <p className="[text-shadow:_0_2px_4px_rgba(0,0,0,0.8)]">
-              <strong className="text-white">Puskar Bhatta</strong> (also known as Puskar Bhatt) stands as one of the most prominent, versatile, and iconic antagonists in contemporary Nepali cinema. Known for his intense screen presence, sharp dialogue delivery, and raw action sequences, he has defined the modern era of cinematic villains.
+              <strong className="text-white">Puskar Bhatt</strong> (also known as Puskar Bhatta) is a prominent Nepali actor known for intense antagonist roles, sharp dialogue delivery, and raw action sequences.
             </p>
             <p className="[text-shadow:_0_2px_4px_rgba(0,0,0,0.8)]">
               With an extensive filmography spanning over <strong className="text-[#ff4d4d] font-bold">80+ Nepali feature films</strong> and dozens of regional hit productions including Bhojpuri blockbusters, his commanding performances continue to captivate audiences and shape high-intensity conflict on screen.
@@ -206,7 +206,7 @@ src="/banner/banner.webp"
               {/* Profile Image */}
               <Image
                 src="/pimage/biography.webp"
-                alt="Puskar Bhatta Biography Profile"
+                alt="Puskar Bhatt biography portrait"
                 fill
                 priority
                 sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 360px"
@@ -238,7 +238,7 @@ src="/banner/banner.webp"
               {/* Bottom Card Caption Badge */}
               <div className="absolute bottom-3 inset-x-3 text-center py-2 px-3 rounded-lg bg-black/70 backdrop-blur-md border border-white/10 pointer-events-none shadow-lg">
                 <p className="text-[11px] font-black uppercase tracking-widest text-[#e2e8f0]">
-                  Puskar Bhatta
+                  Puskar Bhatt
                 </p>
                 <p className="text-[9px] uppercase tracking-wider text-[#ff4d4d] font-bold">
                   Iconic Antagonist

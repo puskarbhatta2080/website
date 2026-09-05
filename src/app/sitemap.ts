@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 const BASE_URL = "https://puskarbhatt.com";
+const LAST_MODIFIED = new Date("2026-09-05T00:00:00.000Z");
 
 const galleryRoutes = [
   { path: "/gallery/iconic", priority: 0.9 },
@@ -13,18 +14,16 @@ const galleryRoutes = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastMod = new Date();
-
   const routes: MetadataRoute.Sitemap = [
     {
       url: BASE_URL,
-      lastModified: lastMod,
+      lastModified: LAST_MODIFIED,
       changeFrequency: "weekly",
       priority: 1.0,
     },
     ...galleryRoutes.map(({ path, priority }) => ({
       url: `${BASE_URL}${path}`,
-      lastModified: lastMod,
+      lastModified: LAST_MODIFIED,
       changeFrequency: "monthly" as const,
       priority,
     })),
