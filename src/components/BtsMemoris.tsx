@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useState, useMemo } from "react";
+import { useCallback, useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CinematicLightbox from "@/components/CinematicLightbox";
 import type { LightboxImage } from "@/components/CinematicLightbox";
@@ -132,6 +132,7 @@ export default function BtsMemoris() {
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [hoveredNode, setHoveredNode] = useState<number | null>(null);
   const [activeNodes, setActiveNodes] = useState<Set<number>>(new Set());
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   const nodes = useMemo(() => generateNodes(), []);
   const connections = useMemo(() => generateConnections(nodes), [nodes]);
@@ -169,6 +170,31 @@ export default function BtsMemoris() {
       setActiveNodes(new Set());
     }
   }, [connections]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: none), (pointer: coarse)");
+    const updateTouchState = () => setIsTouchDevice(mediaQuery.matches);
+
+    updateTouchState();
+    mediaQuery.addEventListener("change", updateTouchState);
+    return () => mediaQuery.removeEventListener("change", updateTouchState);
+  }, []);
+
+  useEffect(() => {
+    if (!isTouchDevice) return;
+
+    let nodeIndex = 0;
+    const initialActivation = window.setTimeout(() => handleNodeHover(nodeIndex), 0);
+    const interval = window.setInterval(() => {
+      nodeIndex = (nodeIndex + 1) % nodes.length;
+      handleNodeHover(nodeIndex);
+    }, 3200);
+
+    return () => {
+      window.clearTimeout(initialActivation);
+      window.clearInterval(interval);
+    };
+  }, [handleNodeHover, isTouchDevice, nodes.length]);
 
   return (
     <section
@@ -316,11 +342,13 @@ export default function BtsMemoris() {
                 onClick={() => openLightbox(node.id)}
                 onMouseEnter={() => handleNodeHover(node.id)}
                 onMouseLeave={() => handleNodeHover(null)}
+                onFocus={() => handleNodeHover(node.id)}
+                onBlur={() => handleNodeHover(null)}
                 className="absolute z-10 text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#dc2626]/50"
                 style={{
                   left: `${node.x}%`,
                   top: `${node.y}%`,
-                  width: "180px",
+                  width: "clamp(140px, 32vw, 180px)",
                   transform: "translate(-50%, -50%)",
                 }}
                 animate={{
@@ -471,7 +499,7 @@ export default function BtsMemoris() {
           <div className="flex items-center gap-4 text-[10px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/40">
             <span className="flex items-center gap-2">
               <span className="h-1 w-1 rounded-full bg-[#dc2626]" />
-              HOVER TO INSPECT
+              {isTouchDevice ? "TOUCH FEED ACTIVE" : "HOVER TO INSPECT"}
             </span>
             <span className="flex items-center gap-2">
               <span className="h-1 w-1 rounded-full bg-[#dc2626]" />

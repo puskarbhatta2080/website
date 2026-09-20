@@ -7,6 +7,9 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/", "/admin/"], // Keep /api/ disallowed, remove /_next/
     },
-    sitemap: "https://puskarbhatt.com/sitemap.xml",
+    sitemap: [
+      "https://puskarbhatt.com/sitemap.xml",
+      "https://puskarbhatt.com/image-sitemap.xml",
+    ],
   };
 }

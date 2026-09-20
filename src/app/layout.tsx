@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     countryName: "Nepal",
     images: [
       {
-        url: "/iconic2.webp",
+        url: "/pimage/iconic2.webp",
         width: 1200,
         height: 630,
         alt: "Puskar Bhatt — Nepali Cinema Iconic Villain Portrait",
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     title: "Puskar Bhatt — Nepali Cinema's Ultimate Antagonist",
     description:
       "Premium cinematic portfolio showcasing Puskar Bhatt's antagonist roles across 80+ Nepali films.",
-    images: ["/iconic2.webp"],
+    images: ["/pimage/iconic2.webp"],
     creator: "@puskarbhatt",
   },
   robots: {

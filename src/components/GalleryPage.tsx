@@ -41,8 +41,31 @@ export default function GalleryPage({
     );
   }, [images.length]);
 
+  const imageStructuredData = images.map((image) => ({
+    "@type": "ImageObject",
+    contentUrl: `https://puskarbhatt.com${image.src}`,
+    name: image.alt,
+    caption: `${image.alt} — Puskar Bhatt official portfolio`,
+    creator: {
+      "@type": "Person",
+      name: "Puskar Bhatt",
+    },
+  }));
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ImageGallery",
+            name: `Puskar Bhatt — ${title}`,
+            description: subtitle,
+            image: imageStructuredData,
+          }),
+        }}
+      />
       <section className="relative min-h-screen py-20 px-4 sm:px-6 overflow-hidden">
         {/* Vignette */}
         <div
@@ -117,7 +140,7 @@ export default function GalleryPage({
                 />
 
                 {/* Hover indicator */}
-                <div className="absolute bottom-4 right-4 h-9 w-9 rounded-full border border-[rgba(220,38,38,0.25)] bg-black/30 backdrop-blur-sm flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-[0_0_20px_rgba(220,38,38,0.18)]">
+                <div className="touch-visible absolute bottom-4 right-4 h-9 w-9 rounded-full border border-[rgba(220,38,38,0.25)] bg-black/30 backdrop-blur-sm flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-[0_0_20px_rgba(220,38,38,0.18)]">
                   <span className="text-[11px] font-black text-[#dc2626]">+</span>
                 </div>
 
@@ -132,7 +155,7 @@ export default function GalleryPage({
 
                 {/* Alt text at bottom */}
                 <div className="absolute inset-x-0 bottom-0 p-4">
-                  <p className="text-[11px] uppercase tracking-wider font-semibold text-[#d4d4d8]/80 truncate opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                  <p className="touch-visible text-[11px] uppercase tracking-wider font-semibold text-[#d4d4d8]/80 truncate opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                     {img.alt}
                   </p>
                 </div>
