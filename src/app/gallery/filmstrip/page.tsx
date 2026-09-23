@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     description:
       "Vintage film strip frames and behind-the-scenes evidence from the villain's cinematic workshop.",
   },
+  alternates: {
+    canonical: "/gallery/filmstrip",
+  },
 };
 
 const FRAMES: LightboxImage[] = [

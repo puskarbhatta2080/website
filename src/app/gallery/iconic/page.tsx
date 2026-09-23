@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     description:
       "Psychological villain portraits and projected frames from Nepali cinema's most intense antagonist.",
   },
+  alternates: {
+    canonical: "/gallery/iconic",
+  },
 };
 
 const ICONIC_IMAGES: LightboxImage[] = [
