@@ -24,11 +24,11 @@ export const metadata: Metadata = {
 };
 
 const ICONIC_IMAGES: LightboxImage[] = [
-  { src: "/iconic1.webp", alt: "Psychological Villain — Still Frame 01" },
-  { src: "/iconic2.webp", alt: "Psychological Villain — Still Frame 02" },
-  { src: "/iconic3.webp", alt: "Psychological Villain — Still Frame 03" },
-  { src: "/iconic4.webp", alt: "Psychological Villain — Still Frame 04" },
-  { src: "/iconic5.webp", alt: "Psychological Villain — Still Frame 05" },
+  { src: "/iconic1.webp", alt: "Puskar Bhatt Nepali actor villain portrait" },
+  { src: "/iconic2.webp", alt: "Puskar Bhatt antagonist character still from Nepali cinema" },
+  { src: "/iconic3.webp", alt: "Puskar Bhatt villain character still from Nepali cinema" },
+  { src: "/iconic4.webp", alt: "Puskar Bhatt dramatic antagonist portrait" },
+  { src: "/iconic5.webp", alt: "Puskar Bhatt cinematic villain still" },
 ];
 
 export default function IconicGalleryPage() {

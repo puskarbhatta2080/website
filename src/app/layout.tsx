@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s — Puskar Bhatt",
   },
   description:
-    "Official portfolio of Puskar Bhatt, Nepali actor known for villain and antagonist roles. Explore his filmography, awards, behind-the-scenes archive, press coverage, and casting contact.",
+    "Official website and biography of Puskar Bhatt, also known as Puskar Bhatta, a Nepali actor known for villain and antagonist roles. Explore his filmography, awards, behind-the-scenes archive, press coverage, and casting contact.",
   keywords: [
     "Puskar Bhatt",
     "Puskar Bhatta",
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Puskar Bhatt — Nepali Cinema's Ultimate Antagonist",
     description:
-      "Premium cinematic portfolio showcasing Puskar Bhatt's antagonist roles across 80+ Nepali films and Bhojpuri cinema. Filmography, awards, BTS, and casting.",
+      "Official biography and cinematic portfolio of Puskar Bhatt, also known as Puskar Bhatta, showcasing antagonist roles across Nepali and Bhojpuri cinema. Filmography, awards, BTS, and casting.",
     url: "https://puskarbhatt.com",
     siteName: "Puskar Bhatt — Ultimate Antagonist",
     locale: "en_US",

@@ -42,11 +42,11 @@ export default function Home() {
 
           <CreativeImageDisplay
             images={[
-              { src: "/iconic1.webp", alt: "Fragment 1" },
-              { src: "/iconic2.webp", alt: "Fragment 2" },
-              { src: "/iconic3.webp", alt: "Fragment 3" },
-              { src: "/iconic4.webp", alt: "Fragment 4" },
-              { src: "/iconic5.webp", alt: "Fragment 5" },
+              { src: "/iconic1.webp", alt: "Puskar Bhatt Nepali actor villain portrait" },
+              { src: "/iconic2.webp", alt: "Puskar Bhatt antagonist character still from Nepali cinema" },
+              { src: "/iconic3.webp", alt: "Puskar Bhatt villain character still from Nepali cinema" },
+              { src: "/iconic4.webp", alt: "Puskar Bhatt dramatic antagonist portrait" },
+              { src: "/iconic5.webp", alt: "Puskar Bhatt cinematic villain still" },
             ]}
             label="PROJECTOR REEL // PSYCHOLOGICAL VILLAIN"
           />

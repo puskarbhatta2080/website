@@ -29,16 +29,16 @@ export default function AboutContact() {
   const [errorMsg, setErrorMsg] = useState("");
 
   return (
-    <section id="about" className="py-20 px-4 sm:px-6">
+    <section id="about" aria-labelledby="about-heading" className="py-20 px-4 sm:px-6">
       <div className="mx-auto max-w-6xl">
         <header className="flex items-end justify-between gap-6 flex-wrap">
           <div>
-<h3 className="uppercase tracking-[0.18em] font-black text-[#d4d4d8] text-[22px]">
+            <h2 id="about-heading" className="uppercase tracking-[0.18em] font-black text-[#d4d4d8] text-[22px]">
               About & Discipline
-            </h3>
+            </h2>
             <p className="mt-3 text-[#d4d4d8]/70 max-w-2xl">
-              Real-life discipline. The persona is theatrical—crafted from
-              relentless practice, restraint, and control.
+              Puskar Bhatt, also known as Puskar Bhatta, is a Nepali actor known
+              for intense villain and antagonist performances in Nepali cinema.
             </p>
           </div>
           <div className="hidden sm:block">

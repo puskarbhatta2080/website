@@ -8,7 +8,7 @@ const IMAGE_DIRECTORIES = [
   { name: "BTS", page: "/gallery/bts" },
   { name: "filmography", page: "/gallery/filmography" },
   { name: "news", page: "/gallery/news" },
-  { name: "pimage", page: "/gallery/iconic" },
+  { name: "pimage", page: "/" },
   { name: "thumbnail", page: "/" },
 ];
 const IMAGE_EXTENSIONS = new Set([".avif", ".jpeg", ".jpg", ".png", ".webp"]);

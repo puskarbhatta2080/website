@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 const BASE_URL = "https://puskarbhatt.com";
-const LAST_MODIFIED = new Date("2026-09-05T00:00:00.000Z");
+const LAST_MODIFIED = new Date("2026-09-23T00:00:00.000Z");
 
 const galleryRoutes = [
   { path: "/gallery/iconic", priority: 0.9 },
