@@ -3,26 +3,28 @@ import GalleryPage from "@/components/GalleryPage";
 import type { LightboxImage } from "@/components/CinematicLightbox";
 
 export const metadata: Metadata = {
-  title: "35mm Evidence Reel",
+  title: "35mm Evidence Reel | Puskar Bhatta",
   description:
-    "Browse the 35mm evidence reel — vintage film strip frames from Puskar Bhatta's behind-the-scenes archive. Grayscale evidence from the villain's workshop with infinite scroll effect.",
+    "View 35mm film-strip frames and backstage evidence from Puskar Bhatta's cinematic archive, capturing the raw atmosphere of rehearsals, set life, and character preparation.",
   keywords: [
     "Puskar Bhatta film strip",
-    "Nepali cinema BTS",
     "35mm evidence reel",
+    "Nepali cinema BTS archive",
     "Puskar Bhatta behind the scenes",
     "vintage film frames Nepal",
     "Nepali film evidence reel",
+    "Puskar Bhatta on set archive",
     "villain workshop Nepal",
-    "Puskar Bhatta grayscale",
+    "Puskar Bhatta grayscale gallery",
   ],
   openGraph: {
     title: "Puskar Bhatta — 35mm Evidence Reel Gallery",
     description:
-      "Vintage film strip frames and behind-the-scenes evidence from the villain's cinematic workshop.",
+      "Vintage film strip moments and behind-the-scenes evidence from Puskar Bhatta's cinematic workshop.",
+    url: "https://puskarbhatt.com/gallery/filmstrip",
   },
   alternates: {
-    canonical: "/gallery/filmstrip",
+    canonical: "https://puskarbhatt.com/gallery/filmstrip",
   },
 };
 

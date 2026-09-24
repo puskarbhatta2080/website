@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import FilmStrip from "@/components/FilmStrip";
 import Filmography from "@/components/Filmography";
@@ -8,6 +9,35 @@ import BtsMemoris from "@/components/BtsMemoris";
 import CreativeImageDisplay from "@/components/CreativeImageDisplay";
 import SocialMediaFeed from "@/components/SocialMediaFeed";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Puskar Bhatta | Nepali Actor, Villain, and Filmography",
+  description:
+    "Explore the official portfolio of Puskar Bhatta, Nepali actor and cinematic antagonist known for powerful villain roles, filmography highlights, news coverage, iconic stills, and award recognition.",
+  keywords: [
+    "Puskar Bhatta",
+    "Puskar Bhatta actor",
+    "Nepali actor",
+    "Nepali villain",
+    "Nepali cinema actor",
+    "Puskar Bhatta filmography",
+    "Puskar Bhatta news",
+    "Nepali villain roles",
+    "Puskar Bhatta awards",
+    "Nepali cinema portfolio",
+    "antagonist actor Nepal",
+  ],
+  openGraph: {
+    title: "Puskar Bhatta | Nepali Actor, Villain, and Filmography",
+    description:
+      "Official portfolio of Puskar Bhatta featuring filmography, awards, iconic stills, cinematic moments, and news coverage in Nepali cinema.",
+    url: "https://puskarbhatt.com",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://puskarbhatt.com",
+  },
+};
 
 export default function Home() {
   return (

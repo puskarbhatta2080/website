@@ -3,17 +3,17 @@ import GalleryPage from "@/components/GalleryPage";
 import type { LightboxImage } from "@/components/CinematicLightbox";
 
 export const metadata: Metadata = {
-  title: "Filmography",
+  title: "Filmography | Puskar Bhatta",
   description:
-    "Browse the complete filmography of Puskar Bhatta — 80+ Nepali feature films and Bhojpuri movies. Explore all antagonist roles from Gangajal, Himmatwali, Jaljalaa, Ma Birsu Kasari, 12 Gaun 2, and more. Full movie poster gallery with release years and character details.",
+    "Explore the complete filmography of Puskar Bhatta, featuring iconic Nepali and Bhojpuri performances in antagonist roles across major films such as Gangajal, Himmatwali, Jaljalaa, Ma Birsu Kasari, and 12 Gaun 2.",
   keywords: [
     "Puskar Bhatta filmography",
-    "Nepali movies list",
-    "Puskar Bhatta films",
+    "Puskar Bhatta movies",
+    "Nepali actor filmography",
     "Nepali villain movies",
-    "Gangajal 2010",
-    "Himmatwali 2014",
-    "Jaljalaa 2012",
+    "Gangajal film",
+    "Himmatwali film",
+    "Jaljalaa movie",
     "Ma Birsu Kasari",
     "Salam Cha Mayalai",
     "Bhojpuri films Puskar Bhatta",
@@ -24,7 +24,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Puskar Bhatta — Complete Filmography Gallery",
     description:
-      "Browse all 80+ Nepali films and Bhojpuri movies featuring Puskar Bhatta's iconic antagonist performances.",
+      "Browse the full body of work by Puskar Bhatta, including major Nepali and Bhojpuri films and legendary antagonist performances.",
+    url: "https://puskarbhatt.com/gallery/filmography",
+  },
+  alternates: {
+    canonical: "https://puskarbhatt.com/gallery/filmography",
   },
 };
 

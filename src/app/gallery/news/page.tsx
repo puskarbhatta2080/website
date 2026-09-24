@@ -3,27 +3,31 @@ import GalleryPage from "@/components/GalleryPage";
 import type { LightboxImage } from "@/components/CinematicLightbox";
 
 export const metadata: Metadata = {
-  title: "News & Press Coverage",
+  title: "News & Press Coverage | Puskar Bhatta",
   description:
-    "Browse all press coverage, news articles, and media features about Puskar Bhatta — Nepali cinema's ultimate antagonist. Includes South Indian news, Canadian coverage, and regional press from Nepal's film industry.",
+    "Follow the latest news, press features, interviews, and media updates about Puskar Bhatta — the Nepali cinema icon known for powerful antagonist roles and standout screen presence.",
   keywords: [
     "Puskar Bhatta news",
+    "Puskar Bhatta press coverage",
     "Nepali film news",
     "Puskar Bhatta updates",
     "Nepali cinema press",
     "Puskar Bhatta media coverage",
-    "Nepali actor news 2025",
     "12 Gaun 2 news",
     "Nepali film industry news",
-    "South Indian news Nepal",
-    "Nepali actor Canada news",
     "Puskar Bhatta return to films",
+    "Nepali actor Canada news",
+    "Puskar Bhatta interviews",
     "Nepali cinema latest news",
   ],
   openGraph: {
     title: "Puskar Bhatta — News & Press Coverage Gallery",
     description:
-      "Latest press coverage, news articles, and media features from Puskar Bhatta's career in Nepali cinema.",
+      "Latest press coverage, articles, and media features about Puskar Bhatta's Nepali cinema career.",
+    url: "https://puskarbhatt.com/gallery/news",
+  },
+  alternates: {
+    canonical: "https://puskarbhatt.com/gallery/news",
   },
 };
 

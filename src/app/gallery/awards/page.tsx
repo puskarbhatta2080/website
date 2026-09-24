@@ -3,27 +3,30 @@ import GalleryPage from "@/components/GalleryPage";
 import type { LightboxImage } from "@/components/CinematicLightbox";
 
 export const metadata: Metadata = {
-  title: "Awards & Recognition",
+  title: "Awards & Recognition | Puskar Bhatta",
   description:
-    "Browse all awards and recognition highlights from Puskar Bhatta's cinematic career. View certificates of appreciation, felicitation ceremonies, chief guest honors, and industry accolades from Nepali cinema and international events in Canada.",
+    "Explore Puskar Bhatta's awards, honors, certificates, and public recognitions from Nepali cinema, cultural events, and leadership programs in Nepal and Canada.",
   keywords: [
     "Puskar Bhatta awards",
+    "Puskar Bhatta honors",
     "Nepali film awards",
     "Nepali actor recognition",
-    "Puskar Bhatta honors",
     "Global Nepali Film Award",
-    "NFAA certificate",
-    "Nepali cinema awards",
+    "Puskar Bhatta certificate",
+    "Nepali cinema honors",
     "chief guest honor Nepal",
-    "Nepali actor Canada award",
-    "dance academy award",
     "brand ambassador Nepal",
-    "Nepali film industry honors",
+    "Puskar Bhatta Canada award",
+    "Nepali film industry recognition",
   ],
   openGraph: {
     title: "Puskar Bhatta — Awards & Recognition Gallery",
     description:
-      "View the complete awards collection — certificates, felicitations, and honors from Nepali cinema and international events.",
+      "See the full awards collection of Puskar Bhatta, featuring certificates, honors, and public recognition from Nepali cinema and community leadership.",
+    url: "https://puskarbhatt.com/gallery/awards",
+  },
+  alternates: {
+    canonical: "https://puskarbhatt.com/gallery/awards",
   },
 };
 

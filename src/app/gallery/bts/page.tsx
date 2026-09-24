@@ -3,23 +3,28 @@ import GalleryPage from "@/components/GalleryPage";
 import type { LightboxImage } from "@/components/CinematicLightbox";
 
 export const metadata: Metadata = {
-  title: "BTS & Memoris",
+  title: "BTS & Memories | Puskar Bhatta",
   description:
-    "Behind-the-scenes fragments, rehearsals, and memory cuts from Puskar Bhatta's cinematic journey. Explore 25+ exclusive BTS photographs, character preparation shots, and on-set moments from Nepali film productions.",
+    "Explore behind-the-scenes footage, rehearsals, costume preparation, and on-set memories from Puskar Bhatta's cinematic journey in Nepali cinema.",
   keywords: [
     "Puskar Bhatta BTS",
-    "behind the scenes Nepali film",
-    "Nepali cinema behind the scenes",
+    "Puskar Bhatta behind the scenes",
+    "Nepali cinema BTS",
     "Puskar Bhatta rehearsal",
     "film set photos Nepal",
     "Nepali actor behind the scenes",
     "movie making Nepal",
     "antagonist preparation",
+    "Puskar Bhatta on set",
   ],
   openGraph: {
-    title: "Puskar Bhatta — BTS & Memoris Gallery",
+    title: "Puskar Bhatta — BTS & Memories Gallery",
     description:
-      "Exclusive behind-the-scenes photographs, rehearsals, and on-set moments from Puskar Bhatta's film career.",
+      "Exclusive behind-the-scenes photographs, rehearsals, and on-set memories from Puskar Bhatta's film career.",
+    url: "https://puskarbhatt.com/gallery/bts",
+  },
+  alternates: {
+    canonical: "https://puskarbhatt.com/gallery/bts",
   },
 };
 

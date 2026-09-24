@@ -2,27 +2,30 @@ import type { Metadata } from "next";
 import SocialGalleryClient from "./client";
 
 export const metadata: Metadata = {
-  title: "Social & Press Coverage",
+  title: "Social Media & Press Coverage | Puskar Bhatta",
   description:
-    "Browse all social media posts, Facebook Reels, YouTube videos, and online news coverage of Puskar Bhatta — Nepali cinema's ultimate antagonist. Includes Makalu Khabar articles and MeroFilm features.",
+    "Follow Puskar Bhatta across social media, Facebook reels, YouTube features, and online press coverage from Nepal and Canada’s Nepali cinema community.",
   keywords: [
     "Puskar Bhatta social media",
-    "Nepali actor Facebook",
-    "Puskar Bhatta Makalu Khabar",
-    "MeroFilm Puskar Bhatta",
-    "Puskar Bhatta YouTube",
-    "Nepali film reel",
     "Puskar Bhatta Facebook",
-    "Puskar Bhatta interviews",
-    "Nepali cinema social media",
+    "Puskar Bhatta YouTube",
     "Puskar Bhatta press coverage",
-    "Nepali actor news online",
+    "Puskar Bhatta interviews",
+    "Makalu Khabar Puskar Bhatta",
+    "MeroFilm Puskar Bhatta",
+    "Nepali actor social media",
+    "Nepali cinema news online",
     "Puskar Bhatta Canada interview",
+    "Nepali film reel coverage",
   ],
   openGraph: {
-    title: "Puskar Bhatta — Social & Press Coverage Gallery",
+    title: "Puskar Bhatta — Social Media & Press Coverage",
     description:
-      "Browse social media posts, Facebook Reels, YouTube videos, and news articles about Puskar Bhatta.",
+      "Browse social media posts, Facebook reels, YouTube features, and news coverage about Puskar Bhatta.",
+    url: "https://puskarbhatt.com/gallery/social",
+  },
+  alternates: {
+    canonical: "https://puskarbhatt.com/gallery/social",
   },
 };
 

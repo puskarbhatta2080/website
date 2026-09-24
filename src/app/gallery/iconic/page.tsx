@@ -3,11 +3,12 @@ import GalleryPage from "@/components/GalleryPage";
 import type { LightboxImage } from "@/components/CinematicLightbox";
 
 export const metadata: Metadata = {
-  title: "Iconic Stills",
+  title: "Iconic Stills | Puskar Bhatta",
   description:
-    "Browse the iconic stills gallery of Puskar Bhatta — psychological villain portraits, projected frames, and cinematic character studies from Nepali cinema's most intense antagonist. High-resolution images capturing menace and power.",
+    "Discover the iconic stills of Puskar Bhatta — cinematic villain portraits, dramatic character frames, and memorable moments from Nepali cinema’s most unforgettable antagonist.",
   keywords: [
     "Puskar Bhatta stills",
+    "Puskar Bhatta iconic images",
     "Nepali villain portraits",
     "antagonist photos",
     "Nepali cinema gallery",
@@ -15,14 +16,16 @@ export const metadata: Metadata = {
     "villain character stills",
     "Nepali actor photos",
     "cinematic portraits",
+    "Puskar Bhatta dramatic portrait",
   ],
   openGraph: {
     title: "Puskar Bhatta — Iconic Stills Gallery",
     description:
-      "Psychological villain portraits and projected frames from Nepali cinema's most intense antagonist.",
+      "Psychological villain portraits and cinematic stills from Puskar Bhatta's most unforgettable character moments.",
+    url: "https://puskarbhatt.com/gallery/iconic",
   },
   alternates: {
-    canonical: "/gallery/iconic",
+    canonical: "https://puskarbhatt.com/gallery/iconic",
   },
 };
 
