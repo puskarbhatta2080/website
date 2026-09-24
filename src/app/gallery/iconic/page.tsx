@@ -5,19 +5,19 @@ import type { LightboxImage } from "@/components/CinematicLightbox";
 export const metadata: Metadata = {
   title: "Iconic Stills",
   description:
-    "Browse the iconic stills gallery of Puskar Bhatt — psychological villain portraits, projected frames, and cinematic character studies from Nepali cinema's most intense antagonist. High-resolution images capturing menace and power.",
+    "Browse the iconic stills gallery of Puskar Bhatta — psychological villain portraits, projected frames, and cinematic character studies from Nepali cinema's most intense antagonist. High-resolution images capturing menace and power.",
   keywords: [
-    "Puskar Bhatt stills",
+    "Puskar Bhatta stills",
     "Nepali villain portraits",
     "antagonist photos",
     "Nepali cinema gallery",
-    "Puskar Bhatt images",
+    "Puskar Bhatta images",
     "villain character stills",
     "Nepali actor photos",
     "cinematic portraits",
   ],
   openGraph: {
-    title: "Puskar Bhatt — Iconic Stills Gallery",
+    title: "Puskar Bhatta — Iconic Stills Gallery",
     description:
       "Psychological villain portraits and projected frames from Nepali cinema's most intense antagonist.",
   },
@@ -27,11 +27,11 @@ export const metadata: Metadata = {
 };
 
 const ICONIC_IMAGES: LightboxImage[] = [
-  { src: "/iconic1.webp", alt: "Puskar Bhatt Nepali actor villain portrait" },
-  { src: "/iconic2.webp", alt: "Puskar Bhatt antagonist character still from Nepali cinema" },
-  { src: "/iconic3.webp", alt: "Puskar Bhatt villain character still from Nepali cinema" },
-  { src: "/iconic4.webp", alt: "Puskar Bhatt dramatic antagonist portrait" },
-  { src: "/iconic5.webp", alt: "Puskar Bhatt cinematic villain still" },
+  { src: "/iconic1.webp", alt: "Puskar Bhatta Nepali actor villain portrait" },
+  { src: "/iconic2.webp", alt: "Puskar Bhatta antagonist character still from Nepali cinema" },
+  { src: "/iconic3.webp", alt: "Puskar Bhatta villain character still from Nepali cinema" },
+  { src: "/iconic4.webp", alt: "Puskar Bhatta dramatic antagonist portrait" },
+  { src: "/iconic5.webp", alt: "Puskar Bhatta cinematic villain still" },
 ];
 
 export default function IconicGalleryPage() {

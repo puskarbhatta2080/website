@@ -46,7 +46,7 @@ export default function FilmStrip() {
       {/* Outer wrapper for the scrolling track */}
       <div className="group w-full overflow-hidden">
         <div
-          aria-label="Puskar Bhatt film strip reel"
+          aria-label="Puskar Bhatta film strip reel"
           className="film-strip-track flex w-max animate-[filmScroll_50s_linear_infinite] hover:[animation-play-state:paused] motion-safe:animate-[filmScroll_42s_linear_infinite] will-change-transform"
           style={{ animationPlayState: "running", animationDuration: "42s" }}
         >

@@ -65,7 +65,7 @@ export default function Quotes() {
             Quotes
           </h3>
           <p className="mt-3 text-[#d4d4d8]/70 max-w-2xl">
-            Replace these with Puskar Bhatt’s real iconic dialogues. Each block
+            Replace these with Puskar Bhatta’s real iconic dialogues. Each block
             enters like a cinematic whisper becoming a threat.
           </p>
         </header>

@@ -38,10 +38,9 @@ export default function AboutContact() {
             </h2>
             <div className="mt-3 max-w-3xl space-y-3 text-[#d4d4d8]/70">
               <p>
-                <strong className="font-semibold text-[#d4d4d8]">Puskar Bhatt</strong>,
-                also known as Puskar Bhatta, is a prominent Nepali actor known
-                for intense antagonist roles, sharp dialogue delivery, and raw
-                action sequences.
+                <strong className="font-semibold text-[#d4d4d8]">Puskar Bhatta</strong>
+                is a prominent Nepali actor known for intense antagonist roles,
+                sharp dialogue delivery, and raw action sequences.
               </p>
               <p>
                 With a filmography spanning over 80 Nepali feature films and

@@ -5,25 +5,25 @@ import type { LightboxImage } from "@/components/CinematicLightbox";
 export const metadata: Metadata = {
   title: "News & Press Coverage",
   description:
-    "Browse all press coverage, news articles, and media features about Puskar Bhatt — Nepali cinema's ultimate antagonist. Includes South Indian news, Canadian coverage, and regional press from Nepal's film industry.",
+    "Browse all press coverage, news articles, and media features about Puskar Bhatta — Nepali cinema's ultimate antagonist. Includes South Indian news, Canadian coverage, and regional press from Nepal's film industry.",
   keywords: [
-    "Puskar Bhatt news",
+    "Puskar Bhatta news",
     "Nepali film news",
     "Puskar Bhatta updates",
     "Nepali cinema press",
-    "Puskar Bhatt media coverage",
+    "Puskar Bhatta media coverage",
     "Nepali actor news 2025",
     "12 Gaun 2 news",
     "Nepali film industry news",
     "South Indian news Nepal",
     "Nepali actor Canada news",
-    "Puskar Bhatt return to films",
+    "Puskar Bhatta return to films",
     "Nepali cinema latest news",
   ],
   openGraph: {
-    title: "Puskar Bhatt — News & Press Coverage Gallery",
+    title: "Puskar Bhatta — News & Press Coverage Gallery",
     description:
-      "Latest press coverage, news articles, and media features from Puskar Bhatt's career in Nepali cinema.",
+      "Latest press coverage, news articles, and media features from Puskar Bhatta's career in Nepali cinema.",
   },
 };
 
@@ -49,7 +49,7 @@ export default function NewsGalleryPage() {
   return (
     <GalleryPage
       title="News & Updates"
-      subtitle="Latest announcements, press coverage, and career milestones from the world of Puskar Bhatt."
+      subtitle="Latest announcements, press coverage, and career milestones from the world of Puskar Bhatta."
       images={NEWS_IMAGES}
       backHref="/#news"
     />

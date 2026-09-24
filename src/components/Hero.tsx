@@ -20,19 +20,28 @@ export default function Hero() {
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
 
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
+  const updateTiltFromPoint = (clientX: number, clientY: number, rect: DOMRect) => {
     const width = rect.width;
     const height = rect.height;
 
-    const pointerX = e.clientX - rect.left;
-    const pointerY = e.clientY - rect.top;
+    const pointerX = clientX - rect.left;
+    const pointerY = clientY - rect.top;
 
     const xPct = pointerX / width - 0.5;
     const yPct = pointerY / height - 0.5;
 
     x.set(xPct);
     y.set(yPct);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    updateTiltFromPoint(e.clientX, e.clientY, e.currentTarget.getBoundingClientRect());
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length === 0) return;
+    const touch = e.touches[0];
+    updateTiltFromPoint(touch.clientX, touch.clientY, e.currentTarget.getBoundingClientRect());
   };
 
   const handlePointerLeave = () => {
@@ -49,7 +58,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <Image
 src="/banner/banner.webp"
-          alt="Puskar Bhatt — Cinematic Villain"
+          alt="Puskar Bhatta — Cinematic Villain"
           fill
           priority
           sizes="100vw"
@@ -123,7 +132,7 @@ src="/banner/banner.webp"
 
           <div className="mt-6 max-w-xl text-[#d4d4d8]/95 text-[15px] sm:text-[16px] leading-relaxed space-y-4">
             <p className="[text-shadow:_0_2px_4px_rgba(0,0,0,0.8)]">
-              <strong className="text-white">Puskar Bhatt</strong> is a celebrated Nepali cinema actor known for intense antagonist performances, razor-sharp dialogue, and commanding screen presence in landmark Nepali and Bhojpuri films.
+              <strong className="text-white">Puskar Bhatta</strong> is a celebrated Nepali cinema actor known for intense antagonist performances, razor-sharp dialogue, and commanding screen presence in landmark Nepali and Bhojpuri films.
             </p>
             <p className="[text-shadow:_0_2px_4px_rgba(0,0,0,0.8)]">
               With a legacy spanning <strong className="text-[#ff4d4d] font-bold">80+ films</strong> and an unmistakable villain aura, he continues to define the emotional intensity and cinematic fear that audiences remember long after the credits roll.
@@ -160,6 +169,15 @@ src="/banner/banner.webp"
             onPointerMove={prefersReducedMotion ? undefined : handlePointerMove}
             onPointerLeave={prefersReducedMotion ? undefined : handlePointerLeave}
             onPointerCancel={prefersReducedMotion ? undefined : handlePointerLeave}
+            onTouchStart={prefersReducedMotion ? undefined : (e) => {
+              if (e.touches.length > 0) {
+                const touch = e.touches[0];
+                updateTiltFromPoint(touch.clientX, touch.clientY, e.currentTarget.getBoundingClientRect());
+              }
+            }}
+            onTouchMove={prefersReducedMotion ? undefined : handleTouchMove}
+            onTouchEnd={prefersReducedMotion ? undefined : handlePointerLeave}
+            onTouchCancel={prefersReducedMotion ? undefined : handlePointerLeave}
             animate={
               !prefersReducedMotion
                 ? { rotateX: [0, 2.5, -2, 0], rotateY: [0, -2, 2.5, 0] }
@@ -174,7 +192,7 @@ src="/banner/banner.webp"
               rotateX: prefersReducedMotion ? 0 : rotateX,
               rotateY: prefersReducedMotion ? 0 : rotateY,
               transformStyle: "preserve-3d",
-              touchAction: "pan-y",
+              touchAction: "none",
               willChange: "transform",
               WebkitTapHighlightColor: "transparent",
               perspective: "1000px",
@@ -199,7 +217,7 @@ src="/banner/banner.webp"
               {/* Profile Image */}
               <Image
                 src="/pimage/biography.webp"
-                alt="Puskar Bhatt biography portrait"
+                alt="Puskar Bhatta biography portrait"
                 fill
                 priority
                 sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 360px"
@@ -231,7 +249,7 @@ src="/banner/banner.webp"
               {/* Bottom Card Caption Badge */}
               <div className="absolute bottom-3 inset-x-3 text-center py-2 px-3 rounded-lg bg-black/70 backdrop-blur-md border border-white/10 pointer-events-none shadow-lg">
                 <p className="text-[11px] font-black uppercase tracking-widest text-[#e2e8f0]">
-                  Puskar Bhatt
+                  Puskar Bhatta
                 </p>
                 <p className="text-[9px] uppercase tracking-wider text-[#ff4d4d] font-bold">
                   Iconic Antagonist

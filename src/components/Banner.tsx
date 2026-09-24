@@ -32,9 +32,9 @@ export type BannerProps = {
 
 export default function Banner({
   imageSrc = "/iconic4.webp",
-  imageAlt = "Puskar Bhatt cinematic banner",
+  imageAlt = "Puskar Bhatta cinematic banner",
   badge = "FEATURED RELEASE",
-  heading = "PUSKAR BHATT",
+  heading = "PUSKAR BHATTA",
   subheading = "A premium, theatrical archive of menace.",
   ctaLabel = "Enter the Dark Side",
   ctaHref = "#filmography",

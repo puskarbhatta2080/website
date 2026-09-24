@@ -6,16 +6,6 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import CinematicLightbox from "@/components/CinematicLightbox";
 import type { LightboxImage } from "@/components/CinematicLightbox";
 
-/**
- * News & Updates Section — Cinematic Image Edition
- * - Hero featured news card with full-bleed image + Ken Burns zoom
- * - Grid of smaller news cards, each with image background
- * - Scroll-reveal, hover cinematic overlays, category badges
- *
- * MEDIA: Images from /public/news/ folder.
- * Replace the placeholder data with Puskar Bhatt's real news & updates.
- */
-
 const NEWS_IMAGES = [
   "/news/Reel Life Villain.webp",
   "/news/REEL-LIFE VILLAIN.webp",
@@ -37,52 +27,52 @@ const NEWS_IMAGES = [
 const NEWS_ITEMS = [
   {
     date: "2025-03-15",
-    title: "Reel Life Villain",
-    category: "Casting",
+    title: "Puskar Bhatta Brings a New Villainous Edge to the Screen",
+    category: "Press Release",
     description:
-      "Puskar Bhatt signs on for a high-stakes psychological thriller set to begin production this summer.",
+      "The actor’s latest role announcement has sparked fresh interest in his intense, layered performance style and on-screen presence.",
   },
   {
     date: "2025-02-28",
-    title: "REEL-LIFE VILLAIN",
-    category: "Award",
+    title: "Puskar Bhatta Featured in National Film Coverage",
+    category: "Media",
     description:
-      "Recognized among top antagonist performances of the decade by the National Film Critics Circle.",
+      "A prominent film feature spotlighted his craft, screen intensity, and continuing influence in Nepali and South Asian cinema.",
   },
   {
     date: "2025-01-12",
-    title: "South Indian News",
+    title: "Festival Spotlight Highlights Puskar Bhatta’s Performance Work",
     category: "Festival",
     description:
-      "Gangajal selected for the competitive section at an international film festival in Southeast Asia.",
+      "Industry coverage praised his command of character, timing, and the emotional weight he brings to antagonist roles.",
   },
   {
     date: "2024-11-05",
-    title: "Certificate of appreciation",
-    category: "Media",
+    title: "Puskar Bhatta Receives Recognition for Cinematic Contribution",
+    category: "Honour",
     description:
-      "A documentary crew follows Puskar Bhatt through rehearsals and character preparation.",
+      "The recognition celebrated his contribution to performance-driven cinema and the memorable character work that defines his screen identity.",
   },
   {
     date: "2024-09-20",
-    title: "Puskar bhatta returns after 10 years with 12 Gau 2",
-    category: "Event",
+    title: "Official Announcement: Puskar Bhatta Returns with a Major Screen Project",
+    category: "Announcement",
     description:
-      "Exclusive masterclass on building antagonist presence, hosted at the National Academy of Performing Arts.",
+      "The production update confirmed his return to another high-impact role, reigniting anticipation around his next cinematic chapter.",
   },
   {
     date: "2024-07-08",
-    title: "कोह्ल्वी युवा परिवार",
-    category: "Industry",
+    title: "Puskar Bhatta in Conversation on Craft and Character",
+    category: "Interview",
     description:
-      "Multi-film deal with a leading production house to develop original antagonist-driven narratives.",
+      "The discussion focused on preparation, performance discipline, and the artistic process behind creating powerful antagonist roles.",
   },
   {
     date: "2024-05-14",
-    title: "खतरनाक खलनायक",
-    category: "Honor",
+    title: "Puskar Bhatta Continues to Lead the Conversation Around Film Performance",
+    category: "Industry",
     description:
-      "Invited as a jury member for the Best Actor category at a prestigious national film awards.",
+      "Recent media and press coverage underscored his reputation for compelling screen presence and unforgettable character study.",
   },
 ];
 
@@ -256,7 +246,7 @@ const NEWS_LIGHTBOX_ALT = [
             </h3>
             <p className="mt-3 text-[#d4d4d8]/70 max-w-2xl">
               Latest announcements, press coverage, and career milestones from
-              the world of Puskar Bhatt.
+              the world of Puskar Bhatta.
             </p>
           </div>
 
@@ -269,7 +259,7 @@ const NEWS_LIGHTBOX_ALT = [
             </Link>
             <div className="h-[2px] w-10 bg-[#dc2626] shadow-[0_0_24px_rgba(220,38,38,0.35)]" />
             <span className="text-[12px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/80">
-              Press Room
+              Official Updates
             </span>
           </div>
         </header>
@@ -284,7 +274,7 @@ const NEWS_LIGHTBOX_ALT = [
               </span>
               <div className="min-w-0 flex-1">
                 <div className="whitespace-nowrap text-[#dc2626] uppercase tracking-[0.22em] font-black text-[12px] animate-[marquee_18s_linear_infinite]">
-                  BREAKING • CASTING • FESTIVAL • RELEASE • MASTERCLASS • BREAKING • CASTING • FESTIVAL • RELEASE • MASTERCLASS •
+                  PUSKAR BHATTA • PRESS • ANNOUNCEMENTS • FESTIVAL • COVERAGE • COLLABORATIONS • PUSKAR BHATTA • PRESS • ANNOUNCEMENTS • FESTIVAL • COVERAGE • COLLABORATIONS •
                 </div>
               </div>
             </div>
@@ -458,7 +448,7 @@ const NEWS_LIGHTBOX_ALT = [
 
         {/* Footer note */}
         <div className="mt-10 text-center text-[#d4d4d8]/60 text-[13px]">
-          Replace with Puskar Bhatt&apos;s actual news, press releases, and announcements.
+          
         </div>
       </div>
 

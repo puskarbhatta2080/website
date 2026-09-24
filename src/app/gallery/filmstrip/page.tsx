@@ -5,19 +5,19 @@ import type { LightboxImage } from "@/components/CinematicLightbox";
 export const metadata: Metadata = {
   title: "35mm Evidence Reel",
   description:
-    "Browse the 35mm evidence reel — vintage film strip frames from Puskar Bhatt's behind-the-scenes archive. Grayscale evidence from the villain's workshop with infinite scroll effect.",
+    "Browse the 35mm evidence reel — vintage film strip frames from Puskar Bhatta's behind-the-scenes archive. Grayscale evidence from the villain's workshop with infinite scroll effect.",
   keywords: [
-    "Puskar Bhatt film strip",
+    "Puskar Bhatta film strip",
     "Nepali cinema BTS",
     "35mm evidence reel",
-    "Puskar Bhatt behind the scenes",
+    "Puskar Bhatta behind the scenes",
     "vintage film frames Nepal",
     "Nepali film evidence reel",
     "villain workshop Nepal",
-    "Puskar Bhatt grayscale",
+    "Puskar Bhatta grayscale",
   ],
   openGraph: {
-    title: "Puskar Bhatt — 35mm Evidence Reel Gallery",
+    title: "Puskar Bhatta — 35mm Evidence Reel Gallery",
     description:
       "Vintage film strip frames and behind-the-scenes evidence from the villain's cinematic workshop.",
   },

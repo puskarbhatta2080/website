@@ -5,21 +5,21 @@ import type { LightboxImage } from "@/components/CinematicLightbox";
 export const metadata: Metadata = {
   title: "BTS & Memoris",
   description:
-    "Behind-the-scenes fragments, rehearsals, and memory cuts from Puskar Bhatt's cinematic journey. Explore 25+ exclusive BTS photographs, character preparation shots, and on-set moments from Nepali film productions.",
+    "Behind-the-scenes fragments, rehearsals, and memory cuts from Puskar Bhatta's cinematic journey. Explore 25+ exclusive BTS photographs, character preparation shots, and on-set moments from Nepali film productions.",
   keywords: [
-    "Puskar Bhatt BTS",
+    "Puskar Bhatta BTS",
     "behind the scenes Nepali film",
     "Nepali cinema behind the scenes",
-    "Puskar Bhatt rehearsal",
+    "Puskar Bhatta rehearsal",
     "film set photos Nepal",
     "Nepali actor behind the scenes",
     "movie making Nepal",
     "antagonist preparation",
   ],
   openGraph: {
-    title: "Puskar Bhatt — BTS & Memoris Gallery",
+    title: "Puskar Bhatta — BTS & Memoris Gallery",
     description:
-      "Exclusive behind-the-scenes photographs, rehearsals, and on-set moments from Puskar Bhatt's film career.",
+      "Exclusive behind-the-scenes photographs, rehearsals, and on-set moments from Puskar Bhatta's film career.",
   },
 };
 
@@ -51,17 +51,10 @@ const BTS_FILES = [
   "f91369a6-f6fe-41ec-bf4b-54fab4a413ed.webp",
 ];
 
-const ALL_IMAGES: LightboxImage[] = [
-  ...BTS_FILES.map((f, i) => ({
-    src: `/BTS/${f}`,
-    alt: `BTS Fragment ${i + 1}`,
-  })),
-  ...[
-    { src: "/pimage/placeholder1.webp", alt: "Memoris #01 — A scar of cinema." },
-    { src: "/pimage/placeholder2.webp", alt: "Memoris #02 — The vow before the scene." },
-    { src: "/pimage/placeholder3.webp", alt: "Memoris #03 — A silence that speaks." },
-  ],
-];
+const ALL_IMAGES: LightboxImage[] = BTS_FILES.map((f, i) => ({
+  src: `/BTS/${f}`,
+  alt: `BTS Fragment ${i + 1}`,
+}));
 
 export default function BtsGalleryPage() {
   return (

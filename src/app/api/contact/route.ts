@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
         <p style="margin:0;color:#dc2626;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Reply to: ${sEmail}</p>
       </div>
     </div>
-    <div class="footer">Puskar Bhatt &mdash; Cinematic Villain Portfolio</div>
+    <div class="footer">Puskar Bhatta &mdash; Cinematic Villain Portfolio</div>
   </div>
 </body>
 </html>`;

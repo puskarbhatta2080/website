@@ -59,7 +59,7 @@ ${imageEntries
     <loc>${escapeXml(pageUrl)}</loc>
     <image:image>
       <image:loc>${escapeXml(imageUrl)}</image:loc>
-      <image:caption>Puskar Bhatt official portfolio image</image:caption>
+      <image:caption>Puskar Bhatta official portfolio image</image:caption>
     </image:image>
   </url>`,
   )

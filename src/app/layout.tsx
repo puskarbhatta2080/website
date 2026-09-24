@@ -16,17 +16,16 @@ const geistMono = Geist_Mono({
 });
 
 const personSummary =
-  "Puskar Bhatt, also known as Puskar Bhatta, is a prominent Nepali actor known for intense antagonist roles, sharp dialogue delivery, and raw action sequences. With an extensive filmography spanning over 80 Nepali feature films and regional productions including Bhojpuri cinema, he continues to contribute to the legacy of the Nepali film industry from Canada and Nepal.";
+  "Puskar Bhatta is a prominent Nepali actor known for intense antagonist roles, sharp dialogue delivery, and raw action sequences. With an extensive filmography spanning over 80 Nepali feature films and regional productions including Bhojpuri cinema, he continues to contribute to the legacy of the Nepali film industry from Canada and Nepal.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://puskarbhatt.com"),
   title: {
-    default: "Puskar Bhatt | Nepali Actor, Villain and Filmography",
-    template: "%s — Puskar Bhatt",
+    default: "Puskar Bhatta | Nepali Actor, Villain and Filmography",
+    template: "%s — Puskar Bhatta",
   },
   description: personSummary,
   keywords: [
-    "Puskar Bhatt",
     "Puskar Bhatta",
     "Nepali actor",
     "Nepali villain",
@@ -42,7 +41,7 @@ export const metadata: Metadata = {
     "actor portfolio",
     "cinematic portfolio",
     "film villain Nepal",
-    "Puskar Bhatt filmography",
+    "Puskar Bhatta filmography",
     "casting Nepal",
     "Nepali Gulshan Grover",
     "Nepali film industry",
@@ -50,20 +49,20 @@ export const metadata: Metadata = {
     "Nepali action film",
     "Nepali drama actor",
   ],
-  authors: [{ name: "Puskar Bhatt", url: "https://puskarbhatt.com" }],
-  creator: "Puskar Bhatt",
+  authors: [{ name: "Puskar Bhatta", url: "https://puskarbhatt.com" }],
+  creator: "Puskar Bhatta",
 
-  publisher: "Puskar Bhatt",
+  publisher: "Puskar Bhatta",
   formatDetection: {
     telephone: true,
     email: true,
     address: true,
   },
   openGraph: {
-    title: "Puskar Bhatt — Nepali Cinema's Ultimate Antagonist",
+    title: "Puskar Bhatta — Nepali Cinema's Ultimate Antagonist",
     description: personSummary,
     url: "https://puskarbhatt.com",
-    siteName: "Puskar Bhatt — Ultimate Antagonist",
+    siteName: "Puskar Bhatta — Ultimate Antagonist",
     locale: "en_US",
     type: "website",
     countryName: "Nepal",
@@ -72,13 +71,13 @@ export const metadata: Metadata = {
         url: "/pimage/iconic2.webp",
         width: 1200,
         height: 630,
-        alt: "Puskar Bhatt — Nepali Cinema Iconic Villain Portrait",
+        alt: "Puskar Bhatta — Nepali Cinema Iconic Villain Portrait",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Puskar Bhatt — Nepali Cinema's Ultimate Antagonist",
+    title: "Puskar Bhatta — Nepali Cinema's Ultimate Antagonist",
     description: personSummary,
     images: ["/pimage/iconic2.webp"],
     creator: "@puskarbhatt",
@@ -119,12 +118,12 @@ export const viewport: Viewport = {
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Puskar Bhatt",
+  name: "Puskar Bhatta",
   alternateName: "Puskar Bhatta",
   description:
-    "Puskar Bhatt, also known as Puskar Bhatta, is a prominent Nepali actor known for intense antagonist roles, sharp dialogue delivery, and raw action sequences. With an extensive filmography spanning over 80 Nepali feature films and dozens of regional hit productions including Bhojpuri blockbusters, his commanding performances continue to captivate audiences and shape high-intensity conflict on screen. Though he now resides in Canada, he frequently returns to Nepal to carry forward his legendary mark as an antagonist and contribute to the growth and legacy of the Nepali film industry.",
+    "Puskar Bhatta is a prominent Nepali actor known for intense antagonist roles, sharp dialogue delivery, and raw action sequences. With an extensive filmography spanning over 80 Nepali feature films and dozens of regional hit productions including Bhojpuri blockbusters, his commanding performances continue to captivate audiences and shape high-intensity conflict on screen. Though he now resides in Canada, he frequently returns to Nepal to carry forward his legendary mark as an antagonist and contribute to the growth and legacy of the Nepali film industry.",
   disambiguatingDescription:
-    "Nepali actor Puskar Bhatt, also known as Puskar Bhatta, is recognized for antagonist and villain roles in Nepali and Bhojpuri cinema.",
+    "Nepali actor Puskar Bhatta is recognized for antagonist and villain roles in Nepali and Bhojpuri cinema.",
   url: "https://puskarbhatt.com",
   image: "https://puskarbhatt.com/pimage/biography.webp",
   mainEntityOfPage: {

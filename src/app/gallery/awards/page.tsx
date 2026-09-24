@@ -5,12 +5,12 @@ import type { LightboxImage } from "@/components/CinematicLightbox";
 export const metadata: Metadata = {
   title: "Awards & Recognition",
   description:
-    "Browse all awards and recognition highlights from Puskar Bhatt's cinematic career. View certificates of appreciation, felicitation ceremonies, chief guest honors, and industry accolades from Nepali cinema and international events in Canada.",
+    "Browse all awards and recognition highlights from Puskar Bhatta's cinematic career. View certificates of appreciation, felicitation ceremonies, chief guest honors, and industry accolades from Nepali cinema and international events in Canada.",
   keywords: [
-    "Puskar Bhatt awards",
+    "Puskar Bhatta awards",
     "Nepali film awards",
     "Nepali actor recognition",
-    "Puskar Bhatt honors",
+    "Puskar Bhatta honors",
     "Global Nepali Film Award",
     "NFAA certificate",
     "Nepali cinema awards",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     "Nepali film industry honors",
   ],
   openGraph: {
-    title: "Puskar Bhatt — Awards & Recognition Gallery",
+    title: "Puskar Bhatta — Awards & Recognition Gallery",
     description:
       "View the complete awards collection — certificates, felicitations, and honors from Nepali cinema and international events.",
   },

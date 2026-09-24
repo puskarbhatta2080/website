@@ -45,10 +45,10 @@ export default function GalleryPage({
     "@type": "ImageObject",
     contentUrl: `https://puskarbhatt.com${image.src}`,
     name: image.alt,
-    caption: `${image.alt} — Puskar Bhatt official portfolio`,
+    caption: `${image.alt} — Puskar Bhatta official portfolio`,
     creator: {
       "@type": "Person",
-      name: "Puskar Bhatt",
+      name: "Puskar Bhatta",
     },
   }));
 
@@ -60,7 +60,7 @@ export default function GalleryPage({
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ImageGallery",
-            name: `Puskar Bhatt — ${title}`,
+            name: `Puskar Bhatta — ${title}`,
             description: subtitle,
             image: imageStructuredData,
           }),

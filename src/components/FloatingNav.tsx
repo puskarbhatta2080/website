@@ -88,7 +88,7 @@ export default function FloatingNav() {
               onClick={() => setMenuOpen(false)}
             >
               <span className="text-[11px] sm:text-[12px] leading-none">
-                Puskar Bhatt
+                Puskar Bhatta
               </span>
               <span className="absolute -bottom-2 left-0 h-[2px] w-full origin-left scale-x-0 bg-gradient-to-r from-[#dc2626] to-[#ff3b3b] transition-transform duration-300 group-hover:scale-x-100" />
             </Link>
