@@ -178,29 +178,32 @@ export default function Filmography() {
           <div>
             <div className="inline-flex items-center gap-3 mb-4">
               <div className="h-[1px] w-8 bg-gradient-to-r from-transparent via-red-500/40 to-transparent" />
-              <span className="text-[10px] uppercase tracking-[0.3em] font-black text-red-400/60">
-                Filmography
+              <span className="text-[10px] uppercase tracking-[0.32em] font-black text-red-400/75">
+                Archive // 01
               </span>
               <div className="h-[1px] w-8 bg-gradient-to-l from-transparent via-red-500/40 to-transparent" />
             </div>
             <h2
-              className="text-[38px] sm:text-[56px] font-black uppercase tracking-[0.04em] leading-[0.9]"
-              style={{ color: "#e2e8f0" }}
+              className="text-[36px] sm:text-[50px] md:text-[56px] font-black uppercase tracking-[0.06em] leading-[0.9]"
+              style={{ color: "#f8fafc" }}
             >
               The Reel Legacy
             </h2>
             <p className="mt-4 text-[14px] max-w-xl leading-relaxed text-slate-400/80">
-              A curated deck of antagonist performances — each entry a study in controlled menace.
+              A curated archive of formidable antagonist performances, each frame marked by menace, intensity, and unforgettable screen presence.
             </p>
           </div>
           <div className="flex items-center gap-4">
+            <span className="hidden md:inline text-[9px] uppercase tracking-[0.28em] text-slate-500/70">
+              35mm / Selected Works
+            </span>
             <Link
               href="/gallery/filmography"
-              className="group inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.25em] font-bold"
-              style={{ color: "rgba(220,38,38,0.7)" }}
+              className="group inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.24em] font-black"
+              style={{ color: "rgba(220,38,38,0.82)" }}
             >
               <span className="h-[1px] w-6 bg-gradient-to-r from-transparent to-red-500/30 group-hover:w-10 transition-all duration-300" />
-              <span className="group-hover:tracking-[0.3em] transition-all duration-300">
+              <span className="group-hover:tracking-[0.28em] transition-all duration-300">
                 View All {MOVIES.length} Films
               </span>
               <svg
@@ -230,7 +233,7 @@ export default function Filmography() {
               <motion.div
                 key={m.title}
                 layout
-                className="relative group"
+                className="relative group [transform:translateZ(0)]"
                 initial={{ opacity: 0, y: 30 }}
                 animate={vis ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: idx * 0.07, duration: 0.5, ease: "easeOut" }}
@@ -250,33 +253,34 @@ export default function Filmography() {
                   onMouseMove={(e) => handleCardMouse(idx, e.clientX, e.clientY, true)}
                   onMouseEnter={(e) => handleCardMouse(idx, e.clientX, e.clientY, true)}
                   onMouseLeave={() => handleCardMouse(idx, 0, 0, false)}
-                  className="relative overflow-hidden rounded-[20px] cursor-pointer select-none transition-all duration-300"
+                  className="relative overflow-hidden rounded-[16px] cursor-pointer select-none transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_18px_40px_rgba(220,38,38,0.12)]"
                   style={{
                     perspective: "1000px",
                     transform: tilt
                       ? `rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`
                       : "rotateX(0deg) rotateY(0deg)",
-                    transition: "transform 0.12s ease-out",
+                    transition: "transform 0.12s ease-out, box-shadow 0.3s ease",
                     background: isSelected
                       ? "rgba(15,23,42,0.85)"
                       : "rgba(15,23,42,0.4)",
                     backdropFilter: isSelected ? "blur(32px)" : "blur(20px)",
                     WebkitBackdropFilter: isSelected ? "blur(32px)" : "blur(20px)",
                     border: isSelected
-                      ? "1.5px solid rgba(220,38,38,0.4)"
-                      : "1px solid rgba(220,38,38,0.12)",
+                      ? "1.5px solid rgba(220,38,38,0.45)"
+                      : "1px solid rgba(220,38,38,0.14)",
                     boxShadow: isSelected
-                      ? "0 0 60px rgba(220,38,38,0.15), 0 0 120px rgba(220,38,38,0.06)"
+                      ? "0 0 68px rgba(220,38,38,0.18), 0 0 120px rgba(220,38,38,0.07)"
                       : tilt
                       ? `0 ${tilt.ry * 0.3}px ${Math.abs(tilt.ry) * 2 + 20}px rgba(220,38,38,0.18)`
-                      : "0 8px 32px rgba(0,0,0,0.4)",
+                      : "0 8px 32px rgba(0,0,0,0.42)",
+                    willChange: "transform",
                   }}
                 >
                   {/* Cursor-follow glow */}
                   {tilt && (
                     <div
                       aria-hidden="true"
-                      className="pointer-events-none absolute inset-[-1px] rounded-[20px]"
+                      className="pointer-events-none absolute inset-[-1px] rounded-[16px]"
                       style={{
                         background: `radial-gradient(500px circle at ${tilt.glowX}% ${tilt.glowY}%, rgba(220,38,38,0.35), transparent 60%)`,
                       }}
@@ -286,7 +290,7 @@ export default function Filmography() {
                   {/* Frosted border shine */}
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-[-1px] rounded-[20px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    className="pointer-events-none absolute inset-[-1px] rounded-[16px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{
                       background:
                         "linear-gradient(135deg, rgba(220,38,38,0.15) 0%, transparent 40%, transparent 60%, rgba(220,38,38,0.08) 100%)",
@@ -523,13 +527,13 @@ export default function Filmography() {
         >
           <Link
             href="/gallery/filmography"
-            className="group inline-flex items-center gap-4 rounded-full px-8 py-4 text-[12px] uppercase tracking-[0.28em] font-black transition-all duration-300 hover:scale-[1.02]"
+            className="group inline-flex items-center gap-4 rounded-full px-8 py-4 text-[11px] uppercase tracking-[0.28em] font-black transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5"
             style={{
-              background: "rgba(220,38,38,0.06)",
-              border: "1px solid rgba(220,38,38,0.15)",
-              color: "rgba(220,38,38,0.7)",
+              background: "linear-gradient(135deg, rgba(220,38,38,0.08), rgba(15,23,42,0.4))",
+              border: "1px solid rgba(220,38,38,0.2)",
+              color: "rgba(220,38,38,0.82)",
               backdropFilter: "blur(12px)",
-              boxShadow: "0 0 40px rgba(220,38,38,0.06)",
+              boxShadow: "0 0 40px rgba(220,38,38,0.08)",
             }}
           >
             <span className="h-[1px] w-6 bg-gradient-to-r from-transparent to-red-500/30 group-hover:w-12 transition-all duration-300" />

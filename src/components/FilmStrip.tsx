@@ -46,7 +46,9 @@ export default function FilmStrip() {
       {/* Outer wrapper for the scrolling track */}
       <div className="group w-full overflow-hidden">
         <div
-          className="flex w-max animate-[filmScroll_50s_linear_infinite] hover:[animation-play-state:paused]"
+          aria-label="Puskar Bhatt film strip reel"
+          className="film-strip-track flex w-max animate-[filmScroll_50s_linear_infinite] hover:[animation-play-state:paused] motion-safe:animate-[filmScroll_42s_linear_infinite] will-change-transform"
+          style={{ animationPlayState: "running", animationDuration: "42s" }}
         >
           {/* Render twice for seamless infinite loop */}
           {[...frames, ...frames].map((frame, index) => (

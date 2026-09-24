@@ -36,10 +36,21 @@ export default function AboutContact() {
             <h2 id="about-heading" className="uppercase tracking-[0.18em] font-black text-[#d4d4d8] text-[22px]">
               About & Discipline
             </h2>
-            <p className="mt-3 text-[#d4d4d8]/70 max-w-2xl">
-              Puskar Bhatt, also known as Puskar Bhatta, is a Nepali actor known
-              for intense villain and antagonist performances in Nepali cinema.
-            </p>
+            <div className="mt-3 max-w-3xl space-y-3 text-[#d4d4d8]/70">
+              <p>
+                <strong className="font-semibold text-[#d4d4d8]">Puskar Bhatt</strong>,
+                also known as Puskar Bhatta, is a prominent Nepali actor known
+                for intense antagonist roles, sharp dialogue delivery, and raw
+                action sequences.
+              </p>
+              <p>
+                With a filmography spanning over 80 Nepali feature films and
+                regional productions including Bhojpuri cinema, he continues to
+                captivate audiences. Though he now resides in Canada, he
+                frequently returns to Nepal to contribute to the growth and
+                legacy of the Nepali film industry.
+              </p>
+            </div>
           </div>
           <div className="hidden sm:block">
             <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(220,38,38,0.22)] bg-black/15 px-4 py-2 shadow-[0_0_30px_rgba(220,38,38,0.12)]">
@@ -233,7 +244,7 @@ export default function AboutContact() {
                   </a>
 
                   <a
-                    href="https://wa.me/16477602298"
+                    href="https://wa.me/15195218816"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 rounded-[14px] border border-[rgba(220,38,38,0.16)] bg-black/20 px-4 py-3 hover:bg-black/30 hover:border-[rgba(220,38,38,0.32)] transition-all duration-300 group"
@@ -241,7 +252,7 @@ export default function AboutContact() {
                     <span className="text-[18px]">💬</span>
                     <div>
                       <p className="text-[10px] uppercase tracking-widest font-extrabold text-[#d4d4d8]/60">WhatsApp</p>
-                      <p className="text-[13px] font-bold text-[#d4d4d8] group-hover:text-[#dc2626] transition-colors">+1 (647) 760-2298</p>
+                      <p className="text-[13px] font-bold text-[#d4d4d8] group-hover:text-[#dc2626] transition-colors">+1 (519) 521-8816</p>
                     </div>
                   </a>
 

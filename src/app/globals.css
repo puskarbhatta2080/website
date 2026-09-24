@@ -254,6 +254,16 @@ body {
   }
 }
 
+.film-strip-track {
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .film-strip-track {
+    animation-duration: 42s !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -262,6 +272,12 @@ body {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .film-strip-track,
+  .hero-tilt-card {
+    animation: none !important;
+    transform: none !important;
   }
 }
 

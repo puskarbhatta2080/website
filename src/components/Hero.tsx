@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
@@ -9,15 +9,6 @@ export default function Hero() {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [imgError, setImgError] = useState(false);
   const prefersReducedMotion = useReducedMotion();
-  const isCoarsePointer = useSyncExternalStore(
-    (onStoreChange) => {
-      const mediaQuery = window.matchMedia("(pointer: coarse)");
-      mediaQuery.addEventListener("change", onStoreChange);
-      return () => mediaQuery.removeEventListener("change", onStoreChange);
-    },
-    () => window.matchMedia("(pointer: coarse)").matches,
-    () => false
-  );
 
   // 3D Motion Values for Card Tilt Effect
   const x = useMotionValue(0);
@@ -29,22 +20,22 @@ export default function Hero() {
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
 
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+    const pointerX = e.clientX - rect.left;
+    const pointerY = e.clientY - rect.top;
 
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
+    const xPct = pointerX / width - 0.5;
+    const yPct = pointerY / height - 0.5;
 
     x.set(xPct);
     y.set(yPct);
   };
 
-  const handleMouseLeave = () => {
+  const handlePointerLeave = () => {
     x.set(0);
     y.set(0);
   };
@@ -83,14 +74,18 @@ src="/banner/banner.webp"
       <div className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6 pb-12 sm:pb-16 flex flex-col lg:flex-row items-center justify-between gap-12">
         {/* Left Narrative Column */}
         <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-3 rounded-full border border-[rgba(220,38,38,0.3)] bg-black/60 backdrop-blur-md px-4 py-2 shadow-[0_0_28px_rgba(220,38,38,0.2)]">
-            <span className="h-2 w-2 rounded-full bg-[#dc2626] shadow-[0_0_14px_rgba(220,38,38,0.8)]" />
-            <p className="text-[12px] uppercase tracking-widest font-extrabold text-[#e4e4e7]">
+          <div className="inline-flex items-center gap-3 rounded-full border border-[rgba(220,38,38,0.35)] bg-black/60 backdrop-blur-md px-4 py-2 shadow-[0_0_24px_rgba(220,38,38,0.18)]">
+            <span className="h-2 w-2 rounded-full bg-[#dc2626] shadow-[0_0_16px_rgba(220,38,38,0.8)]" />
+            <p className="text-[11px] uppercase tracking-[0.26em] font-extrabold text-[#f4f4f5]">
               Cinematic Villain Portfolio
             </p>
           </div>
 
-          <h1 className="mt-6 leading-[0.85] relative">
+          <p className="mt-5 text-[11px] sm:text-[12px] uppercase tracking-[0.38em] font-bold text-[#fca5a5]/90">
+            Nepali cinema&apos;s ultimate antagonist
+          </p>
+
+          <h1 className="mt-4 leading-[0.82] relative">
             <motion.div
               aria-hidden="true"
               className="absolute -left-3 top-0 w-1.5 h-0 rounded-full bg-gradient-to-b from-[#dc2626] to-transparent"
@@ -98,29 +93,27 @@ src="/banner/banner.webp"
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             />
 
-            {/* PUSKAR Header */}
             <span
-              className="relative block text-[36px] xs:text-[42px] sm:text-[68px] md:text-[84px] font-black uppercase tracking-[0.06em] text-white"
+              className="relative block text-[34px] xs:text-[42px] sm:text-[62px] md:text-[80px] lg:text-[94px] font-black uppercase tracking-[0.08em] text-white"
               style={{
                 textShadow:
-                  "0 4px 12px rgba(0,0,0,0.95), 0 0 30px rgba(220,38,38,0.5)",
+                  "0 4px 12px rgba(0,0,0,0.95), 0 0 30px rgba(220,38,38,0.38)",
               }}
             >
               PUSKAR
             </span>
 
-            {/* BHATT Header - Solid Crimson Red */}
             <div className="relative inline-block mt-1">
               <div
                 aria-hidden="true"
-                className="absolute -inset-4 bg-red-600/30 blur-2xl rounded-2xl -z-10"
+                className="absolute -inset-4 bg-gradient-to-r from-[#dc2626]/30 via-[#ff4d4d]/15 to-transparent blur-2xl rounded-2xl -z-10"
               />
 
               <span
-                className="relative block text-[40px] xs:text-[48px] sm:text-[76px] md:text-[96px] font-black uppercase leading-[0.9] tracking-wider text-[#ff3b3b]"
+                className="relative block text-[38px] xs:text-[46px] sm:text-[68px] md:text-[86px] lg:text-[104px] font-black uppercase leading-[0.9] tracking-[0.08em] bg-gradient-to-r from-[#ff6b6b] via-[#ff4545] to-[#fca5a5] bg-clip-text text-transparent"
                 style={{
                   textShadow:
-                    "0 4px 10px rgba(0, 0, 0, 1), 0 0 20px rgba(220, 38, 38, 0.9), 0 0 40px rgba(220, 38, 38, 0.4)",
+                    "0 4px 10px rgba(0, 0, 0, 0.8), 0 0 30px rgba(220, 38, 38, 0.38)",
                 }}
               >
                 BHATT
@@ -128,37 +121,32 @@ src="/banner/banner.webp"
             </div>
           </h1>
 
-          {/* About Text - Updated Narrative */}
           <div className="mt-6 max-w-xl text-[#d4d4d8]/95 text-[15px] sm:text-[16px] leading-relaxed space-y-4">
             <p className="[text-shadow:_0_2px_4px_rgba(0,0,0,0.8)]">
-              <strong className="text-white">Puskar Bhatt</strong> (also known as Puskar Bhatta) is a prominent Nepali actor known for intense antagonist roles, sharp dialogue delivery, and raw action sequences.
+              <strong className="text-white">Puskar Bhatt</strong> is a celebrated Nepali cinema actor known for intense antagonist performances, razor-sharp dialogue, and commanding screen presence in landmark Nepali and Bhojpuri films.
             </p>
             <p className="[text-shadow:_0_2px_4px_rgba(0,0,0,0.8)]">
-              With an extensive filmography spanning over <strong className="text-[#ff4d4d] font-bold">80+ Nepali feature films</strong> and dozens of regional hit productions including Bhojpuri blockbusters, his commanding performances continue to captivate audiences and shape high-intensity conflict on screen.
-            </p>
-            <p className="[text-shadow:_0_2px_4px_rgba(0,0,0,0.8)]">
-              Though he now resides in <strong className="text-white">Canada</strong>, he frequently returns to Nepal to carry forward his legendary mark as an antagonist and to continuously contribute to the growth and legacy of the Nepali film industry.
+              With a legacy spanning <strong className="text-[#ff4d4d] font-bold">80+ films</strong> and an unmistakable villain aura, he continues to define the emotional intensity and cinematic fear that audiences remember long after the credits roll.
             </p>
           </div>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center w-full sm:w-auto">
             <Link
               href="#filmography"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#ef4444] to-[#dc2626] px-6 py-4 sm:py-3 text-[13px] uppercase tracking-widest font-black text-black shadow-[0_0_30px_rgba(220,38,38,0.45)] hover:shadow-[0_0_48px_rgba(220,38,38,0.7)] hover:scale-[1.02] transition-all duration-300 min-h-[48px]"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#ef4444] via-[#dc2626] to-[#b91c1c] px-6 py-4 sm:py-3 text-[12px] uppercase tracking-[0.24em] font-black text-black shadow-[0_0_30px_rgba(220,38,38,0.45)] hover:shadow-[0_0_48px_rgba(220,38,38,0.72)] transition-all duration-300 min-h-[48px] hover:-translate-y-0.5"
             >
-              <span className="relative">
+              <span className="relative inline-flex items-center gap-2">
                 <span className="absolute -inset-3 rounded-full animate-pulse [animation-duration:2.2s] bg-[rgba(220,38,38,0.25)]" />
-                <span className="relative whitespace-nowrap">
-                  Enter the Dark Side
-                </span>
+                <span className="relative whitespace-nowrap">Enter the Dark Side</span>
+                <span className="relative text-base transition-transform duration-300 group-hover:translate-x-1">→</span>
               </span>
             </Link>
 
             <Link
               href="/gallery/iconic"
-              className="inline-flex items-center justify-center rounded-full border border-[rgba(220,38,38,0.35)] px-6 py-4 sm:py-3 text-[13px] uppercase tracking-widest font-black text-[#e4e4e7] bg-black/50 hover:bg-black/70 backdrop-blur-md shadow-[0_0_30px_rgba(220,38,38,0.15)] hover:scale-[1.02] transition-all duration-300 min-h-[48px]"
+              className="inline-flex items-center justify-center rounded-full border border-[rgba(220,38,38,0.4)] bg-black/55 px-6 py-4 sm:py-3 text-[12px] uppercase tracking-[0.22em] font-black text-[#f4f4f5] backdrop-blur-md shadow-[0_0_30px_rgba(220,38,38,0.12)] hover:bg-black/70 transition-all duration-300 min-h-[48px] hover:-translate-y-0.5"
             >
-              View More →
+              View More
             </Link>
           </div>
         </div>
@@ -169,24 +157,29 @@ src="/banner/banner.webp"
           <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-[#dc2626]/40 via-red-900/20 to-transparent blur-2xl opacity-70 animate-pulse pointer-events-none" />
 
           <motion.div
-            onMouseMove={prefersReducedMotion ? undefined : handleMouseMove}
-            onMouseLeave={prefersReducedMotion ? undefined : handleMouseLeave}
+            onPointerMove={prefersReducedMotion ? undefined : handlePointerMove}
+            onPointerLeave={prefersReducedMotion ? undefined : handlePointerLeave}
+            onPointerCancel={prefersReducedMotion ? undefined : handlePointerLeave}
             animate={
-              isCoarsePointer && !prefersReducedMotion
+              !prefersReducedMotion
                 ? { rotateX: [0, 2.5, -2, 0], rotateY: [0, -2, 2.5, 0] }
                 : undefined
             }
             transition={
-              isCoarsePointer && !prefersReducedMotion
+              !prefersReducedMotion
                 ? { duration: 8, repeat: Infinity, ease: "easeInOut" }
                 : undefined
             }
             style={{
-              rotateX: isCoarsePointer || prefersReducedMotion ? 0 : rotateX,
-              rotateY: isCoarsePointer || prefersReducedMotion ? 0 : rotateY,
+              rotateX: prefersReducedMotion ? 0 : rotateX,
+              rotateY: prefersReducedMotion ? 0 : rotateY,
               transformStyle: "preserve-3d",
+              touchAction: "pan-y",
+              willChange: "transform",
+              WebkitTapHighlightColor: "transparent",
+              perspective: "1000px",
             }}
-            className="relative w-full h-full rounded-2xl border border-[rgba(220,38,38,0.4)] bg-black/60 backdrop-blur-md p-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_30px_rgba(220,38,38,0.25)] transition-shadow duration-300 hover:shadow-[0_25px_60px_rgba(220,38,38,0.45)]"
+            className="hero-tilt-card relative w-full h-full rounded-2xl border border-[rgba(220,38,38,0.4)] bg-black/60 backdrop-blur-md p-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.85),0_0_30px_rgba(220,38,38,0.25)] transition-shadow duration-300 hover:shadow-[0_25px_60px_rgba(220,38,38,0.45)]"
           >
             {/* Inner Container */}
             <div className="relative w-full h-full rounded-xl overflow-hidden bg-[#0a0a0a] border border-white/10">
